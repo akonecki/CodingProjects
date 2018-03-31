@@ -1,4 +1,2 @@
 *.class
-BruteCollinearPoints.*
-FastCollinearPoints.*
-Point.*
+.DS*
