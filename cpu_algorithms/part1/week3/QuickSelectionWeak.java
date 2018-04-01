@@ -6,6 +6,15 @@ public class QuickSelectionWeak {
         data[j] = object;
     }
 
+    private static void shuffle(Comparable [] data) {
+        // Perform the definition of the shuffle to obtain the pivot.  In the 
+        // ideal case this will result in roughly the median of the data set
+        // that needs to be sorted.
+
+        // For the weak implementation this will be ignored for the time being.
+        return;
+    }
+
     // Weak implementation that does not properly handle duplicate data entries.
     private static int partition(Comparable [] data, int startIndex, int endIndex) {
         int pivot = startIndex;
@@ -92,6 +101,9 @@ public class QuickSelectionWeak {
         if (data == null || (n > data.length) || n <= 0) {
             return null;
         }
+
+        // Perform the shuffle on the data.
+        QuickSelectionWeak.shuffle(data);
 
         return QuickSelectionWeak.selectNthMember(data, n - 1, 0, data.length - 1);
     }
