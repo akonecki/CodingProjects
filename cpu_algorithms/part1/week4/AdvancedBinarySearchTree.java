@@ -5,6 +5,10 @@ import java.util.Queue;
 public class AdvancedBinarySearchTree<Key extends Comparable<Key>, Value> {
     private Node root = null;
     
+    public Node getRoot() {
+        return root;
+    }
+
     public void insert(Key key, Value value) {
         this.root = insert(root, key, value);
     }
@@ -56,31 +60,68 @@ public class AdvancedBinarySearchTree<Key extends Comparable<Key>, Value> {
     }
 
     // Easy delete, just NULL the value but keep the node key in the graph.
-    public Node delete(Key key) {
+    public void delete(Key key) {
         if (key == null) {
-            return null;
+            return;
         }
 
-        return this.delete(this.root, key);
+        root = this.delete(this.root, key);
     }
 
     private Node delete(Node root, Key key) {
         Node node = null;
 
-        if (root.key.compareTo(key) < 0) {
-            node = this.delete(root.right, key);
+        if (root == null) {
+            return null;
+        }
+        else if (root.key.compareTo(key) < 0) {
+            root.right = this.delete(root.right, key);
+            root.count = this.size(root.right) + this.size(root.left) + 1;
         }
         else if (root.key.compareTo(key) > 0) {
-            node = this.delete(root.left, key);
+            root.left = this.delete(root.left, key);
+            root.count = this.size(root.right) + this.size(root.left) + 1;
         }
         else {
-            return root;
+            if (root.left == null && root.right == null) {
+                // Case 0 : no children
+                return null;
+            }
+            else if (root.left == null || root.right == null) {
+                // Case 1 : one child
+                if (root.left != null) {
+                    node = root.left;
+                    root.left = null;
+                    root.right = null;
+                    return node;
+                }
+                else {
+                    node = root.right;
+                    root.left = null;
+                    root.right = null;
+                    return node;
+                }
+            }
+            else {
+                // Case 3 : two children
+
+                // Obtain the successor, next comparable Key of the ordered set.
+                node = this.min(root.right);
+                // Delete the 
+                root.right = this.delete(root.right, (Key) node.key);
+                // Make the local node now the root.
+                node.left = root.left;
+                node.right = root.right;
+                node.count = this.size(root.right) + this.size(root.left) + 1;
+                // Remove the root references from the graph.
+                root.right = null;
+                root.left = null;
+                
+                return node;
+            }
         }
 
-        // Case 0 : no children
-        // Case 1 : one child
-        // Case 2 : two children
-        return null;
+        return root;
     }
 
     // Public facing API for min of the overall tree.
@@ -342,7 +383,7 @@ public class AdvancedBinarySearchTree<Key extends Comparable<Key>, Value> {
         }
 
         public String toString() {
-            return "Key " + this.key.toString() + " Value " + this.value.toString();
+            return "Key " + this.key.toString() + " Value " + this.value.toString() + " Count " + Integer.toString(this.count);
         }
     }
 
@@ -353,9 +394,11 @@ public class AdvancedBinarySearchTree<Key extends Comparable<Key>, Value> {
         bst.insert(10,10);
         bst.insert(3,3);
         bst.insert(2,2);
+        bst.insert(4,4);
+        bst.insert(-1,-1);
 
         for (Object key : bst.keys()) {
-            System.out.println(key);
+            System.out.println(bst.get((Integer) key));
         }
 
         System.out.println(bst.size());
@@ -366,5 +409,10 @@ public class AdvancedBinarySearchTree<Key extends Comparable<Key>, Value> {
         System.out.println(bst.ceil(11));
         System.out.println(bst.rank(0));
         System.out.println(bst.rank(3));
+        bst.delete(0);
+        System.out.println(bst.min());
+        System.out.println(bst.get(0));
+        System.out.println(bst.getRoot());
+        System.out.println(bst.size());
     }
 }
