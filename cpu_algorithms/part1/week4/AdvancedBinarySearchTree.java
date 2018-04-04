@@ -414,5 +414,7 @@ public class AdvancedBinarySearchTree<Key extends Comparable<Key>, Value> {
         System.out.println(bst.get(0));
         System.out.println(bst.getRoot());
         System.out.println(bst.size());
+        System.out.println(bst.get(0));
+        bst.delete(0);
     }
 }
