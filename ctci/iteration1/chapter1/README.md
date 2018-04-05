@@ -28,3 +28,21 @@ ASCII only lower case letters is 26 characters in the known set.  26 characters 
 - Could sort (but need to either implement own to enforce memory constraints)
 - Could perform quadratic time by comparing each element to each other element.
 - If need to support larger unique character counts then will need to allocate more memory for the problem.
+
+### Problem 2
+#### Problem Statement
+>Implement a function `void reverse(char* str)` in `C` or `C++` which reverses a null terminated string.
+
+#### Problem Discussion
+- want to perform in-place reversal.
+- will only need to iterate through half the string due to exchange of pairs of locations within the string.
+- Java this is difficult due to `String` object being immutable data types resulting in un-desired memory implications if performed.
+
+#### Problem Design
+- Iterate through the characters of the string up to half the string length and exchange with the end index - the current index of iteration.
+- Do not reverse the null termination.
+
+#### Implementation Issues
+- declaration of data determines location for C / C++.
+- `char *string = "hello";` points the `string` variable to the bss section of code.  This is un-modifiable / read only memory.
+- `char string[] = "hello";` points the `string` variable to read/write location of memory. 
