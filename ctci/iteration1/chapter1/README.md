@@ -22,3 +22,9 @@ ASCII only lower case letters is 26 characters in the known set.  26 characters 
 
 #### Implementation Issues
 - Java character iteration should be accomplished through indexing and using charAt on the String object.
+
+#### Solution Points
+- Depending on the context of the problem, constraint definition is important.  
+- Could sort (but need to either implement own to enforce memory constraints)
+- Could perform quadratic time by comparing each element to each other element.
+- If need to support larger unique character counts then will need to allocate more memory for the problem.
