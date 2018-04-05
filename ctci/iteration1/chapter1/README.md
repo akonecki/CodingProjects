@@ -45,4 +45,7 @@ ASCII only lower case letters is 26 characters in the known set.  26 characters 
 #### Implementation Issues
 - declaration of data determines location for C / C++.
 - `char *string = "hello";` points the `string` variable to the bss section of code.  This is un-modifiable / read only memory.
-- `char string[] = "hello";` points the `string` variable to read/write location of memory. 
+- `char string[] = "hello";` points the `string` variable to read/write location of memory.
+
+#### Solution Points
+- no addition material.
