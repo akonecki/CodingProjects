@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.ArrayList;
+
 public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
     private static final boolean RED_LINK = true;
@@ -74,13 +77,29 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
         // Two Node Consideration Case 2 - new node is right child with new link
         // being red and to the right (invariant needs to be addressed).
-        if (root.mRightChild.mLinkColor && root.mCount == 2) {
-            root = this.rotateLeft(root);
-        }
 
         // Three Node Consideration Case 1
         // Three Node Consideration Case 2
         // Three Node Consideration Case 3
+
+        if (root.mRightChild != null && root.mRightChild.mLinkColor) {
+            root = this.rotateLeft(root);
+        }
+
+        if (root.mLeftChild != null && root.mRightChild != null && root.mLeftChild.mLinkColor && root.mRightChild.mLinkColor) {
+            this.flip(root);
+        }
+
+        if (root.mRightChild != null && root.mLeftChild != null && root.mLinkColor && root.mLeftChild.mLinkColor) {
+            // Temporary 4 Node.
+            root = this.rotateRight(root);
+            this.flip(root);
+        }
+
+        if (root.mLeftChild != null && root.mRightChild != null && root.mLinkColor && root.mRightChild.mLinkColor) {
+            root = this.rotateLeft(root);
+            this.flip(root);
+        }
 
         return root;
     }
@@ -121,16 +140,8 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         oldRoot.mLinkColor = RedBlackBST.RED_LINK;
         
         // Count Update
-        // The original count of the old root included 
-        // itself + left children (not touched) + right children (modified)
-        
-        // The original count of the new root included
-        // itself + left children (new parent) + right children (not touched)
-
-        // Just switch the counts
-        tempCount = oldRoot.mCount;
-        oldRoot.mCount = newRoot.mCount;
-        newRoot.mCount = tempCount;
+        oldRoot.mCount = 1 + this.size(oldRoot.mLeftChild) + this.size(oldRoot.mRightChild);
+        newRoot.mCount = 1 + this.size(newRoot.mLeftChild) + this.size(newRoot.mRightChild);
 
         // Ensure that the old root's right child is not touched.
         assert(oldRoot.mRightChild == root.mRightChild);
@@ -161,16 +172,8 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         oldRoot.mLinkColor = RedBlackBST.RED_LINK;
         
         // Count Update
-        // The original count of the old root included 
-        // itself + left children (not touched) + right children (modified)
-        
-        // The original count of the new root included
-        // itself + left children (new parent) + right children (not touched)
-
-        // Just switch the counts
-        tempCount = oldRoot.mCount;
-        oldRoot.mCount = newRoot.mCount;
-        newRoot.mCount = tempCount;
+        oldRoot.mCount = 1 + this.size(oldRoot.mLeftChild) + this.size(oldRoot.mRightChild);
+        newRoot.mCount = 1 + this.size(newRoot.mLeftChild) + this.size(newRoot.mRightChild);
 
         // Ensure that the old root's left child is not touched.
         assert(oldRoot.mLeftChild == root.mLeftChild);
@@ -217,7 +220,47 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         return 0;
     }
 
-    public static void main(String [] args) {
+    public Iterable<Key> keys() {
+        List<Key> keys = new ArrayList<Key>();
 
+        this.inOrderTraversal(keys, this.mRoot);
+
+        return keys;
+    }
+
+    private void inOrderTraversal(List<Key> keys, Node<Key, Value> root) {
+        if (root == null) {
+            return;
+        }
+
+        this.inOrderTraversal(keys, root.mLeftChild);
+        keys.add(root.mKey);
+        this.inOrderTraversal(keys, root.mRightChild);
+
+        return;
+    }
+
+    public static void main(String [] args) {
+        RedBlackBST<Integer, Integer> bst = new RedBlackBST<Integer, Integer>();
+
+        bst.insert(10, 10);
+        bst.insert(9, 10);
+        bst.insert(0, 10);
+        bst.insert(1, 10);
+        bst.insert(8, 10);
+        bst.insert(7, 10);
+        bst.insert(2, 10);
+        bst.insert(3, 10);
+        bst.insert(6, 10);
+        bst.insert(4, 10);
+        bst.insert(5, 10);
+
+        for (Integer key : bst.keys()) {
+            System.out.print(key);
+            System.out.print(" ");
+        }
+
+        System.out.println("");
+        System.out.println(bst.size());
     }
 }
