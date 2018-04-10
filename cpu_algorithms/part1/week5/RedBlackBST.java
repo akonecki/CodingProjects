@@ -26,6 +26,19 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
         // Update the root post insert.
         this.mRoot = this.insert(this.mRoot, key, value);
+        this.mRoot.mLinkColor = RedBlackBST.BLACK_LINK;
+    }
+
+    public int size() {
+        return this.size(this.mRoot);
+    }
+
+    private int size(Node<Key, Value> root) {
+        if (root == null) {
+            return 0;
+        }
+
+        return root.mCount;
     }
 
     private Node<Key, Value> insert(Node<Key, Value> root, Key key, Value value) {
@@ -37,10 +50,12 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         if (root.mKey.compareTo(key) > 0) {
             // key is less than go left.
             root.mLeftChild = this.insert(root.mLeftChild, key, value);
+            root.mCount = 1 + this.size(root.mRightChild) + this.size(root.mLeftChild);
         }
         else if (root.mKey.compareTo(key) < 0) {
             // key is greater than go right.
             root.mRightChild = this.insert(root.mRightChild, key, value);
+            root.mCount = 1 + this.size(root.mRightChild) + this.size(root.mLeftChild);
         }
         else {
             // key is equal, update since not supporting duplicate keys.
@@ -53,23 +68,133 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         // traversed for the insert must have a correct invariant, otherwise bad
         // things will occur.
 
+        // Two Node Consideration Case 1 - new node is left child with new link 
+        // being red and to the left.
+        // Do nothing.
+
+        // Two Node Consideration Case 2 - new node is right child with new link
+        // being red and to the right (invariant needs to be addressed).
+        if (root.mRightChild.mLinkColor && root.mCount == 2) {
+            root = this.rotateLeft(root);
+        }
+
+        // Three Node Consideration Case 1
+        // Three Node Consideration Case 2
+        // Three Node Consideration Case 3
 
         return root;
     }
 
     // Localized flipping of the link colors.
-    private void flip() {
+    private void flip(Node<Key, Value> root) {
+        // Should only execute this function in the pressence of a left and 
+        // right child with red links.
+        assert(!(root.mRightChild == null || root.mLeftChild == null));
+        assert(this.isRightChildRed(root) && this.isLeftChildRed(root));
 
+        root.mLeftChild.mLinkColor = !root.mLeftChild.mLinkColor;
+        root.mRightChild.mLinkColor = !root.mRightChild.mLinkColor;
+        root.mLinkColor = !root.mLinkColor;
+
+        // Post condition checks.
+        assert(!(this.isRightChildRed(root) || this.isLeftChildRed(root)));
+        assert(root.mLinkColor);
     }
 
     // Localized rotation right (e.g. the left becomes the parent)
-    private void rotateRight() {
+    private Node<Key, Value> rotateRight(Node<Key, Value> root) {
+        // Never perform a rotate right if the left child is null.
+        assert(!(root.mLeftChild == null));
+        
+        Node<Key, Value> oldRoot = root;
+        Node<Key, Value> newRoot = root.mLeftChild;
+        int tempCount = 0;
 
+        // Fix old root's left to be the right child of the old root's left
+        // child.
+        oldRoot.mLeftChild = oldRoot.mLeftChild.mRightChild;
+        // The left child of the new root must now be set to the old root.
+        newRoot.mRightChild = oldRoot;
+
+        // Update link colors appropriately.
+        newRoot.mLinkColor = oldRoot.mLinkColor;
+        oldRoot.mLinkColor = RedBlackBST.RED_LINK;
+        
+        // Count Update
+        // The original count of the old root included 
+        // itself + left children (not touched) + right children (modified)
+        
+        // The original count of the new root included
+        // itself + left children (new parent) + right children (not touched)
+
+        // Just switch the counts
+        tempCount = oldRoot.mCount;
+        oldRoot.mCount = newRoot.mCount;
+        newRoot.mCount = tempCount;
+
+        // Ensure that the old root's right child is not touched.
+        assert(oldRoot.mRightChild == root.mRightChild);
+        // Ensure that the new right child of the old root is not a red link.
+        assert(!(this.isLeftChildRed(oldRoot)));
+
+        // Return the new root.
+        return newRoot;
     }
 
     // Localized rotation left (e.g. the right becomes the parent)
-    private void rotateLeft() {
+    private Node<Key, Value> rotateLeft(Node<Key, Value> root) {
+        // Never perform a rotate left if the right child is null.
+        assert(!(root.mRightChild == null));
+        
+        Node<Key, Value> oldRoot = root;
+        Node<Key, Value> newRoot = root.mRightChild;
+        int tempCount = 0;
 
+        // Fix old root's right to be the left child of the old root's right
+        // child.
+        oldRoot.mRightChild = oldRoot.mRightChild.mLeftChild;
+        // The left child of the new root must now be set to the old root.
+        newRoot.mLeftChild = oldRoot;
+
+        // Update link colors appropriately.
+        newRoot.mLinkColor = oldRoot.mLinkColor;
+        oldRoot.mLinkColor = RedBlackBST.RED_LINK;
+        
+        // Count Update
+        // The original count of the old root included 
+        // itself + left children (not touched) + right children (modified)
+        
+        // The original count of the new root included
+        // itself + left children (new parent) + right children (not touched)
+
+        // Just switch the counts
+        tempCount = oldRoot.mCount;
+        oldRoot.mCount = newRoot.mCount;
+        newRoot.mCount = tempCount;
+
+        // Ensure that the old root's left child is not touched.
+        assert(oldRoot.mLeftChild == root.mLeftChild);
+        // Ensure that the new right child of the old root is not a red link.
+        assert(!(this.isRightChildRed(oldRoot)));
+
+        // Return the new root.
+        return newRoot;
+    }
+
+    private boolean isLeftChildRed(Node<Key, Value> root) {
+        if (root == null || root.mLeftChild == null) {
+            return false;
+        }
+
+        return root.mLeftChild.mLinkColor;
+    }
+
+    private boolean isRightChildRed(Node<Key, Value> root) {
+        if (root == null || root.mRightChild == null) {
+            return false;
+        }
+
+        return root.mRightChild.mLinkColor;
     }
 
     public Value delete(Key key) {
