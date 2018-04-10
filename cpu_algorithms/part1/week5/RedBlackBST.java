@@ -20,6 +20,31 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
             this.mKey = key;
             this.mValue = value;
         }
+
+        public String toString() {
+            return "<" + this.mKey.toString() + ", " + this.mValue.toString() + "> :: Count : " + 
+                Integer.toString(this.mCount) + " :: Link Colors <parent, left, right> : <" +
+                Boolean.toString(this.mLinkColor) + ", " + Boolean.toString(this.getNodeLink(this.mLeftChild)) + ", " +
+                Boolean.toString(this.getNodeLink(this.mRightChild)) + "> :: Keys <current, left, right> : <" +
+                this.mKey.toString() + ", " + this.getNodeKey(this.mLeftChild).toString() + ", " + 
+                this.getNodeKey(this.mLeftChild).toString() + ">";
+        }
+
+        private Key getNodeKey(Node<Key, Value> node) {
+            if (node == null) {
+                return null;
+            }
+
+            return node.mKey;
+        }
+
+        private boolean getNodeLink(Node<Key, Value> node) {
+            if (node == null) {
+                return false;
+            }
+
+            return node.mLinkColor;
+        }
     }
 
     public void insert(Key key, Value value) {
@@ -90,7 +115,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
             this.flip(root);
         }
 
-        if (root.mRightChild != null && root.mLeftChild != null && root.mLinkColor && root.mLeftChild.mLinkColor) {
+        if (root.mRightChild != null && root.mLeftChild != null && root.mLeftChild.mLeftChild != null && root.mLeftChild.mLinkColor && root.mLeftChild.mLeftChild.mLinkColor) {
             // Temporary 4 Node.
             root = this.rotateRight(root);
             this.flip(root);
@@ -100,6 +125,17 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
             root = this.rotateLeft(root);
             this.flip(root);
         }
+
+        try {
+            assert(this.isRedBlackTree(root));
+        }
+        catch(java.lang.AssertionError e) {
+
+            System.out.println(root);
+            throw new java.lang.UnsupportedOperationException(e);
+        }
+
+
 
         return root;
     }
@@ -226,6 +262,47 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         this.inOrderTraversal(keys, this.mRoot);
 
         return keys;
+    }
+
+    public boolean isRedBlackTree() {
+        return this.isRedBlackTree(this.mRoot);
+    }
+
+    private boolean isRedBlackTree(Node<Key, Value> root) {
+        if (root == null) {
+            return true;
+        }
+
+        // Right link is red.
+        if (root.mRightChild != null && root.mRightChild.mLinkColor) {
+            assert(false);
+            // return false;
+        }
+
+        // Multiple red links in a row (more than a 2/3 red tree).
+        if (root.mLeftChild != null && root.mLeftChild.mLinkColor && root.mLinkColor) {
+            // assert(false);
+            return false;
+        }
+
+        // Keys are not in order.
+        if (root.mLeftChild != null && root.mKey.compareTo(root.mLeftChild.mKey) <= 0) {
+            assert(false);
+            // return false;
+        }
+
+        if (root.mRightChild != null && root.mKey.compareTo(root.mRightChild.mKey) >= 0) {
+            assert(false);
+            // return false;
+        }
+
+        // Counts of children must be equal
+        if (root.mLeftChild != null && !root.mLeftChild.mLinkColor && (root.mLeftChild.mCount != root.mRightChild.mCount)) {
+            assert(false);
+            // return false;
+        }
+
+        return true;
     }
 
     private void inOrderTraversal(List<Key> keys, Node<Key, Value> root) {
