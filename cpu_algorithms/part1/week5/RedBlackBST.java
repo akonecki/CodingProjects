@@ -22,12 +22,12 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         }
 
         public String toString() {
-            return "<" + this.mKey.toString() + ", " + this.mValue.toString() + "> :: Count : " + 
+            return "<" + this.mKey + ", " + this.mValue + "> :: Count : " + 
                 Integer.toString(this.mCount) + " :: Link Colors <parent, left, right> : <" +
                 Boolean.toString(this.mLinkColor) + ", " + Boolean.toString(this.getNodeLink(this.mLeftChild)) + ", " +
                 Boolean.toString(this.getNodeLink(this.mRightChild)) + "> :: Keys <current, left, right> : <" +
-                this.mKey.toString() + ", " + this.getNodeKey(this.mLeftChild).toString() + ", " + 
-                this.getNodeKey(this.mLeftChild).toString() + ">";
+                this.mKey + ", " + this.getNodeKey(this.mLeftChild) + ", " + 
+                this.getNodeKey(this.mRightChild) + ">";
         }
 
         private Key getNodeKey(Node<Key, Value> node) {
@@ -115,7 +115,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
             this.flip(root);
         }
 
-        if (root.mRightChild != null && root.mLeftChild != null && root.mLeftChild.mLeftChild != null && root.mLeftChild.mLinkColor && root.mLeftChild.mLeftChild.mLinkColor) {
+        if (root.mLeftChild != null && root.mLeftChild.mLeftChild != null && root.mLeftChild.mLinkColor && root.mLeftChild.mLeftChild.mLinkColor) {
             // Temporary 4 Node.
             root = this.rotateRight(root);
             this.flip(root);
@@ -126,8 +126,10 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
             this.flip(root);
         }
 
+        this.isRedBlackTree(root);
         try {
             assert(this.isRedBlackTree(root));
+            // System.out.println(root);
         }
         catch(java.lang.AssertionError e) {
 
@@ -160,14 +162,13 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
     private Node<Key, Value> rotateRight(Node<Key, Value> root) {
         // Never perform a rotate right if the left child is null.
         assert(!(root.mLeftChild == null));
-        
+
         Node<Key, Value> oldRoot = root;
         Node<Key, Value> newRoot = root.mLeftChild;
-        int tempCount = 0;
 
         // Fix old root's left to be the right child of the old root's left
         // child.
-        oldRoot.mLeftChild = oldRoot.mLeftChild.mRightChild;
+        oldRoot.mLeftChild = newRoot.mRightChild;
         // The left child of the new root must now be set to the old root.
         newRoot.mRightChild = oldRoot;
 
@@ -240,8 +241,52 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         return null;
     }
 
-    public Value search(Key key) {
-        return null;
+    public Value find(Key key) {
+        Node<Key, Value> node = null;
+
+        if (key == null || this.mRoot == null) {
+            return null;
+        }
+
+        node = this.search(this.mRoot, key);
+
+        if (node == null) {
+            return null;
+        }
+
+        return node.mValue;
+    }
+
+    public String getNodeDetails(Key key) {
+        Node<Key, Value> node = null;
+
+        if (key == null || this.mRoot == null) {
+            return null;
+        }
+
+        node = this.search(this.mRoot, key);
+
+        if (node == null) {
+            return null;
+        }
+
+        return node.toString();
+    }
+
+    private Node<Key, Value> search(Node<Key, Value> root, Key key) {
+        if (root == null) {
+            return null;
+        }
+
+        if (root.mKey.compareTo(key) > 0) {
+            return this.search(root.mLeftChild, key);
+        }
+        else if (root.mKey.compareTo(key) < 0) {
+            return this.search(root.mRightChild, key);
+        }
+        else {
+            return root;
+        }
     }
 
     public int rank(Key key) {
@@ -280,10 +325,11 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         }
 
         // Multiple red links in a row (more than a 2/3 red tree).
-        if (root.mLeftChild != null && root.mLeftChild.mLinkColor && root.mLinkColor) {
+        // This is only true when the 4-Node case does not apply
+        // if (root.mLeftChild != null && root.mLeftChild.mLinkColor && root.mLinkColor) {
             // assert(false);
-            return false;
-        }
+        //    return false;
+        // }
 
         // Keys are not in order.
         if (root.mLeftChild != null && root.mKey.compareTo(root.mLeftChild.mKey) <= 0) {
@@ -296,11 +342,12 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
             // return false;
         }
 
-        // Counts of children must be equal
-        if (root.mLeftChild != null && !root.mLeftChild.mLinkColor && (root.mLeftChild.mCount != root.mRightChild.mCount)) {
-            assert(false);
+        // Counts of children must be equal 
+        // This is only true when the 4-Node case does not apply
+        //if (root.mLeftChild != null && !root.mLeftChild.mLinkColor && (root.mLeftChild.mCount != root.mRightChild.mCount)) {
+        //    assert(false);
             // return false;
-        }
+        //}
 
         return true;
     }
@@ -333,8 +380,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         bst.insert(5, 10);
 
         for (Integer key : bst.keys()) {
-            System.out.print(key);
-            System.out.print(" ");
+            System.out.println(bst.getNodeDetails(key));
         }
 
         System.out.println("");
