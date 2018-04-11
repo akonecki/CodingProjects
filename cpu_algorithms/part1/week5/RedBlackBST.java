@@ -305,6 +305,9 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
     // return the number of nodes that are < key
     public int rank(Key key) {
+        if (key == null) {
+            throw new java.lang.IllegalArgumentException("Invalid key.");
+        }
 
         return this.rank(this.mRoot, key);
     }
@@ -325,14 +328,73 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         }
     }
 
+    public Key ceil(Key key) {
+        if (key == null) {
+            throw new java.lang.IllegalArgumentException("Invalid key.");
+        }
 
-    public int ceil(Key key) {
-        return 0;
+        return this.ceil(this.mRoot, key);
     }
 
-    
-    public int floor(Key key) {
-        return 0;
+    // min max
+    private Key ceil(Node<Key, Value> root, Key key) {
+        Key saved = null;
+
+        if (root == null) {
+            return null;
+        }
+
+        if (root.mKey.compareTo(key) > 0) {
+            saved = this.ceil(root.mLeftChild, key);
+            
+            if (saved == null) {
+                return root.mKey;
+            }
+
+            return saved;
+        }
+        else if (root.mKey.compareTo(key) < 0) {
+            saved = this.ceil(root.mRightChild, key);
+
+            return saved;
+        }
+        else {
+            return root.mKey;
+        }
+    }
+
+    public Key floor(Key key) {
+        if (key == null) {
+            throw new java.lang.IllegalArgumentException("Invalid key.");
+        }
+
+        return this.floor(this.mRoot, key);
+    }
+
+    // max min
+    private Key floor(Node<Key, Value> root, Key key) {
+        Key saved = null;
+
+        if (root == null) {
+            return null;
+        }
+
+        if (root.mKey.compareTo(key) > 0) {
+            saved = this.floor(root.mLeftChild, key);
+
+            return saved;
+        }
+        else if (root.mKey.compareTo(key) < 0) {
+            saved = this.floor(root.mRightChild, key);
+
+            if (saved == null) {
+                return root.mKey;
+            }
+            return saved;
+        }
+        else {
+            return root.mKey;
+        }
     }
 
     public Iterable<Key> keys() {
@@ -413,6 +475,11 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         bst.insert(6, 10);
         bst.insert(4, 10);
         bst.insert(5, 10);
+        bst.insert(225, 10);
+        bst.insert(125, 10);
+        bst.insert(35, 10);
+        bst.insert(84, 10);
+        bst.insert(12, 10);
 
         for (Integer key : bst.keys()) {
             System.out.println(bst.getNodeDetails(key));
@@ -425,6 +492,8 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         System.out.println(bst.rank(101));
         System.out.println(bst.rank(176));
         System.out.println(bst.rank(6));
+        System.out.println(bst.ceil(8));
+        System.out.println(bst.floor(8));
 
         test.insert("S", 10);
         test.insert("E", 10);
