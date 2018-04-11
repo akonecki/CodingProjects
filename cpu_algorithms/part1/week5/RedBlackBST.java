@@ -328,17 +328,31 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         }
     }
 
+    private Node<Key, Value> successor(Node<Key, Value> root) {
+        return this.floor(root.mLeftChild, root.mKey);
+    }
+
+    private Node<Key, Value> predecessor(Node<Key, Value> root) {
+        return this.ceil(root.mRightChild, root.mKey);
+    }
+
     public Key ceil(Key key) {
+        Node<Key, Value> node = null;
+
         if (key == null) {
             throw new java.lang.IllegalArgumentException("Invalid key.");
         }
 
-        return this.ceil(this.mRoot, key);
+        node = this.ceil(this.mRoot, key);
+        if (node == null) {
+            return null;
+        }
+        return node.mKey;
     }
 
     // min max
-    private Key ceil(Node<Key, Value> root, Key key) {
-        Key saved = null;
+    private Node<Key, Value> ceil(Node<Key, Value> root, Key key) {
+        Node<Key, Value> saved = null;
 
         if (root == null) {
             return null;
@@ -348,7 +362,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
             saved = this.ceil(root.mLeftChild, key);
             
             if (saved == null) {
-                return root.mKey;
+                return root;
             }
 
             return saved;
@@ -359,21 +373,27 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
             return saved;
         }
         else {
-            return root.mKey;
+            return root;
         }
     }
 
     public Key floor(Key key) {
+        Node<Key, Value> node = null;
+
         if (key == null) {
             throw new java.lang.IllegalArgumentException("Invalid key.");
         }
 
-        return this.floor(this.mRoot, key);
+        node = this.floor(this.mRoot, key);
+        if (node == null) {
+            return null;
+        }
+        return node.mKey;
     }
 
     // max min
-    private Key floor(Node<Key, Value> root, Key key) {
-        Key saved = null;
+    private Node<Key, Value> floor(Node<Key, Value> root, Key key) {
+        Node<Key, Value> saved = null;
 
         if (root == null) {
             return null;
@@ -388,12 +408,12 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
             saved = this.floor(root.mRightChild, key);
 
             if (saved == null) {
-                return root.mKey;
+                return root;
             }
             return saved;
         }
         else {
-            return root.mKey;
+            return root;
         }
     }
 
