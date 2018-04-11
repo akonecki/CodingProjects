@@ -366,18 +366,19 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
     public static void main(String [] args) {
         RedBlackBST<Integer, Integer> bst = new RedBlackBST<Integer, Integer>();
+        RedBlackBST<String, Integer> test = new RedBlackBST<String, Integer>();
 
-        bst.insert(10, 10);
-        bst.insert(9, 10);
-        bst.insert(0, 10);
-        bst.insert(1, 10);
-        bst.insert(8, 10);
-        bst.insert(7, 10);
-        bst.insert(2, 10);
-        bst.insert(3, 10);
-        bst.insert(6, 10);
-        bst.insert(4, 10);
-        bst.insert(5, 10);
+        bst.insert(100, 10);
+        bst.insert(50, 10);
+        bst.insert(150, 10);
+        bst.insert(200, 10);
+        bst.insert(175, 10);
+        // bst.insert(7, 10);
+        // bst.insert(2, 10);
+        // bst.insert(3, 10);
+        // bst.insert(6, 10);
+        // bst.insert(4, 10);
+        // bst.insert(5, 10);
 
         for (Integer key : bst.keys()) {
             System.out.println(bst.getNodeDetails(key));
@@ -385,5 +386,22 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
         System.out.println("");
         System.out.println(bst.size());
+
+        test.insert("S", 10);
+        test.insert("E", 10);
+        test.insert("A", 10);
+        test.insert("R", 10);
+        test.insert("C", 10);
+        test.insert("H", 10);
+        test.insert("X", 10);
+        test.insert("M", 10);
+        test.insert("P", 10);
+        test.insert("L", 10);
+
+        for (String key : test.keys()) {
+            System.out.println(test.getNodeDetails(key));
+        }
+        System.out.println("");
+        System.out.println(test.size());
     }
 }
