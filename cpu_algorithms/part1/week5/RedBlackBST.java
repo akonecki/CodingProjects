@@ -326,10 +326,10 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
         // Multiple red links in a row (more than a 2/3 red tree).
         // This is only true when the 4-Node case does not apply
-        // if (root.mLeftChild != null && root.mLeftChild.mLinkColor && root.mLinkColor) {
-            // assert(false);
+        if (root.mLeftChild != null && root.mLeftChild.mLeftChild != null && root.mLeftChild.mLeftChild.mLinkColor && root.mLeftChild.mLinkColor) {
+            assert(false);
         //    return false;
-        // }
+        }
 
         // Keys are not in order.
         if (root.mLeftChild != null && root.mKey.compareTo(root.mLeftChild.mKey) <= 0) {
