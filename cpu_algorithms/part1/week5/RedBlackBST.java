@@ -15,6 +15,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         private Value mValue = null;
         private int mLeftCount = 0;
         private int mRightCount = 0;
+        private int mLevelFromLeaf = 0;
         // Overall count
         private int mCount = 1;
         private boolean mLinkColor = RedBlackBST.RED_LINK;
@@ -41,7 +42,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
             return node.mKey;
         }
 
-        private int getCount(Node<Key, Value> node) {
+        private int size(Node<Key, Value> node) {
             if (node == null) {
                 return 0;
             }
@@ -57,15 +58,20 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
             return node.mLinkColor;
         }
 
-        private int subLevelCount(Node<Key, Value> node) {
+        private int levelsFromLeaf(Node<Key, Value> node) {
             if (node == null) {
                 return 0;
             }
     
+            if (node.mLinkColor && node.mLeftChild == null && node.mRightChild == null) {
+                // Left leaning 3-node with no children, thus is a leaf.
+                return 0;
+            }
+
             if (this.isRed(node.mLeftChild)) {
                 // Right member of a 3 Node.
-                assert(node.mLeftChild.mLeftCount == node.mRightCount);
-                assert(node.mLeftChild.mRightCount == node.mRightCount);
+                // assert(node.mLeftChild.mLeftCount == node.mRightCount);
+                // assert(node.mLeftChild.mRightCount == node.mRightCount);
                 return node.mRightCount;
     
                 
@@ -73,7 +79,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
             else {
                 // Left and right child should always be the same to hold the 
                 // symmetric property.
-                assert(node.mLeftCount == node.mRightCount);
+                // assert(node.mLeftCount == node.mRightCount);
                 return node.mLeftCount;
             }
         }
@@ -251,9 +257,88 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         return newRoot;
     }
 
-    public Value delete(Key key) {
+    public void delete(Key key) {
+        if (key == null) {
+            return;
+        }
+
+        this.mRoot = this.delete(this.mRoot, key);
+    }
+
+    private Node<Key, Value> delete(Node<Key, Value> root, Key key) {
+        Node<Key, Value> node = null;
+
+        if (root == null) {
+            return null;
+        }
+
+        if (root.mKey.compareTo(key) > 0) {
+            root.mLeftChild = this.delete(root.mLeftChild, key);
+        }
+        else if (root.mKey.compareTo(key) < 0) {
+            root.mRightChild = this.delete(root.mRightChild, key);
+        }
+        else {
+            // Root is a match to the key, thus need to address children prior 
+            // to deletion of the node.
+
+            if (root.mLeftChild == null && root.mRightChild == null) {
+                // Just delete the node up to parent to fix invariant.
+                return null;
+            }
+            else if (root.mLeftChild != null) {
+                // Save a local copy of successor node to prevent garabage 
+                // collection (will always be a leaf node).
+                node = this.successor(root);
+
+                // Now remove successor from the tree but keep the local copy.
+                root.mLeftChild = this.delete(root, node.mKey);
+            }
+            else { 
+                // Save a local copy of predecessor node to prevent garabage 
+                // collection (will always be a leaf node).
+                node = this.predecessor(root);
+
+                // Now remove predecessor from the tree but keep the local copy.
+                root.mRightChild = this.delete(root, node.mKey);
+            }
+
+            // Now update the local copy node to take over the root being 
+            // deleted (imposter the root), except the key, value pair.
+            node.mLeftChild = root.mLeftChild;
+            node.mRightChild = root.mRightChild;
+            node.mLinkColor = root.mLinkColor;
+
+            // Counts should be correct since graph had to already be accounted
+            // for the deleted node's sub Red Black BST.
+            node.mLeftCount = root.mLeftCount;
+            node.mRightCount = root.mRightCount;
+            node.mCount = root.mCount;
+
+            // Remove roots downward pointer references.
+            root.mLeftChild = null;
+            root.mRightChild = null;
+            root.mKey = null;
+            root.mValue = null;
+
+            // Clear out root.
+            root = null;
+
+            // Replace root with the successor as the new root.
+            root = node;
+        }
+
+        // Count adjustment
+        root.mCount = 1 + root.size(root.mLeftChild) + root.size(root.mRightChild);
+
+        // Invariant corrections.
+
         return null;
     }
+
+    // private void exch(Node<Key, Value> nodeA, Node<Key, Value> nodeB) {
+        
+    // }
 
     public Value find(Key key) {
         Node<Key, Value> node = null;
@@ -321,7 +406,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
             return this.rank(root.mLeftChild, key);
         }
         else if (root.mKey.compareTo(key) < 0) {
-            return 1 + root.getCount(root.mLeftChild) + this.rank(root.mRightChild, key);
+            return 1 + root.size(root.mLeftChild) + this.rank(root.mRightChild, key);
         }
         else {
             return root.mCount - 1;
