@@ -66,15 +66,16 @@ public class Range1DNonBalancedBST <Key extends Comparable<Key>, Value> {
     }
 
     private int rank(Node<Key, Value> root, Key key) {
-        if (root.mKey.compareTo(key) > 0) {
+        if (root == null) {
+            return 0;
+        }
+
+        if (root.mKey.compareTo(key) >= 0) {
             // Go left
             return this.rank(root.mLeftChild, key);
         }
-        else if (root.mKey.compareTo(key) < 0) {
+        else { // (root.mKey.compareTo(key) < 0) {
             return 1 + this.size(root.mLeftChild) + this.rank(root.mRightChild, key);
-        }
-        else {
-            return root.mCount - 1;
         }
     }
 
