@@ -222,6 +222,29 @@ public class IntervalSearchTree <Key extends Comparable<Key>> {
         return count;
     }
 
+    private void interval_search(Node<Key> root, Key low, Key high, List<Key> keys) {
+        if (root == null) {
+            return;
+        }
+
+        // Try to go left.
+        if (root.mLeftChild != null && root.mLeftChild.mMaxKey.compareTo(low) >= 0) {
+            // Now explore the left of the root.
+            this.interval_search(root.mLeftChild, low, high, keys);
+        }
+
+        // Check to see if the root is within the key interval.
+        if (root.compare(low, high) == 0) {
+            keys.add(root.mLowKey); 
+        }
+
+        // Determine if need to even try to go right.
+        if (root.mLowKey.compareTo(high) < 0) {
+            // Now explore the right of the root.
+            this.interval_search(root.mRightChild, low, high, keys);
+        }   
+    }
+
     //*************************************************************************
     //* PUBLIC FACING API
     //************************************************************************* 
@@ -270,6 +293,19 @@ public class IntervalSearchTree <Key extends Comparable<Key>> {
         return this.interval_count(this.mRoot, low, high);
     }
 
+    // Returns all the sorting keys that exist wihtin the interval.
+    public List<Key> interval_search(Key low, Key high) {
+        List<Key> keys = new ArrayList<Key>();
+
+        if (low == null || high == null) {
+            throw new java.lang.IllegalArgumentException("Keys can not be null.");
+        }
+
+        this.interval_search(this.mRoot, low, high, keys);
+
+        return keys;
+    }
+
     public Key interval_occurrence(Key low, Key high) {
         Node<Key> node = null;
 
@@ -314,5 +350,10 @@ public class IntervalSearchTree <Key extends Comparable<Key>> {
 
         System.out.println(test.interval_occurrence(9, 12));
         System.out.println(test.interval_count(9, 21));
+
+        for (Integer integer : test.interval_search(9, 21)) {
+            System.out.print(integer + " ");
+        }
+        System.out.println("");
     }
 }
