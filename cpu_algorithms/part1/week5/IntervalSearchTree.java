@@ -26,8 +26,35 @@ public class IntervalSearchTree <Key extends Comparable<Key>> {
             return new MaxNode();
         } 
 
-        public int compare(Node<Key> low, Node<Key> high) {
-            return this.max_node().compare(low, high);
+        public Comparator<Key> interval() {
+            return new NodeInterval();
+        }
+
+        public int compare(Node<Key> left, Node<Key> right) {
+            return this.max_node().compare(left, right);
+        }
+
+        public int compare(Key low, Key high) {
+            return this.interval().compare(low, high);
+        }
+
+        private class NodeInterval implements Comparator<Key> {
+            public int compare(Key low, Key high) {
+                // -1 : Node interval is less than specified interval.
+                //  0 : Node interval is within the specified interval.
+                //  1 : Node interval is greater than specified interval.
+                System.out.println(Node.this.mLowKey + " " + low + " " + high);
+
+                if (Node.this.mHighKey.compareTo(low) < 0) {
+                    return -1;
+                }
+                else if (Node.this.mLowKey.compareTo(high) > 0) {
+                    return 1;
+                }
+                else {
+                    return 0;
+                }
+            }
         }
 
         private class MaxNode implements Comparator<Node <Key>> {
@@ -38,7 +65,7 @@ public class IntervalSearchTree <Key extends Comparable<Key>> {
 
                 if (left != null && right != null) {
                     if (right.mMaxKey.compareTo(left.mMaxKey) >= 0) {
-                        if (right.mMaxKey.compareTo(Node.this.mMaxKey) > 0) {
+                        if (right.mMaxKey.compareTo(Node.this.mHighKey) > 0) {
                             return 1;
                         }
                         else {
@@ -46,7 +73,7 @@ public class IntervalSearchTree <Key extends Comparable<Key>> {
                         }
                     }
                     else {// if (right.mMaxKey.compareTo(left.mMaxKey) < 0) {
-                        if (left.mMaxKey.compareTo(Node.this.mMaxKey) > 0) {
+                        if (left.mMaxKey.compareTo(Node.this.mHighKey) > 0) {
                             return -1;
                         }
                         else {
@@ -78,6 +105,8 @@ public class IntervalSearchTree <Key extends Comparable<Key>> {
     }
 
     private Node<Key> insert(Node<Key> root, Key low, Key high) {
+        int compareValue = 0;
+        
         if (root == null) {
             return new Node<Key>(low, high);
         }
@@ -95,11 +124,13 @@ public class IntervalSearchTree <Key extends Comparable<Key>> {
             root.mHighKey = high;
         }
 
+        compareValue = root.compare(root.mLeftChild, root.mRightChild);
+
         // Invariant fix up the path.
-        if (root.compare(root.mLeftChild, root.mRightChild) > 0) {
+        if (compareValue > 0) {
             root.mMaxKey = root.mRightChild.mMaxKey;
         }
-        else if (root.compare(root.mLeftChild, root.mRightChild) < 0) {
+        else if (compareValue < 0) {
             root.mMaxKey = root.mLeftChild.mMaxKey;
         }
         else {
@@ -136,8 +167,32 @@ public class IntervalSearchTree <Key extends Comparable<Key>> {
         }
 
         this.max_key_inorder_traversal(root.mLeftChild, keys);
+        System.out.println("Low Key : " + root.mLowKey + " Max Key : " + root.mMaxKey);
         keys.add(root.mMaxKey);
         this.max_key_inorder_traversal(root.mRightChild, keys);
+    }
+
+    private Node<Key> interval_occurrence(Node<Key> root, Key low, Key high) {
+        if (root == null) {
+            return null;
+        }
+
+        // Check to see if the root is within the key interval.
+        if (root.compare(low, high) == 0) {
+            return root;
+        }
+        else if (root.mLeftChild != null && root.mLeftChild.mMaxKey.compareTo(low) >= 0) {
+            // Go left.
+            return this.interval_occurrence(root.mLeftChild, low, high);
+        }
+        else if (root.mLowKey.compareTo(high) < 0) {
+            // Go right.
+            return this.interval_occurrence(root.mRightChild, low, high);
+        }
+        else {
+            // No where to go.
+            return null;
+        }
     }
 
     //*************************************************************************
@@ -184,6 +239,23 @@ public class IntervalSearchTree <Key extends Comparable<Key>> {
         return 0;
     }
 
+    public Key interval_occurrence(Key low, Key high) {
+        Node<Key> node = null;
+
+        if (low == null || high == null) {
+            throw new java.lang.IllegalArgumentException("Keys can not be null.");
+        }
+
+        node = this.interval_occurrence(this.mRoot, low, high);
+
+        if (node == null) {
+            return null;
+        }
+        else {
+            return node.mLowKey;
+        }
+    }
+
     public static void main(String [] args) {
         IntervalSearchTree<Integer> test = new IntervalSearchTree<Integer>();
 
@@ -208,5 +280,7 @@ public class IntervalSearchTree <Key extends Comparable<Key>> {
             System.out.print(integer + " ");
         }
         System.out.println("");
+
+        System.out.println(test.interval_occurrence(9, 12));
     }
 }
