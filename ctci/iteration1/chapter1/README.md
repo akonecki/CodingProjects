@@ -75,3 +75,9 @@ ASCII only lower case letters is 26 characters in the known set.  26 characters 
 - there are two solutions provided.
 - Solution 1 states about performing a sort on the characters within the string and then checking if the strings are the same.  This would result in O(nlogn) time due to the sorting algorithm.
 - Solution 2 follows the same approach as my solution.  My solution however has a few more checks to return early if the strings happen to already be referencing the same string.
+
+### Problem 4
+#### Problem Statement
+>Write a method to replace all spaces in a string with `%20`.  You may assume that the string has sufficient space at the end of the string to hold the additional characters, and that you are given the true length of the string.  For `Java` implementations use a character array to perform this in place.
+
+#### Problem Discussion
