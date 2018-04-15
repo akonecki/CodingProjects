@@ -81,3 +81,13 @@ ASCII only lower case letters is 26 characters in the known set.  26 characters 
 >Write a method to replace all spaces in a string with `%20`.  You may assume that the string has sufficient space at the end of the string to hold the additional characters, and that you are given the true length of the string.  For `Java` implementations use a character array to perform this in place.
 
 #### Problem Discussion
+- Does the string have intentional spaces at the end that are part of the actual string?
+- for the characters at the end are they white spaces already in bit-representation or say zero'd values.
+- Performing in place from the front will be difficult, start from the end and progress until you encounter a non-whitespace or non-terminating character for the allocated size.
+- Moves characters from the current index to their new index as it progresses in reverse.
+
+#### Problem Design
+- Start from the back of the array using the array's true length.
+- Must have seen a non-space character previously to process a space (this assumes that there is only one space used between words if multiple would need a flag to indicate that spaces can begin to be processed).
+- Real index will keep track of the position in the array of the next index to store a character.
+- If the last value in the array is already populated with a non-white space character then there is no need to inspect the character array (no spaces present).
