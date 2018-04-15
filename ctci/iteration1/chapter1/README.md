@@ -49,3 +49,21 @@ ASCII only lower case letters is 26 characters in the known set.  26 characters 
 
 #### Solution Points
 - no addition material.
+
+### Problem 3
+#### Problem Statement 
+>Given two strings determine if one is a permutation of the other.
+
+#### Problem Discussion
+- Could be a word or letter level but in reality the approach should be roughly the same.
+- I will assume that it is character composition without the correctness of white character placement for simplity.
+- Strings can be arbitrary long.
+- Assume that the definition of permutation is that the lengths must be the same lenght and the the same characters and number of character occurrences must both be the same but the orders may differ.
+- With this assumption it can be stated that if the lengths of the two string differ, they can not be permutations of each other (non-symmetric relationship).
+- Want to state that a permutation of a string is accomplished through the function of F(S) which produces S' where S' is a permutation of S.  Let there exist another function F' such that F'(S') produces S, thus applying the inverse of the permutation.
+
+#### Problem Design
+- No matter what will need to iterate through both strings for all characters.
+- Will assume that ASCII characters will be used thus total is 8-bits of representation, and can be trimmed to only the 7-bit range if only want to consider the first half of the table.
+- Go through one string and record the occurrence of each letter.  Use the letter as the key, the value is the number of occurrences.  Evaluation of the keys need to be quick, thus should not have to examine all other keys.  Dictionary / symbol / hash is appropriate to manage the average case access times. 
+- Pre-allocate the total number of cells needed to hold the values, to not have to deal with increasing / decreasing the total memory impact (will be inefficient for strings that use only a specific portion of the bit of representation.  In a totally random this would not be the case.)
