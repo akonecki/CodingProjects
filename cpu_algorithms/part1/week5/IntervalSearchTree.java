@@ -195,6 +195,33 @@ public class IntervalSearchTree <Key extends Comparable<Key>> {
         }
     }
 
+    private int interval_count(Node<Key> root, Key low, Key high) {
+        int count = 0;
+
+        if (root == null) {
+            return 0;
+        }
+
+        // Check to see if the root is within the key interval.
+        if (root.compare(low, high) == 0) {
+            count++; 
+        }
+
+        // Try to go left.
+        if (root.mLeftChild != null && root.mLeftChild.mMaxKey.compareTo(low) >= 0) {
+            // Now explore the left of the root.
+            count += this.interval_count(root.mLeftChild, low, high);
+        }
+
+        // Determine if need to even try to go right.
+        if (root.mLowKey.compareTo(high) < 0) {
+            // Now explore the right of the root.
+            count += this.interval_count(root.mRightChild, low, high);
+        }
+
+        return count;
+    }
+
     //*************************************************************************
     //* PUBLIC FACING API
     //************************************************************************* 
@@ -236,7 +263,11 @@ public class IntervalSearchTree <Key extends Comparable<Key>> {
 
     // Returns the number of points that exist within the interval.
     public int interval_count(Key low, Key high) {
-        return 0;
+        if (low == null || high == null) {
+            throw new java.lang.IllegalArgumentException("Keys can not be null.");
+        }
+
+        return this.interval_count(this.mRoot, low, high);
     }
 
     public Key interval_occurrence(Key low, Key high) {
@@ -282,5 +313,6 @@ public class IntervalSearchTree <Key extends Comparable<Key>> {
         System.out.println("");
 
         System.out.println(test.interval_occurrence(9, 12));
+        System.out.println(test.interval_count(9, 21));
     }
 }
