@@ -91,3 +91,15 @@ ASCII only lower case letters is 26 characters in the known set.  26 characters 
 - Must have seen a non-space character previously to process a space (this assumes that there is only one space used between words if multiple would need a flag to indicate that spaces can begin to be processed).
 - Real index will keep track of the position in the array of the next index to store a character.
 - If the last value in the array is already populated with a non-white space character then there is no need to inspect the character array (no spaces present).
+- You know that when the pivot index that indicates where the next character is saved equals to the current iteration index, then there is no more spaces, since a space always requires + 3 more characters.
+
+#### Problem Issues
+- Did not look closely enough at the definition of the true length. 
+- True length indicates where to actually start accepting spaces to be converted.
+- All data behind the true length can be ignored or any form.
+
+#### Problem Solution
+- Book does a double pass of the data up to the indicated true length.
+- The first pass is to determine the number of qualified spaces which are thne used to determine the total size of the allocated memory.
+- In C/C++ this is necessary, in Java however it is not due to the fact that the total allocated memory associated with an array is always provided.
+- The calculation of total space necessary is more conserative and cross language.
