@@ -67,3 +67,11 @@ ASCII only lower case letters is 26 characters in the known set.  26 characters 
 - Will assume that ASCII characters will be used thus total is 8-bits of representation, and can be trimmed to only the 7-bit range if only want to consider the first half of the table.
 - Go through one string and record the occurrence of each letter.  Use the letter as the key, the value is the number of occurrences.  Evaluation of the keys need to be quick, thus should not have to examine all other keys.  Dictionary / symbol / hash is appropriate to manage the average case access times. 
 - Pre-allocate the total number of cells needed to hold the values, to not have to deal with increasing / decreasing the total memory impact (will be inefficient for strings that use only a specific portion of the bit of representation.  In a totally random this would not be the case.)
+
+#### Implementation Issues
+- Just need to remember that String length is a function call not an attribute accessible field.
+
+#### Solution Points
+- there are two solutions provided.
+- Solution 1 states about performing a sort on the characters within the string and then checking if the strings are the same.  This would result in O(nlogn) time due to the sorting algorithm.
+- Solution 2 follows the same approach as my solution.  My solution however has a few more checks to return early if the strings happen to already be referencing the same string.
