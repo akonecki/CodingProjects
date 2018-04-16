@@ -103,3 +103,22 @@ ASCII only lower case letters is 26 characters in the known set.  26 characters 
 - The first pass is to determine the number of qualified spaces which are thne used to determine the total size of the allocated memory.
 - In C/C++ this is necessary, in Java however it is not due to the fact that the total allocated memory associated with an array is always provided.
 - The calculation of total space necessary is more conserative and cross language.
+
+### Problem 5
+#### Problem Statement
+>Implement a method that performs basic string compression using the counts of repeated characters.  If the compressed string is not shorter than the original then the original should be returned instead.  Assume the string only uses lowcase ASCII letters.
+
+#### Problem Discussion
+- For `Java` implementation will need to still use char array since String type is not mutuable.
+- Application is limited to lower case only.
+- String length is important
+- Need to determine if a length of one needs to be accounted for or not.  In the example given it is needed.  So this means that if compression occurs then all character lengths need to be accounted for otherwise use the original string with no counts.
+- Likely should target in place manipulation.
+
+#### Problem Design
+- An easier implementation would be to use additional storage and create a new compressed array and then return the shorter of the two.
+- In place requires the measuring of the total size of characters needed.  If the total size is less than the original then can do.
+- In place also has issue with if there are lot of back to back sizes of 1 then will lose the next character due to being over-written, would need to start the modification from the back, but the same problem persists.  Can only have so many 1 compressions in a row before you would start needing to have additional data structures, which would defeat the whole purpose of performing an in place compression.
+  - Could replace all compressions greater than one first
+  - compress the 1s but the logic for that seems awful.
+- due to the compression logic of one will implement a copy of the data to a block of memory that is the needed space if the space needed is less than the original.
