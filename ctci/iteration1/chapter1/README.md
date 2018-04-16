@@ -122,3 +122,10 @@ ASCII only lower case letters is 26 characters in the known set.  26 characters 
   - Could replace all compressions greater than one first
   - compress the 1s but the logic for that seems awful.
 - due to the compression logic of one will implement a copy of the data to a block of memory that is the needed space if the space needed is less than the original.
+
+#### Problem Issues
+- Trying to do in place was waste of time.
+- Break problem up more in the written stage.
+
+#### Problem Solution
+- My design actually hit the more optimized solution that does not rely upon StringBuffers.
