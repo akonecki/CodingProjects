@@ -137,10 +137,17 @@ ASCII only lower case letters is 26 characters in the known set.  26 characters 
 #### Problem Discussion
 - A simplified matrix below  
 >
-1    2    3    4      13    9    5    1    1    2    3      9    5    1
-5    6    7    8      14    10   6    2    4    5    6      8    4    2
+1    2    3    4      13    9    5    1    1    2    3      9    4    1
+5    6    7    8      14    10   6    2    4    5    6      8    5    2
 9   10   11   12      15    11   7    3    7    8    9      7    6    3
 13  14   15   16      16    12   8    4
+
+>
+1    2    3    4     5       21    16    11    6    1  
+6    7    8    9     10      22    17    12    7    2
+11   12   13   14    15      23    18    13    8    3
+16   17   18   19    20      24    19    14    9    4
+21   22   23   24    25      25    20    15    10   5
 
 - Without considering the the constraint of in-place, will need to rotate the elements to their new locations within the matrix.  
 - NxN constraint allows for simplification.
