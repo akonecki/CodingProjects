@@ -205,6 +205,7 @@ ASCII only lower case letters is 26 characters in the known set.  26 characters 
 
 #### Problem Issues
 - Recursive leads to significant performance penalty due to do hitting the same cells multiple times.
+- Don't attempt for in-place no extra storage implementation, performance is not good (multiple revisits) and complexity more than really needed.
 
 #### Problem Solution
 - Keep track of just the rows and columns that need to be zero'ed.
