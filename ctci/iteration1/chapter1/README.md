@@ -228,3 +228,9 @@ Assume you have a method isSubstring which checks if one word is a substring of 
 #### Problem Design
 - Replicate s2 twice in a new string such that the call to `isSubstring` arguments are s1 and s2 + s2.
 - if s2 is a rotation of s1 then s1 will exist in s2 + s2.
+
+#### Problem Issues
+- Just understanding what the arguments should be for the isSubstring call.
+
+#### Problem Solution
+- Solution includes a bit more checking on lengths to not even perform the concatenation if the lengths are not matching but otherwise is the same.
