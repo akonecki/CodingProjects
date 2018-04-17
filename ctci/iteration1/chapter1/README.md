@@ -129,3 +129,37 @@ ASCII only lower case letters is 26 characters in the known set.  26 characters 
 
 #### Problem Solution
 - My design actually hit the more optimized solution that does not rely upon StringBuffers.
+
+### Problem 6
+#### Problem Statement 
+>Given an image represented by NxN matrix, where each pixel in the image is 4 bytes, write a method to rotate the image by 90 degrees.  Can you do this in place?
+
+#### Problem Discussion
+- A simplified matrix below  
+>
+1    2    3    4      13    9    5    1    1    2    3      9    5    1
+5    6    7    8      14    10   6    2    4    5    6      8    4    2
+9   10   11   12      15    11   7    3    7    8    9      7    6    3
+13  14   15   16      16    12   8    4
+
+- Without considering the the constraint of in-place, will need to rotate the elements to their new locations within the matrix.  
+- NxN constraint allows for simplification.
+- Can always move in specific set of directions, left to right, top to bottom, right to left, bottom to top.
+- The rows and columns that are needed to for modification decreases by two (removing the left, top, bottom, right most sides after performing N - 1 sets (this would perform all directions movements for all rows and columns on the outter most columns and rows).
+- Will need to preserve the location being replaced in-between states above.
+
+#### Problem Design
+- Have a proper definition for movements of data from
+  - left to right (x, y) => (x + n - j - 1, y + j)
+  - top to bottom (x, y) => (x - j, y - n + j + 1)
+  - right to left (x, y) => (x - n + j + 1, y - j)
+  - bottom to top (x, y) => (x + j, y + n - j - 1)
+- Transitions will be for (N -1) - (i * 2) where N is the matrix size, i is the ith iteration
+- Will only need to perform through half (apply the movements starting from the top left will lead to being applied to the bottom as well.
+  - 4x4 would be 
+  - (4 - 1) - (0 * 2) (outer layer) # of repetitions of the movements above <3>
+  - (4 - 1) - (1 * 2) (inner layer) # of repetitions of the movements above <1>
+  - 3x3 would be
+  - (3 - 1) - (0 * 2) (outer layer) # of repetitions of the movements above <2>
+  - (3 - 1) - (1 * 2) (inner layer) # of repetitions of the movements above <0>
+- In the end this is application of the movement of data one layer at a time, if odd the center wont move.
