@@ -211,3 +211,14 @@ ASCII only lower case letters is 26 characters in the known set.  26 characters 
 - Keep track of just the rows and columns that need to be zero'ed.
 - After examining all the cells, then iterate through the rows and columns storage to zero their orientation.
 
+### Problem 8
+#### Problem Statement
+>
+Assume you have a method isSubstring which checks if one word is a substring of another.  Given two strings, s1 and s2 write code to check if s2 is a rotation of s1 using only one call to isSubstring.
+
+#### Problem Disussion
+- With only one call to substring there is likely a trick to this.
+- For rotations could just keep rotating until either the original word or the solution is found then return true but this would require no usage of the isSubstring method.
+- the first letter is not guaranteed to be distinctive.
+- occurring order of the letter matters so sorting would not help since it would not guarantee original order of the word
+- if you can determine the index then you actually don't need substring at all
