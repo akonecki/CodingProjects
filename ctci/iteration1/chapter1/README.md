@@ -222,3 +222,9 @@ Assume you have a method isSubstring which checks if one word is a substring of 
 - the first letter is not guaranteed to be distinctive.
 - occurring order of the letter matters so sorting would not help since it would not guarantee original order of the word
 - if you can determine the index then you actually don't need substring at all
+- determine first what should be arguments to the isSubString function call, it takes two arguments.
+- from the points above we know that performing manual rotations on the string and checking against the second is unlikely.
+
+#### Problem Design
+- Replicate s2 twice in a new string such that the call to `isSubstring` arguments are s1 and s2 + s2.
+- if s2 is a rotation of s1 then s1 will exist in s2 + s2.
