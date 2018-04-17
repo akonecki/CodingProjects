@@ -170,3 +170,10 @@ ASCII only lower case letters is 26 characters in the known set.  26 characters 
   - (3 - 1) - (0 * 2) (outer layer) # of repetitions of the movements above <2>
   - (3 - 1) - (1 * 2) (inner layer) # of repetitions of the movements above <0>
 - In the end this is application of the movement of data one layer at a time, if odd the center wont move.
+
+#### Problem Issues
+- handling of correctly of the index offsets was troubling.
+- it might have been easier to do local calculations instead of from the total layer, element index.
+
+#### Problem Solution
+- Solution provided a slightly more elgant way of handling the indicies in terms of variables but actually the same.
