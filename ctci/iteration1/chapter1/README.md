@@ -177,3 +177,36 @@ ASCII only lower case letters is 26 characters in the known set.  26 characters 
 
 #### Problem Solution
 - Solution provided a slightly more elgant way of handling the indicies in terms of variables but actually the same.
+
+### Problem 7
+#### Problem Statement
+>Write an algorithm such that if an element in an MxN matrix is 0, its entire row and column are zero.
+
+#### Problem Discussion
+- make sure that the evaluation and processing occurs at separate intervals.  If they occurred at the same time then any zero in the matrix would lead to the whole matrix being all zeros.
+- can be performed in place but would require additional data structures to indicate which rows and columns to ignore, which can actually be the satck as well.
+- Less comples would be to perform the transformations a new MxN array, which would then require an additional MxN memory.  The reference is kept the same.
+- A recursive might be possible to save space but fixing higher order already checked indicies to later be zero would be difficult and likely require additional memory.  
+- Need to know if more than one zero can occur in a row / column.
+
+#### Problem Design
+- Iteration needs to occur from left to right, top to bottom.
+- When a zero is encountered setting values to zero in the left and up direction can occur un-checked.  These will not spawn additional checks, thus no additional recusive calls.
+- Each row only checks itself.  Going to the new row requires a new call.
+- The order of the fills and recursive calls are important.
+  - if zero is detected then fill up from the current column.
+  - set row flag to true for detecting a zero.
+  - after iterating through all the cells of the row, check the flag,
+  - if the flag is true set the row cells to zero
+  - go down in the matrix
+  - fill columns down
+  - if the flag is false then just go down.
+- A recursive implementation or any inplace implementation will likely lead to multiple zeroing of the same cell multiple times in the worse case due to not actually maintaining any extra information 
+
+#### Problem Issues
+- Recursive leads to significant performance penalty due to do hitting the same cells multiple times.
+
+#### Problem Solution
+- Keep track of just the rows and columns that need to be zero'ed.
+- After examining all the cells, then iterate through the rows and columns storage to zero their orientation.
+
