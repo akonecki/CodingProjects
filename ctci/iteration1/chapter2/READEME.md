@@ -11,9 +11,8 @@ Write code to remove duplicates from an unsorted linked list, how to perform thi
 #### Problem Discussion
 - the list is not sorted.
 - consider if the linked list is doubly linked.
-- with additional memory can insert in sorted order.
-- likely woudl need to make sure that the data in the linked list is actually ordered, if not ordered then there is no way to actually sort since can only perform compare operators and would require at least quadratic time to remove duplicates if no temporary buffer is used.
 - Looks to be quadratic in most cases without temporary memory.
+- with temporary memory, then can hash the existing values.
 
 #### Problem Design
 - simpleton case use two points one is the pivot and the other iterates through the remainder of the linked list.
@@ -21,5 +20,9 @@ Write code to remove duplicates from an unsorted linked list, how to perform thi
 - For this implementation will do a serial pivot and the removal of duplicates will be the runner pointer done recursively.
 
 #### Implementation Issues
+- None
 
 #### Solution Points
+- There are two solutions provided, 
+- one that operates on linear time linear space using a hash to check for duplicates
+- one that operates in quadratic time constant space (this is the one that is implemented).
