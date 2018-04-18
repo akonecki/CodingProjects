@@ -131,7 +131,7 @@ public class SeparateChaining<Key, Value> {
         }
 
         // Re-sizing check prior attempting to perform the insert.
-        if (this.mNodeCount >= this.mHashCapacity) {
+        if (this.mNodeCount * 10 >= this.mHashCapacity) {
             this.resize(capacity * 2);
         }
 
@@ -153,6 +153,28 @@ public class SeparateChaining<Key, Value> {
         return Math.abs(key.hashCode()) % capacity;
     }
 
+    private Node<Key, Value> getNode(Node<Key, Value> [] arrayOfLinkLists, Key key) {
+        Node<Key, Value> node = null;
+        
+        if (arrayOfLinkLists == null || key == null) {
+            return node;
+        }
+
+        // Get the head of the linked list.
+        node = arrayOfLinkLists[this.hash(key, this.mHashCapacity)];
+
+        // Traverse the list to search for the node.
+        while (node != null) {
+            if (node.mKey.equals(key)) {
+                return node;
+            }
+
+            node = node.mNext;
+        }
+
+        return node;
+    }
+
     //**************************************************************************
     //* PUBLIC API
     //**************************************************************************
@@ -162,6 +184,10 @@ public class SeparateChaining<Key, Value> {
 
     public int size() {
         return this.mNodeCount;
+    }
+
+    public int capacity() {
+        return this.mHashCapacity;
     }
 
     // Will use java provided library for returning iterable for simplicity.
@@ -183,16 +209,29 @@ public class SeparateChaining<Key, Value> {
     }
 
     public int hash(Key key) {
-        return key.hashCode();
+        return this.hash(key, this.mHashCapacity);
     }
 
     public void insert(Key key, Value value) {
+        if (key == null) {
+            throw new java.lang.IllegalArgumentException("Invalid key value");
+        }
+
         this.insert(this.mArrayOfLinkLists, this.mHashCapacity, key, value);
         return;
     }
 
     public Value get(Key key) {
-        return null;
+        Node<Key, Value> node = null;
+
+        node = this.getNode(this.mArrayOfLinkLists, key);
+
+        if (node == null) {
+            return null;
+        }
+        else {
+            return node.mValue;
+        }   
     }
 
     public boolean containsKey(Key key) {
