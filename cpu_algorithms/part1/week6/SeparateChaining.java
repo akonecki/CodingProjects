@@ -175,6 +175,46 @@ public class SeparateChaining<Key, Value> {
         return node;
     }
 
+    private void delete(Node<Key, Value> [] arrayOfLinkLists, Key key) {
+        int index = 0;
+        
+        if (arrayOfLinkLists == null || key == null) {
+            return;
+        }
+
+        // 1. Need to hash the key.
+        index = this.hash(key, this.mHashCapacity);
+
+        // 2. Attempt to delete from the list and update the new head for the hash.
+        arrayOfLinkLists[index] = this.deleteFromList(arrayOfLinkLists[index], key);
+
+        // 3. Resize if necessary.
+        if (this.mHashCapacity / this.mNodeCount >= 100) {
+            this.resize(this.mHashCapacity / 2);
+        }
+    }
+
+    private Node<Key, Value> deleteFromList(Node<Key, Value> head, Key key) {
+        Node<Key, Value> node = null;
+        
+        if (head == null) {
+            return null;
+        }
+
+        if (head.mKey.equals(key)) {
+            node = head.mNext;
+            node.mNext = null;
+            node.mKey = null;
+            node.mValue = null;
+            this.mNodeCount--;
+            return node;
+        } 
+        else {
+            head.mNext = this.deleteFromList(head.mNext, key);
+            return head;
+        }
+    }
+
     //**************************************************************************
     //* PUBLIC API
     //**************************************************************************
@@ -235,14 +275,30 @@ public class SeparateChaining<Key, Value> {
     }
 
     public boolean containsKey(Key key) {
-        return false;
+        Node<Key, Value> node = null;
+
+        node = this.getNode(this.mArrayOfLinkLists, key);
+        
+        if (node == null) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
     public boolean containsValue(Value value) {
+        for (Value tempValue : this.values()) {
+            if (tempValue.equals(value)) {
+                return true;
+            }
+        }
+
         return false;
     }
 
     public void delete(Key key) {
+        this.delete(this.mArrayOfLinkLists, key);
         return;
     }
 
