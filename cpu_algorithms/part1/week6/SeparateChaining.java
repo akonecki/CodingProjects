@@ -8,31 +8,31 @@ public class SeparateChaining<Key, Value> {
     //* PRIVATE API
     //**************************************************************************
     private static final int DEFAULT_HASH_CAPACITY = 10;
-    private Node<Key, Value>[] mArrayOfLinkLists = null;
+    private Node[] mArrayOfLinkLists = new Node[DEFAULT_HASH_CAPACITY];
     private int mHashCapacity = DEFAULT_HASH_CAPACITY;
     private int mNodeCount = 0;
 
-    private class Node<Key, Value> {
-        private Key mKey = null;
-        private Value mValue = null;
-        private Node<Key, Value> mNext = null;
+    private static class Node {
+        private Object mKey = null;
+        private Object mValue = null;
+        private Node mNext = null;
 
-        public Node(Key key, Value value) {
+        public Node(Object key, Object value) {
             this.mKey = key;
             this.mValue = value;
         }
     }
 
     private void resize(int newCapacity) {
-        Node<Key, Value>[] temp = null; 
-        List<Node<Key, Value>> nodes = null;
+        Node[] temp = null; 
+        List<Node> nodes = null;
         int count = 0;
 
         if (newCapacity < SeparateChaining.DEFAULT_HASH_CAPACITY) {
             newCapacity = SeparateChaining.DEFAULT_HASH_CAPACITY;
         }
 
-        temp = (Node<Key, Value>[]) new Object[newCapacity];
+        temp = new Node[newCapacity];
 
         // Now need to re-hash all the existing keys and place them in
         // potentially new positions.
@@ -46,8 +46,8 @@ public class SeparateChaining<Key, Value> {
         this.mNodeCount = 0;
         
         // 3. Insert on the newly constructed hash array using the new capacity.
-        for (Node<Key, Value> node : nodes) {
-            this.insert(temp, newCapacity, node.mKey, node.mValue);
+        for (Node node : nodes) {
+            this.insert(temp, newCapacity, (Key) node.mKey, (Value) node.mValue);
         }
 
         // 4. Set the updated hash table temp to be the instance copy.
@@ -61,12 +61,12 @@ public class SeparateChaining<Key, Value> {
         assert(count == this.mNodeCount);
     }
 
-    private List<Node<Key, Value>> nodes(Node<Key, Value>[] arrayOfLinkLists) {
-        List<Node<Key, Value>> nodes = new ArrayList<Node<Key, Value>>();
+    private List<Node> nodes(Node[] arrayOfLinkLists) {
+        List<Node> nodes = new ArrayList<Node>();
         int count = this.size();
 
         if (arrayOfLinkLists != null) {
-            for (Node<Key, Value> node : arrayOfLinkLists) {
+            for (Node node : arrayOfLinkLists) {
                 while (node != null) {
                     nodes.add(node);
                     node = node.mNext;
@@ -86,30 +86,30 @@ public class SeparateChaining<Key, Value> {
         return nodes;
     }
 
-    private void keys(Node<Key, Value>[] arrayOfLinkLists, List<Key> keys) {
+    private void keys(Node[] arrayOfLinkLists, List<Key> keys) {
         if (arrayOfLinkLists == null || keys == null) {
             return;
         }
 
-        for (Node<Key, Value> node : this.nodes(arrayOfLinkLists)) {
-            keys.add(node.mKey);
+        for (Node node : this.nodes(arrayOfLinkLists)) {
+            keys.add((Key) node.mKey);
         }
     }
 
-    private void values(Node<Key, Value>[] arrayOfLinkLists, List<Value> values) {
+    private void values(Node[] arrayOfLinkLists, List<Value> values) {
         if (arrayOfLinkLists == null || values == null) {
             return;
         }
 
-        for (Node<Key, Value> node : this.nodes(arrayOfLinkLists)) {
-            values.add(node.mValue);
+        for (Node node : this.nodes(arrayOfLinkLists)) {
+            values.add((Value) node.mValue);
         }
     }
 
-    private Node<Key, Value> insertNodeInLinkedList(Node<Key, Value> head, Key key, Value value) {
+    private Node insertNodeInLinkedList(Node head, Key key, Value value) {
         if (head == null) {
             this.mNodeCount++;
-            return new Node<Key, Value>(key, value);
+            return new Node((Key) key, (Value) value);
         }
 
         if (head.mKey.equals(key)) {
@@ -122,9 +122,9 @@ public class SeparateChaining<Key, Value> {
         return head;
     }
 
-    private void insert(Node<Key, Value> [] arrayOfLinkLists, int capacity, Key key, Value value) {
+    private void insert(Node [] arrayOfLinkLists, int capacity, Key key, Value value) {
         int hashValue = 0;
-        Node<Key, Value> head = null;
+        Node head = null;
 
         if (arrayOfLinkLists == null || capacity <= 0 || key == null) {
             return;
@@ -132,7 +132,7 @@ public class SeparateChaining<Key, Value> {
 
         // Re-sizing check prior attempting to perform the insert.
         if (this.mNodeCount * 10 >= this.mHashCapacity) {
-            this.resize(capacity * 2);
+            // this.resize(capacity * 2);
         }
 
         // 1. Obtain the hash value of the key for this specific hash array.
@@ -153,8 +153,8 @@ public class SeparateChaining<Key, Value> {
         return Math.abs(key.hashCode()) % capacity;
     }
 
-    private Node<Key, Value> getNode(Node<Key, Value> [] arrayOfLinkLists, Key key) {
-        Node<Key, Value> node = null;
+    private Node getNode(Node [] arrayOfLinkLists, Key key) {
+        Node node = null;
         
         if (arrayOfLinkLists == null || key == null) {
             return node;
@@ -175,7 +175,7 @@ public class SeparateChaining<Key, Value> {
         return node;
     }
 
-    private void delete(Node<Key, Value> [] arrayOfLinkLists, Key key) {
+    private void delete(Node [] arrayOfLinkLists, Key key) {
         int index = 0;
         
         if (arrayOfLinkLists == null || key == null) {
@@ -190,12 +190,12 @@ public class SeparateChaining<Key, Value> {
 
         // 3. Resize if necessary.
         if (this.mHashCapacity / this.mNodeCount >= 100) {
-            this.resize(this.mHashCapacity / 2);
+            // this.resize(this.mHashCapacity / 2);
         }
     }
 
-    private Node<Key, Value> deleteFromList(Node<Key, Value> head, Key key) {
-        Node<Key, Value> node = null;
+    private Node deleteFromList(Node head, Key key) {
+        Node node = null;
         
         if (head == null) {
             return null;
@@ -219,7 +219,8 @@ public class SeparateChaining<Key, Value> {
     //* PUBLIC API
     //**************************************************************************
     public SeparateChaining() {
-        mArrayOfLinkLists = (Node<Key, Value>[]) new Object[DEFAULT_HASH_CAPACITY];
+        // Could create all the heads
+        mArrayOfLinkLists = new Node[10];// (Node []) new Object[SeparateChaining.DEFAULT_HASH_CAPACITY];
     }
 
     public int size() {
@@ -262,7 +263,7 @@ public class SeparateChaining<Key, Value> {
     }
 
     public Value get(Key key) {
-        Node<Key, Value> node = null;
+        Node node = null;
 
         node = this.getNode(this.mArrayOfLinkLists, key);
 
@@ -270,12 +271,12 @@ public class SeparateChaining<Key, Value> {
             return null;
         }
         else {
-            return node.mValue;
+            return (Value) node.mValue;
         }   
     }
 
     public boolean containsKey(Key key) {
-        Node<Key, Value> node = null;
+        Node node = null;
 
         node = this.getNode(this.mArrayOfLinkLists, key);
         
@@ -303,6 +304,12 @@ public class SeparateChaining<Key, Value> {
     }
 
     public static void main(String [] args) {
+        SeparateChaining<String, Integer> words = new SeparateChaining<String, Integer>();
 
+        for (int index = 0; index < 1000; index++) {
+            words.insert("abc" + Integer.toString(index), index);
+        }
+
+        System.out.println(words.size() + " " + words.capacity());
     }
 }
