@@ -24,7 +24,7 @@ public class SeparateChaining<Key, Value> {
     }
 
     private void resize(int newCapacity) {
-        Node[] temp = null; 
+        // Node[] temp = null; 
         List<Node> nodes = null;
         int count = 0;
 
@@ -32,12 +32,18 @@ public class SeparateChaining<Key, Value> {
             newCapacity = SeparateChaining.DEFAULT_HASH_CAPACITY;
         }
 
-        temp = new Node[newCapacity];
+        // temp = new Node[newCapacity];
 
         // Now need to re-hash all the existing keys and place them in
         // potentially new positions.
-        // 1. Obtain a list of all the nodes.
+        // 1a. Obtain a list of all the nodes.
         nodes = this.nodes(this.mArrayOfLinkLists);
+
+        // 1b. Adjust the array size.
+        this.mArrayOfLinkLists = new Node[newCapacity];
+
+        // 1c. Update to instance capacity.
+        this.mHashCapacity = newCapacity;
 
         // 2a. Save the old count.
         count = this.mNodeCount;
@@ -47,16 +53,10 @@ public class SeparateChaining<Key, Value> {
         
         // 3. Insert on the newly constructed hash array using the new capacity.
         for (Node node : nodes) {
-            this.insert(temp, newCapacity, (Key) node.mKey, (Value) node.mValue);
+            this.insert(this.mArrayOfLinkLists, (Key) node.mKey, (Value) node.mValue);
         }
 
-        // 4. Set the updated hash table temp to be the instance copy.
-        this.mArrayOfLinkLists = temp;
-
-        // 5. Set the new capacity for the class instance.
-        this.mHashCapacity = newCapacity;
-
-        // 6. Number of elements in the hash is updated on the insert, but
+        // 4. Number of elements in the hash is updated on the insert, but
         // will be checked to make sure it was the same as before.
         assert(count == this.mNodeCount);
     }
@@ -122,7 +122,7 @@ public class SeparateChaining<Key, Value> {
         return head;
     }
 
-    private void insert(Node [] arrayOfLinkLists, int capacity, Key key, Value value) {
+    private void insert(Node [] arrayOfLinkLists, Key key, Value value) {
         int hashValue = 0;
         Node head = null;
 
@@ -132,7 +132,7 @@ public class SeparateChaining<Key, Value> {
 
         // Re-sizing check prior attempting to perform the insert.
         if (this.mNodeCount * 10 >= this.mHashCapacity) {
-            // this.resize(capacity * 2);
+            this.resize(capacity * 10);
         }
 
         // 1. Obtain the hash value of the key for this specific hash array.
