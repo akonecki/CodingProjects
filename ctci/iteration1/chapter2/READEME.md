@@ -73,3 +73,8 @@ Implement an algorithm to delete a node in the middle of a singly linked list, g
 - So the assumption made was incorrect.
 - Only given access to the node to be deleted is the intended argument.
 - This would not really be a publicly exposed API since the nodes are wrapped around the data.
+
+#### Problem Solution
+- Move data the wrapper nodes, keeps the pointer links correctness.
+- Can not perform complete removal if it is the last node in the link, caller would have to perform this function.
+
