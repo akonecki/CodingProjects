@@ -43,3 +43,11 @@ Implement an algorithm to find the kth to last element of a singly linked list.
 - Once the lead pointer is established then the trailing pointer can be set to the head and in lock step the traversal of the linked list can occur.
 - once the lead pointer is null, return the trailing pointer since it will be k from the tail.
 - Count of k is the number of hopes that occur from the tail to the trailing node. 
+
+#### Problem Issues
+- Just need to make sure counting hops from the tail is the correct / desired.
+
+#### Problem Solution
+- There are multiple solutions provided, however the one implemented is the suggested ideal case.
+- Other solutions may take advantage of language support (access to pointers) or only provide accessing of the kth element not actually being able to return it (recursive).
+- The leading / tailing pointer solution is serial in nature and independent of the language.
