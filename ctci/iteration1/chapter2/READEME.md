@@ -104,3 +104,14 @@ Write code to partition a linked list around a value x, such that all nodes less
   - if next of high is greater than x, move high by `high = high.next`
   - if next of high is equal to x, then swap value of `match_high.next.value` with `high.next.value`, move high by `high = high.next`
   - if next of high is less than x, then swap value of `match_high.next.value` with `high.next.value`, move high by `high = high.next`, swap value of `match_low.value` with `match_high.next.value`, move match_low by `match_low = match_low.next`, move match_high by `match_high = match_high.next`
+
+#### Problem Issues
+- none just a bit long
+- note that this is not a stable sort.
+
+#### Problem Solution
+- stable sort can be obtained by maintaining separate memory for lists greater and less than x.
+- solution re-arranges the nodes.  
+- I doubt the solution handles multiples do to the fact that it only handles two cases and for values equal to x also fits into the less than category, which would mean it would get intertwined.
+- there solution also is based on the posisble notion that the sorting value can be virtual (the key does not exist within the list).  This makes the problem statement quite difficult due to the assertion of to the left and to the right of in terms of key value.  if x does not exist in the linked list there is no order possible due to no motion of left or right.
+- the stable solution can be used to manage 3 independent linked lists that combines the head / tails of each to each other and return the head of the low.
