@@ -115,3 +115,18 @@ Write code to partition a linked list around a value x, such that all nodes less
 - I doubt the solution handles multiples do to the fact that it only handles two cases and for values equal to x also fits into the less than category, which would mean it would get intertwined.
 - there solution also is based on the posisble notion that the sorting value can be virtual (the key does not exist within the list).  This makes the problem statement quite difficult due to the assertion of to the left and to the right of in terms of key value.  if x does not exist in the linked list there is no order possible due to no motion of left or right.
 - the stable solution can be used to manage 3 independent linked lists that combines the head / tails of each to each other and return the head of the low.
+
+### Problem 5
+#### Problem Statement
+>
+You have two numbers represented as linked lists where each node contains a single digit.  The digits are stored in **reverse** order such that the 1s digit is at the head of the list.  Write a function that adds the two numbers and returns the sum as a linked list.
+
+#### Problem Discussion
+- the reverse order of the digits in linked list fashion is very beneficial.  Allows you to start the necessary carries to the next pair of digits within the two numbers.
+- will need to dynamically create a new linked list structure that also follows the same reverse order.
+
+#### Problem Design
+- Will need a carry to add to the two digits of the numbers.
+- For each iteration will perform an add of new digit to the new Linklist which is the sum.
+- sum scope is the entire problem.
+- Did not say anything about negatives, will assume they are outside the scope of the problem.
