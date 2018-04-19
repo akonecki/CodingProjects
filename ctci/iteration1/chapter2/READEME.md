@@ -51,3 +51,20 @@ Implement an algorithm to find the kth to last element of a singly linked list.
 - There are multiple solutions provided, however the one implemented is the suggested ideal case.
 - Other solutions may take advantage of language support (access to pointers) or only provide accessing of the kth element not actually being able to return it (recursive).
 - The leading / tailing pointer solution is serial in nature and independent of the language.
+
+### Problem 3
+#### Problem Statement
+>
+Implement an algorithm to delete a node in the middle of a singly linked list, given only access to that node.  For example the list is a->b->c->d->e, and passed in the reference to c, after deletion the list should be a->b->d->e.
+
+#### Problem Discussion
+- the access statement is the key point.
+- if access means it is provided as an argument, then would have no way to actually correct the linked list of the parent links.
+- access likely means that using only one pointer to the data structure (i.e. no pairs, leading tailing references).
+- with the assumption above, this fits in a recursive method such that going down allows the deletion of the middle linked node, and then going back up the recursion fixes the invariant.
+
+#### Problem Design 
+- recursion implementation that continues to cycle until the node that is to be deleted is found.  Once found need to store locally the reference to the nodes next. 
+- delete the node
+- return the deleted node's next node reference.
+- keep returning up the stack where the `node.next = deleteNode(node.next, value);`
