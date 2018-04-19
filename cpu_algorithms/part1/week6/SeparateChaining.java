@@ -126,17 +126,12 @@ public class SeparateChaining<Key, Value> {
         int hashValue = 0;
         Node head = null;
 
-        if (arrayOfLinkLists == null || capacity <= 0 || key == null) {
+        if (arrayOfLinkLists == null || this.mHashCapacity <= 0 || key == null) {
             return;
         }
 
-        // Re-sizing check prior attempting to perform the insert.
-        if (this.mNodeCount * 10 >= this.mHashCapacity) {
-            this.resize(capacity * 10);
-        }
-
         // 1. Obtain the hash value of the key for this specific hash array.
-        hashValue = this.hash(key, capacity);
+        hashValue = this.hash(key, this.mHashCapacity);
 
         // 2. Obtain the head of the linked list at the position within the 
         // hash array.
@@ -147,6 +142,11 @@ public class SeparateChaining<Key, Value> {
 
         // 4. Save the head of the link list back into the hash array.
         arrayOfLinkLists[hashValue] = head;
+
+        // 5. Re-sizing check after attempting to the insert.
+        if (this.mNodeCount * 10 >= this.mHashCapacity) {
+            this.resize(this.mHashCapacity * 100);
+        }
     }
 
     private int hash(Key key, int capacity) {
@@ -189,8 +189,8 @@ public class SeparateChaining<Key, Value> {
         arrayOfLinkLists[index] = this.deleteFromList(arrayOfLinkLists[index], key);
 
         // 3. Resize if necessary.
-        if (this.mHashCapacity / this.mNodeCount >= 100) {
-            // this.resize(this.mHashCapacity / 2);
+        if (this.mNodeCount > 0 && this.mHashCapacity / this.mNodeCount >= 1000) {
+            this.resize(this.mHashCapacity / 100);
         }
     }
 
@@ -203,9 +203,9 @@ public class SeparateChaining<Key, Value> {
 
         if (head.mKey.equals(key)) {
             node = head.mNext;
-            node.mNext = null;
-            node.mKey = null;
-            node.mValue = null;
+            head.mNext = null;
+            head.mKey = null;
+            head.mValue = null;
             this.mNodeCount--;
             return node;
         } 
@@ -258,7 +258,7 @@ public class SeparateChaining<Key, Value> {
             throw new java.lang.IllegalArgumentException("Invalid key value");
         }
 
-        this.insert(this.mArrayOfLinkLists, this.mHashCapacity, key, value);
+        this.insert(this.mArrayOfLinkLists, key, value);
         return;
     }
 
@@ -308,6 +308,12 @@ public class SeparateChaining<Key, Value> {
 
         for (int index = 0; index < 1000; index++) {
             words.insert("abc" + Integer.toString(index), index);
+        }
+
+        System.out.println(words.size() + " " + words.capacity());
+
+        for (int index = 0; index < 1000; index++) {
+            words.delete("abc" + Integer.toString(index));
         }
 
         System.out.println(words.size() + " " + words.capacity());
