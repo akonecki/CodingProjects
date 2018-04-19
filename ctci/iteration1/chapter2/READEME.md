@@ -78,3 +78,29 @@ Implement an algorithm to delete a node in the middle of a singly linked list, g
 - Move data the wrapper nodes, keeps the pointer links correctness.
 - Can not perform complete removal if it is the last node in the link, caller would have to perform this function.
 
+### Problem 4
+#### Problem Statement
+>
+Write code to partition a linked list around a value x, such that all nodes less than x come before all nodes greater than or equal to x.
+
+#### Problem Discussion
+- Very similar to how quick sort / 3 way dikstra sorting works, but have to consider linked lists.
+- Need to ask if there will be duplicates possible in the linked list.  If so then must perform with 3 way.
+
+#### Problem Design
+- Will design with multiple values being possible.
+- low -> low -> low -> eq -> eq -> eq -> high -> high -> high is the resulting design.
+- Instead of moving pointers around, will just move the values that the link list nodes wrap around.
+- First find value x
+- After finding x swap it with the value contained in the head because don't know if the values up to then are all less than x or not and would not know where to put them.
+- use 4 pointers to maintain the current layout
+  - head : will always point to a value less than x
+  - low-match : points to the first occurrence of the value x in the linked list that has been ordered
+  - high-match : points to the last occurrence of the value x in the linked list that has been ordered
+  - high : points to the current value that is last confirmed to be larger than x, will eventually be null.
+- when `high` reference pointer is null, then done inspecting the linked list.
+- jumps need to be defined.
+  - initialization requires that all pointers will be equal to the head after the swap with x has occurred.
+  - if next of high is greater than x, move high by `high = high.next`
+  - if next of high is equal to x, then swap value of `match_high.next.value` with `high.next.value`, move high by `high = high.next`
+  - if next of high is less than x, then swap value of `match_high.next.value` with `high.next.value`, move high by `high = high.next`, swap value of `match_low.value` with `match_high.next.value`, move match_low by `match_low = match_low.next`, move match_high by `match_high = match_high.next`
