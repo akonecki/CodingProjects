@@ -68,3 +68,8 @@ Implement an algorithm to delete a node in the middle of a singly linked list, g
 - delete the node
 - return the deleted node's next node reference.
 - keep returning up the stack where the `node.next = deleteNode(node.next, value);`
+
+#### Problem Issue
+- So the assumption made was incorrect.
+- Only given access to the node to be deleted is the intended argument.
+- This would not really be a publicly exposed API since the nodes are wrapped around the data.

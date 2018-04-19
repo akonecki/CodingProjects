@@ -80,6 +80,48 @@ public class ivq3 <T> implements Iterable <T> {
         return new LinkedListIterator();
     }
 
+    private void delete(Node<T> node) {
+        if (node == null) {
+            return;
+        }
+        
+        if (node == this.head) {
+            this.head = node.next;
+            this.count--;
+            node.value = null;
+            node.next = null;
+            return;
+        }
+        else {
+            Node<T> prev = node;
+            Node<T> next = node.next;
+
+            // Need to perform value shifting.
+            while (next != null) {
+                prev.value = next.value;
+                
+                // Don't want zombie pointer to going to be removed node.
+                if (next.next == null) {
+                    prev.next = null;
+                }
+
+                prev = next;
+                next = next.next;
+            }
+
+            // prev is at the end of the linked list
+            // next is at null
+            // don't need the last node any more
+            prev.next = null;
+            prev.value = null;
+
+            // Will having dangling pointer if node is the tail of the linked 
+            // list caller would have to clean it up & will not be garabage 
+            // collected until this is performed.
+            this.count--;
+        }
+    }
+
     public void delete(T value) {
         if (value == null) {
             return;
