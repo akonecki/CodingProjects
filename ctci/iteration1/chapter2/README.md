@@ -137,3 +137,17 @@ You have two numbers represented as linked lists where each node contains a sing
 #### Problem Solution
 - Solution describes two solutions, one with the orientation of the data as given (reverse order) and the other with the order flipped.
 - The flipped uses more recursion but pads the one that is shorter.  This is fine but actually un-necessary.
+
+### Problem 6
+#### Problem Statement
+>
+Given a circular linked list. implement an algorithm which returns the node at the beginning of the loop.
+
+#### Problem Discussion
+- need to determine if can augment the data structure, if so setting a flag would make this trival.
+- if flag is set and encountered then the first time then this is the beginning of the loop.
+- could record all the loops visited
+
+#### Problem Solution
+- I did think of using double pointers but didn't actually look at the math for iterations.  
+- The solution is quite simple based on the loop size and the first collision using duel pointers at different speeds then reseting one pointer then iterating both at the same speed
