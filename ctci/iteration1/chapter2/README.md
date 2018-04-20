@@ -150,4 +150,5 @@ Given a circular linked list. implement an algorithm which returns the node at t
 
 #### Problem Solution
 - I did think of using double pointers but didn't actually look at the math for iterations.  
-- The solution is quite simple based on the loop size and the first collision using duel pointers at different speeds then reseting one pointer then iterating both at the same speed
+- The solution is quite simple based on the loop size and the first collision using duel pointers at different speeds then reseting one pointer then iterating both at the same speed.
+- I could not come up with a solution that did not involve modification by myself.
