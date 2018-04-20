@@ -8,6 +8,10 @@ public class ivq5 implements Iterable<Integer> {
         private Integer value = null;
         private Node next = null;
 
+        public Node() {
+
+        }
+
         public Node(Integer value) {
             this.value = value;
         }
@@ -97,10 +101,66 @@ public class ivq5 implements Iterable<Integer> {
         return sum;
     }
 
+    public void addMajor(ivq5 num1, ivq5 num2) {
+        if (num1 == null || num2 == null) {
+            throw new java.lang.IllegalArgumentException("Invalid argument inputs.");
+        }
+        
+        this.head = this.addMajor(num1.head, num2.head, 0);
+
+        // Now might need to fix the head.
+        if (this.head != null && this.head.value > 9) {
+            Node sum = new Node(this.head.value / 10);
+            sum.next = this.head;
+            this.head.value = this.head.value % 10;
+            this.head = sum;
+        }
+    }
+
+    private Node addMajor(Node num1, Node num2, int carry) {
+        Node sum = null;
+
+        if (num1 != null && num2 != null) {
+            sum = new Node();
+            sum.next = addMajor(num1.next, num2.next, 0);
+
+            if (sum.next != null) {
+                carry = sum.next.value / 10;
+                sum.next.value = sum.next.value % 10;
+            }
+
+            sum.value = num1.value + num2.value + carry;
+        }
+        else if (num1 != null) {
+            sum = new Node();
+            sum.next = addMajor(num1.next, null, 0);
+            
+            if (sum.next != null) {
+                carry = sum.next.value / 10;
+                sum.next.value = sum.next.value % 10;
+            }
+
+            sum.value = num1.value + carry;
+        }
+        else if (num2 != null) {
+            sum = new Node();
+            sum.next = addMajor(null, num2.next, 0);
+            
+            if (sum.next != null) {
+                carry = sum.next.value / 10;
+                sum.next.value = sum.next.value % 10;
+            }
+
+            sum.value = num2.value + carry;
+        }
+
+        return sum;
+    }
+
     public static void main(String [] args) {
         ivq5 num1 = new ivq5();
         ivq5 num2 = new ivq5();
-        num1.insert(1);
+        num1.insert(8);
         num1.insert(1);
         num1.insert(1);
         num1.insert(9);
@@ -111,7 +171,7 @@ public class ivq5 implements Iterable<Integer> {
         num2.insert(2);
         
         ivq5 sum = new ivq5();
-        sum.add(num1, num2);
+        sum.addMajor(num1, num2);
 
         for (Integer integer : sum) {
             System.out.print(integer + " ");

@@ -130,3 +130,10 @@ You have two numbers represented as linked lists where each node contains a sing
 - For each iteration will perform an add of new digit to the new Linklist which is the sum.
 - sum scope is the entire problem.
 - Did not say anything about negatives, will assume they are outside the scope of the problem.
+
+#### Problem Issues
+- None
+
+#### Problem Solution
+- Solution describes two solutions, one with the orientation of the data as given (reverse order) and the other with the order flipped.
+- The flipped uses more recursion but pads the one that is shorter.  This is fine but actually un-necessary.
