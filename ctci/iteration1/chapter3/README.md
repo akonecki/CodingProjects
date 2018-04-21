@@ -26,3 +26,21 @@ Describe how you could use a single array to implement three stacks.
 #### Problem Solution
 - Same as above but does not go into re-sizing.
 - Also provides a flexible implementation when the previous stacks when they grow big takes over its neighbors, and the neighbor values are shifted over to a new memory.
+
+### Problem 2
+#### Problem Statement
+>
+How would you design a stack which, in addition to push and pop also has a function min, which returns the minimum element?  All should operate in O(1) time.
+
+#### Problem Discussion
+- since have access to the pop and push can support min function.
+- must consider the maintaining of the min element as pops occur since the min could be pop'd off, then would need the minimum to then be resolved in O(1) time.
+- Priority queues would all be lgN time but would provide this.
+
+#### Problem Design
+- Stack agumentation is necessary.
+- when a value is being pushed onto the stack the current minimum of the top of stack gets compared to the current value, if it is still the minimum then the mimumium for the new value being push on the stack will be the same.
+- Values themselves will need to be wrapped.
+
+#### Problem Issues
+- Orignally only tried accomplishing this using algorithms, and not actually looking at class constructs.
