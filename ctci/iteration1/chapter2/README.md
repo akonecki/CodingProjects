@@ -152,3 +152,21 @@ Given a circular linked list. implement an algorithm which returns the node at t
 - I did think of using double pointers but didn't actually look at the math for iterations.  
 - The solution is quite simple based on the loop size and the first collision using duel pointers at different speeds then reseting one pointer then iterating both at the same speed.
 - I could not come up with a solution that did not involve modification by myself.
+
+### Problem 7
+#### Problem Statement
+>
+Write a method to determine if a linked list is a Palindrome.
+
+#### Problem Discussion
+- if you want to spend extra memory space can copy values to extra space and then compare.
+- if dont want to spend extra space will need the ability to compare the last and the first and then so on.
+- need to determine possible sizes, if too large and want to implement a recursive method that could be an issue.
+- if have access to extra space can build a secondary list, then go through both, and return true if all entries are at the same iterating one at a time.  Creation of the second linked list can be serial or recursive.
+
+#### Problem Design
+- Assumming additional space is available of the same as the current linked list.
+- Will implement a serial reversed linked list of the current list.
+- then step through both linked lists one at a time.  If elements are all equal return true, otherwise return false.
+
+
