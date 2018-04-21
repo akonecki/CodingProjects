@@ -169,4 +169,11 @@ Write a method to determine if a linked list is a Palindrome.
 - Will implement a serial reversed linked list of the current list.
 - then step through both linked lists one at a time.  If elements are all equal return true, otherwise return false.
 
+#### Problem Issues
+- Only difficulty is in what approach should be implemented, recursive, iterative, extra memory?
 
+#### Problem Solution
+- Mulitple solutions provided.
+  - First solution is similar to the one implemented and that is one that builds a reversed list and compares.
+  - Second solution pushes values onto a stack up to half of the size of the linked list.  Then unwinds the stack comparing on the second half.
+  - Third recursive that follows original ideas of going to the end and then using a complex return type / class to old the forward list and the current status of the palidrome.  The book only goes halfway and then begins the work, where-as my design was to just go through the whole (easier implementation same worse case timing).
