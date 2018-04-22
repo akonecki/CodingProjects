@@ -62,7 +62,11 @@ Imagine s stack of plates, if the stack gets too high it might topple.  Thus whe
 - stacks could be pre-allocated to their maximum amount and just manage it to the desired capacity.
 - very similar to individual array resizing but instead the array just holds references to the new array that is a stack.
 - when a stack gets created or removed depends follows similar fashion to resizing, but will be not as forgiving.
+- for individual popping operation would likely need to determine what the strategy for pushing is to handle holes in earlier stacks, as in fill earliest stack first.
 
 #### Problem Issues
+- None
 
 #### Problem Solution
+- The book uses ArrayList data types which requires a bit more work and more complex methods since not owning the underlying data structure.
+- Valid solution but requires a large number of communication points about assumptions for the implmentation.
