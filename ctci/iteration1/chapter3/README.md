@@ -38,9 +38,22 @@ How would you design a stack which, in addition to push and pop also has a funct
 - Priority queues would all be lgN time but would provide this.
 
 #### Problem Design
-- Stack agumentation is necessary.
+- Stack class agumentation is necessary.
 - when a value is being pushed onto the stack the current minimum of the top of stack gets compared to the current value, if it is still the minimum then the mimumium for the new value being push on the stack will be the same.
 - Values themselves will need to be wrapped.
 
 #### Problem Issues
 - Orignally only tried accomplishing this using algorithms, and not actually looking at class constructs.
+
+### Problem 3
+#### Problem Statement
+>
+Imagine s stack of plates, if the stack gets too high it might topple.  Thus when a stack gets to a specific height we would like to start a new stack when the previous stack exceeds some threshold.  Implement a data structure `SetOfStacks` that mimics this.  `SetOfStacks` should be composed of several stacks and should create a new stack once the previous one exceeds capacity.  `SetOfStacks.pus()` and `SetOfStacks.pop()` should behave identically to a sinlge stack.  Also implement a function `popAt(int index)` which performs a pop operation on a specific sub-stack.
+
+#### Problem Discussion
+
+#### Problem Design
+
+#### Problem Issues
+
+#### Problem Solution
