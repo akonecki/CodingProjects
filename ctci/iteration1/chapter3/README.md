@@ -70,3 +70,20 @@ Imagine s stack of plates, if the stack gets too high it might topple.  Thus whe
 #### Problem Solution
 - The book uses ArrayList data types which requires a bit more work and more complex methods since not owning the underlying data structure.
 - Valid solution but requires a large number of communication points about assumptions for the implmentation.
+
+### Problem 4
+#### Problem Statement
+>
+In the classic `Towers of Hanoi`, you have 3 towers and N disks of different sizes which can slide onto any tower.  The puzzle starts with disks sorted in ascending order of size from top to bottom.  The constraints are as follows.
+1. Only one disk can be moved at a time.
+2. A dusk is slid off the top of one tower onto the next tower.
+3. A disk can only be placed on top of a larger disk.
+Write a program to move the disks from the first tower to the last using stacks.
+
+#### Problem Discussion
+
+#### Problem Design
+
+#### Problem Issues
+
+#### Problem Solution
