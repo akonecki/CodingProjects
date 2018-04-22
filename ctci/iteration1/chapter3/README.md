@@ -48,11 +48,20 @@ How would you design a stack which, in addition to push and pop also has a funct
 ### Problem 3
 #### Problem Statement
 >
-Imagine s stack of plates, if the stack gets too high it might topple.  Thus when a stack gets to a specific height we would like to start a new stack when the previous stack exceeds some threshold.  Implement a data structure `SetOfStacks` that mimics this.  `SetOfStacks` should be composed of several stacks and should create a new stack once the previous one exceeds capacity.  `SetOfStacks.pus()` and `SetOfStacks.pop()` should behave identically to a sinlge stack.  Also implement a function `popAt(int index)` which performs a pop operation on a specific sub-stack.
+Imagine s stack of plates, if the stack gets too high it might topple.  Thus when a stack gets to a specific height we would like to start a new stack when the previous stack exceeds some threshold.  Implement a data structure `SetOfStacks` that mimics this.  `SetOfStacks` should be composed of several stacks and should create a new stack once the previous one exceeds capacity.  `SetOfStacks.push()` and `SetOfStacks.pop()` should behave identically to a sinlge stack.  Also implement a function `popAt(int index)` which performs a pop operation on a specific sub-stack.
 
 #### Problem Discussion
+- two parts to this problem that needs to be considered.
+- first there is the managing of an individual stack
+- second is the handling of all the stacks together.
+- the stacks individuall can be viewed like arrays and as a new stack gets added progresses to a 2D array where the stack is the row.
+- this will allow traversal to be a bit more easy as well.
 
 #### Problem Design
+- need a dynamic array for holding the `SetOfStacks` where the current index indicates the stack that is being worked on.
+- stacks could be pre-allocated to their maximum amount and just manage it to the desired capacity.
+- very similar to individual array resizing but instead the array just holds references to the new array that is a stack.
+- when a stack gets created or removed depends follows similar fashion to resizing, but will be not as forgiving.
 
 #### Problem Issues
 
