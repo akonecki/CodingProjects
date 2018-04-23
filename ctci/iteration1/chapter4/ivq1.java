@@ -50,6 +50,10 @@ public class ivq1 <T extends Comparable<T>> {
         return (this.getHeight(root) != -1);
     }
 
+    public int getHeight() {
+        return this.getHeight(this.mRoot);
+    }
+
     private int getHeight(Node<T> root) {
         if (root == null) {
             return 0;
@@ -69,7 +73,7 @@ public class ivq1 <T extends Comparable<T>> {
             return -1;
         } 
         else {
-            return Math.abs(left - right);
+            return 1 + Math.max(left, right);
         }
     }
 
@@ -113,14 +117,18 @@ public class ivq1 <T extends Comparable<T>> {
         tree.insert(0);
         assert (tree.isBalanced());
         assert (tree.isBalancedRecusrive());
+        assert (tree.getHeight() == 1);
         tree.insert(1);
         assert (tree.isBalanced());
         assert (tree.isBalancedRecusrive());
+        assert (tree.getHeight() == 2);
         tree.insert(2);
         assert (!tree.isBalanced());
         assert (!tree.isBalancedRecusrive());
+        assert (tree.getHeight() == -1);
         tree.insert(-1);
         assert (tree.isBalanced());
         assert (tree.isBalancedRecusrive());
+        assert (tree.getHeight() == 3);
     }
 }
