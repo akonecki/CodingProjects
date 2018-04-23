@@ -177,3 +177,10 @@ Shelter holds only dogs and cats, and operates on a strictly FIFO model.  People
 - four reference pointers, head, dog, cat, tail.
 - head will always equal either the dog or cat reference.
 - could implement a cat / dog class but will just make it a boolean field within the node for the type to reduce code for the problem.
+
+#### Problem Issues
+- None
+
+#### Problem Solution
+- Solution describes the solution I have implemented.
+- Second solution points out that can maintain two queues and order stamp when the animals are enqueued.  THen just need to peak at which is the earlier value.  Better performance and slightly cleaner to implement.
