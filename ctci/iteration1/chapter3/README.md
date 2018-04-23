@@ -127,3 +127,16 @@ Implement a MyQueue class which implements a queue using two stacks.
 
 #### Problem Solution
 - Same approach as the book solution.
+
+### Problem 6
+#### Problem Statement
+>
+Write a program to sort a stack in ascending order (with biggest items on top).  You may use at most one additional stack to hold items but you may not copy the elements into any other data structures (such as an array).  The stack supports the following operations: `push`, `pop`, `peek`, `isEmpty`.
+
+#### Problem Discussion
+
+#### Problem Design
+
+#### Problem Issues
+
+#### Problem Solution
