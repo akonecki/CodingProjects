@@ -37,8 +37,23 @@ Implement a function to check if a binary tree is balanced.  For the purposes of
 Given a directed graph, design an algorithm to find out whether there is a route between two nodes.
 
 #### Problem Discussion
+- sounds like a union problem, where as long as you can perform the connection information you can perform the method of isConnected between two points to know if they are actually connected.
+- don't know what the data looks like however, single tree, list of elements and their relationships?
+- maybe data is like this
+  - Node 1 -> (Node 2, Node 3) :: Node 2 -> (Node 5) :: ...
+  - So this would be that Node 1 is connected say Node 5, but Node 5 is not connected to Node 1 (no upward link)
+- So will need to search for the major node, once the major node is found then perform a search from that point.
+- there is no indication of there being only two nodes per one or if there are circular paths
+- nodes will likely need to indcate that they have been visited
 
 #### Problem Design
+- Node definition will likely need to support the following.
+  - T value
+  - ListArray<Node <T>> nodes
+  - boolean visited
+- First need to be able to perform a search to find the major node.
+- If the node is not found then no path can ever exist.
+- If found then need to perform a search from the node to the minor node.
 
 #### Problem Issues
 
