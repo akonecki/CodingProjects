@@ -123,5 +123,7 @@ Implement a MyQueue class which implements a queue using two stacks.
 - For simplicity will do static size structures, (don't want to implement the resize dynamic memory).
 
 #### Problem Issues
+- Need to make sure to either use provided APIs for the stack implementation, or make a class for it.
 
 #### Problem Solution
+- Same approach as the book solution.
