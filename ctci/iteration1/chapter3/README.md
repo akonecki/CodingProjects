@@ -81,8 +81,15 @@ In the classic `Towers of Hanoi`, you have 3 towers and N disks of different siz
 Write a program to move the disks from the first tower to the last using stacks.
 
 #### Problem Discussion
+- make sure to ask about the meaning of slid off the top of one tower onto the next tower.
+- is the next tower of the end only the middle or can it also assume wrap around.
 
 #### Problem Design
+- will just use numbers to indicate the size of each disk.
+- will have an array of fixed size 2D matrix where each row represents a column.
+- will need to implement the push and pop constructs that indicate the target row.
+- target row can only ever be +-1.
+- can run a background checker for each operation to make sure that the rules are not violated.
 
 #### Problem Issues
 
