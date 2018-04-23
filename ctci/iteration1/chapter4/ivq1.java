@@ -1,5 +1,6 @@
 import java.util.Queue;
 import java.util.LinkedList;
+import java.lang.Math;
 
 public class ivq1 <T extends Comparable<T>> {
     private Node<T> mRoot = null;
@@ -36,6 +37,41 @@ public class ivq1 <T extends Comparable<T>> {
 
         this.mRoot = this.insert(this.mRoot, value);
     }  
+
+    public boolean isBalancedRecusrive() {
+        return this.isBalanced(this.mRoot);
+    }
+
+    private boolean isBalancedRecusrive(Node<T> root) {
+        if (root == null) {
+            return true;
+        }
+
+        return (this.getHeight(root) != -1);
+    }
+
+    private int getHeight(Node<T> root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int left = this.getHeight(root.mLeft);
+        if (left == -1) {
+            return -1;
+        }
+
+        int right = this.getHeight(root.mRight);
+        if (right == -1) {
+            return -1;
+        }
+
+        if (Math.abs(left - right) > 1) {
+            return -1;
+        } 
+        else {
+            return Math.abs(left - right);
+        }
+    }
 
     public boolean isBalanced() {
         return this.isBalanced(this.mRoot);
@@ -76,11 +112,15 @@ public class ivq1 <T extends Comparable<T>> {
 
         tree.insert(0);
         assert (tree.isBalanced());
+        assert (tree.isBalancedRecusrive());
         tree.insert(1);
         assert (tree.isBalanced());
+        assert (tree.isBalancedRecusrive());
         tree.insert(2);
         assert (!tree.isBalanced());
+        assert (!tree.isBalancedRecusrive());
         tree.insert(-1);
         assert (tree.isBalanced());
+        assert (tree.isBalancedRecusrive());
     }
 }

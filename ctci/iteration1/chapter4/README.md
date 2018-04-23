@@ -20,6 +20,14 @@ Implement a function to check if a binary tree is balanced.  For the purposes of
 
 #### Problem Issues
 - efficient bit manipulation for handling to know the limit took more time than the entire problem combined, so next time make a function call for the calculation.
+- since was also pushing null nodes onto the queue logic for non-balanced tree must also check to see if the current count is above the limit and the node is not null.
+- could change to not push null nodes at all but requires different logic.
+- still O(N) time since might have to touch all nodes.
+- Space is O(2^(minheight + 1) to 2N) thus O(N).
 
 #### Problem Solution
+- Solution implements a recursive implementation that performs a DFS implementation comparing depths of left and right.
+- if the previous is not balanced then checks are performed and handled to prevent having to go through the whole tree.
+- stack space is based on the height.
+- Queue implementation may be more appropriate depnding on the data set (i.e. large sets shifts across the root.)
 
