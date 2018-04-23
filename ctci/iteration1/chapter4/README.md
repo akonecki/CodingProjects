@@ -31,3 +31,16 @@ Implement a function to check if a binary tree is balanced.  For the purposes of
 - stack space is based on the height.
 - Queue implementation may be more appropriate depnding on the data set (i.e. large sets shifts across the root.)
 
+### Problem 2
+#### Problem Statement
+>
+Given a directed graph, design an algorithm to find out whether there is a route between two nodes.
+
+#### Problem Discussion
+
+#### Problem Design
+
+#### Problem Issues
+
+#### Problem Solution
+
