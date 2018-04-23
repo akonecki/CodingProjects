@@ -92,5 +92,11 @@ Write a program to move the disks from the first tower to the last using stacks.
 - can run a background checker for each operation to make sure that the rules are not violated.
 
 #### Problem Issues
+- I knew that the towers of hanoi are a recursive problem. 
+- couldn't actually break it down to base case
+- did only serial to try to see the steps but couldnt
 
 #### Problem Solution
+- implemented a copy of the book solution.
+- used my own targets.
+- need to practice breaking down the problem more.
