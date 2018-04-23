@@ -100,3 +100,16 @@ Write a program to move the disks from the first tower to the last using stacks.
 - implemented a copy of the book solution.
 - used my own targets.
 - need to practice breaking down the problem more.
+
+### Problem 5
+#### Problem Statement
+>
+Implement a MyQueue class which implements a queue using two stacks.
+
+#### Problem Discussion
+
+#### Problem Design
+
+#### Problem Issues
+
+#### Problem Solution
