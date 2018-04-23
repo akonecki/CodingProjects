@@ -149,5 +149,16 @@ Write a program to sort a stack in ascending order (with biggest items on top). 
 - repeat.
 
 #### Problem Issues
+- None
 
 #### Problem Solution
+- Book has a fairly creative way which is roughly the same as my implementation.
+- The book will push to the second stack in order.
+  - The first element will get pushed.
+  - Then the next will determine if it is greater or not than the element already on the stack.
+  - if the element is greater then it is just pushed on top of the other.
+  - if the element is less then need to pop off the elements from the second stack back to the first stack until the condition is met above.
+- My solution just searches the min back and pushes the stacks back and forth, which is the same computational time and space as this solution.
+- **It should be noted that the book solution does ask how would you do this if you are given more stacks**
+  - Merge / quick sort becomes available with more stacks and can be performed recursively.  
+  - This should be practiced later since it was not part of the question.
