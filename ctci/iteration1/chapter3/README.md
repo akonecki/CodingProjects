@@ -162,3 +162,18 @@ Write a program to sort a stack in ascending order (with biggest items on top). 
 - **It should be noted that the book solution does ask how would you do this if you are given more stacks**
   - Merge / quick sort becomes available with more stacks and can be performed recursively.  
   - This should be practiced later since it was not part of the question.
+
+### Problem 7
+#### Problem Statement
+>
+Shelter holds only dogs and cats, and operates on a strictly FIFO model.  People must adopt either a oldest, based on arrival time or all the animals in the shelter, or they can select whether they would prefer a dog or a cat (receiving the oldest of that type).  No selection of a specific animal.  Create a data structure to maintain this system and implement operations such as enqueue, dequeueAny, dequeueDog and dequeueCat.  You may use built in linked list data structure.
+
+#### Problem Discussion
+- support of linked list makes this fairly straight forward.  If it was array based little bit more complex in handling removal from the front and removal of first cat / dog.
+- Linked list can act as a queue where the the head is removed, and there exists a reference to the first cat and dog.
+
+#### Problem Design
+- Linked list will be singly.
+- four reference pointers, head, dog, cat, tail.
+- head will always equal either the dog or cat reference.
+- could implement a cat / dog class but will just make it a boolean field within the node for the type to reduce code for the problem.
