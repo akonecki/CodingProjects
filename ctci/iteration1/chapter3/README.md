@@ -134,8 +134,19 @@ Implement a MyQueue class which implements a queue using two stacks.
 Write a program to sort a stack in ascending order (with biggest items on top).  You may use at most one additional stack to hold items but you may not copy the elements into any other data structures (such as an array).  The stack supports the following operations: `push`, `pop`, `peek`, `isEmpty`.
 
 #### Problem Discussion
+- the second buffer is the only other major storage.
+- the time complexity will be O(N^2) but due to the nature of the problem.
+- don't really know how to make best use of the `peek` method.
+- it is not indicated if all the values are unique or not.
 
 #### Problem Design
+- push all values off the first stack onto the second stack, acting as a buffer.
+- save the number of elements that are popped off.
+- save the current min found.  When a new minimum is discovered push the old one onto the buffer stack.
+- when the stack isEmpty push the min value back on
+- push the remainder of the values on the second stack back onto the first stack
+- decrement the number of acceptable pops by one.
+- repeat.
 
 #### Problem Issues
 
