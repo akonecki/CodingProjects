@@ -107,8 +107,20 @@ Write a program to move the disks from the first tower to the last using stacks.
 Implement a MyQueue class which implements a queue using two stacks.
 
 #### Problem Discussion
+- traditional queue is first in first out.
+- traditional stack is last in frist out.
+- don't really know the constraints of the two stacks as in two separate memory regions or can it be over-lapping memory with different points (at this point would just be different in names).
+- beleive it is two separate stacks with no overlapping memory or references.
 
 #### Problem Design
+- two operations for a queue
+- 1. enqueue (push to the back)
+- 2. dequeue (remove from the front)
+- when an enqueue happens push to an enqueue stack
+- when a dequeue happens (first check to see if the dequeue stack is empty).
+- if the dequeue stack is empty, pop off all the elements from the enqueue stack and push them onto the dequeue stack.
+- one the dequeue stack is full again or is not empty perform the pop operation.
+- For simplicity will do static size structures, (don't want to implement the resize dynamic memory).
 
 #### Problem Issues
 
