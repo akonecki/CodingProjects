@@ -42,11 +42,11 @@ public class ivq5 <T extends Comparable <T>> {
 
         assert (root.value != null);
 
-        if (root.value.compareTo(value) > 0) {
+        if (root.value.compareTo(value) >= 0) {
+            // Handling equal case.
             root.left = this.insert(root.left, value);
         }
         else {
-            // Handling equal case.
             root.right = this.insert(root.right, value);
         }
 
