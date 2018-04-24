@@ -56,6 +56,26 @@ Given a directed graph, design an algorithm to find out whether there is a route
 - If found then need to perform a search from the node to the minor node.
 
 #### Problem Issues
+- Sub-class templated iterator was causing some issues.
+- Did not implement the insert (since was not part of the problem).
 
 #### Problem Solution
+- Implemented a BFS implementation.
+- Implementation completed was DFS
+
+### Problem 3
+#### Problem Statement
+>
+Given a sorted (increasing order) array with unique integer elements, write an algorithm to create a binary search tree with minimal height.
+
+#### Problem Discussion
+- Minimum height is the same as balanced.
+- Might not be complete.
+- would ideally want to all populated nodes to be left most to be full.
+- Very similar to a Min/Max priority queue except the elements are sorted in the array.
+
+#### Problem Design
+- the elements are sorted, thus roots of subtrees can be broken down by the halfway points
+- the primary root will be the floor (N / 2).
+- will not be full since left side will not be filled at the leaves prior to right.
 
