@@ -141,3 +141,10 @@ if (root.value.compareTo(low) < 0 || root.value.compareTo(high) > 0) {
   return false;
 }
 ```
+
+#### Problem Issues
+- Minor on the insertion for handling equal.
+
+#### Problem Solution
+- Solutions provided is same as mine minor some adjustments.
+- The solution for the range only discusses integer cases, which might not always be true.
