@@ -101,5 +101,9 @@ Given a binary tree, design an algorithm which creates a linked list of all the 
 - will deploy link lists with each index of the array list containing a reference to the linked list that holds the children of the next depth.
 
 #### Problem Issues
+- None
 
 #### Problem Solution
+- Solution highlights both a BFS and DFS implementation.
+- The implementation that was completed matches fairly well with the BFS implementation.
+- For the DFS implementation you must just handle the current level that you are operating at and insert the nodes appropriately.
