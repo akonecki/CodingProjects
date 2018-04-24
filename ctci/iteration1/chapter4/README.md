@@ -78,4 +78,11 @@ Given a sorted (increasing order) array with unique integer elements, write an a
 - the elements are sorted, thus roots of subtrees can be broken down by the halfway points
 - the primary root will be the floor (N / 2).
 - will not be full since left side will not be filled at the leaves prior to right.
+- can do more time by just performing insert for each element individually or can pass the list and build from the root downward since no nodes exist.
 
+#### Problem Issues
+- pay close attention to the calculation of index, was not calculating correctly for the right half.
+- Added `isBalanced` and `isBST` operations to allow for checks.
+
+#### Problem Solution
+- Solution does similar
