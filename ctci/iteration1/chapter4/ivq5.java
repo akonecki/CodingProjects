@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.LinkedList;
+
 public class ivq5 <T extends Comparable <T>> {
     private Node<T> mRoot = null;
 
@@ -9,6 +12,39 @@ public class ivq5 <T extends Comparable <T>> {
         public Node(T value) {
             this.value = value;
         }
+    }
+
+    public boolean isBSTArrayBase() {
+        List<T> values = new LinkedList<T>();
+
+        this.inorderTraversal(this.mRoot, values);
+
+        T previous = null;
+        for (T value : values) {
+            if (previous == null) {
+                previous = value;
+            }
+            
+            if (previous.compareTo(value) > 0) {
+                return false;
+            }
+
+            previous = value;
+        }
+
+        return true;
+    }
+
+    private void inorderTraversal(Node<T> root, List<T> values) {
+        if (root == null) {
+            return;
+        }
+
+        this.inorderTraversal(root.left, values);
+        values.add(root.value);
+        this.inorderTraversal(root.right, values);
+
+        return;
     }
 
     public boolean isBST() {
