@@ -107,3 +107,37 @@ Given a binary tree, design an algorithm which creates a linked list of all the 
 - Solution highlights both a BFS and DFS implementation.
 - The implementation that was completed matches fairly well with the BFS implementation.
 - For the DFS implementation you must just handle the current level that you are operating at and insert the nodes appropriately.
+
+### Problem 5
+#### Problem Statement
+>
+Implement a function to check if a binary tree is a binary search tree.
+
+#### Problem Discussion
+- if a binary tree is implemented as a binary search tree this means that an in order traversal will provide an ordered list.
+- if it is an absolute binary search tree there there are not duplicate entries within the BST but this comes down to the intended implementation (i.e. if being used for symbols key values must be unique).
+- BST requires that the keys have a deterministic order and in particular type must be comparable.
+- A less optimal on space implementation can be coping the values assocaited with a node of the BST to a list, then performing an iteration within the list checking that the values are in ascending order.
+- Another possible method is to pass the max and min values that a node must be within, to save on storage.  Going down the tree modifies the min and max depending on the traversal direction.
+
+#### Problem Design
+- Will do implement the isBST() function two ways.
+  - 1. Placing the values in additional memory that will require O(N) additional space.
+  - 2. Keeping the min max on the stack for the recursive requiring O(H) where H is the maximum height of the tree.
+- Method 1 : straight forward just perform in-order DFS placing each value onto a list.  After list is finished being constructed then compare each value to the previous to make sure they are in order.
+- Method 2 : will need to check to see if the root is null prior to going into the recursive method due to having to provide the initial min and max, since these are templated types can pass null but have to make sure this is handled appropriately for the root.
+- Base case as follows :
+
+```java
+if (root == null) {
+  return true;
+}
+```
+
+- Checking value associated with the node.
+
+```java
+if (root.value.compareTo(low) < 0 || root.value.compareTo(high) > 0) {
+  return false;
+}
+```
