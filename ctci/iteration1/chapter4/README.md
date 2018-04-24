@@ -86,3 +86,16 @@ Given a sorted (increasing order) array with unique integer elements, write an a
 
 #### Problem Solution
 - Solution does similar
+
+### Problem 4
+#### Problem Statement
+>
+Given a binary tree, design an algorithm which creates a linked list of all the nodes at each depth (if you have a tree with depth D, you will have D linked lsits).
+
+#### Problem Discussion
+- BFS search where each layer is built from the parent iteration which it of itself a separate linked list.
+- Put all the linked lists in an array of D (which is also equal to the height + 1) in traditional sense.
+
+#### Problem Design
+- will need to check for root before putting it in the first list (for null), null tree should be considered a depth of 0.
+- will deploy link lists with each index of the array list containing a reference to the linked list that holds the children of the next depth.
