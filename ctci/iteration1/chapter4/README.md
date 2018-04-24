@@ -148,3 +148,18 @@ if (root.value.compareTo(low) < 0 || root.value.compareTo(high) > 0) {
 #### Problem Solution
 - Solutions provided is same as mine minor some adjustments.
 - The solution for the range only discusses integer cases, which might not always be true.
+
+### Problem 6
+#### Problem Statement
+>
+Write an algorithm to find the `next` node (i.e. in successor order) of a given node in a binary search tree.  You may assume that each node has a link to its parent.
+
+#### Problem Discussion
+- Same as successor problem in the general since but is at the specific node level.
+- At the node level there has to be some information about the parent (either due to recursion or explicit link).
+- In this case there is an explicit link back to a parent thus will require some modification to the typical node.
+- Success is going to be defined as the node that comes next in sorted order.
+- Predecssor is going to be the node that comes before in sorted order.
+
+#### Problem Design 
+- For successor want the left most (least value) of all the nodes to the right of the current node, if none then parent if one exists, otherwise is itself.
