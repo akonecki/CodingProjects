@@ -99,3 +99,7 @@ Given a binary tree, design an algorithm which creates a linked list of all the 
 #### Problem Design
 - will need to check for root before putting it in the first list (for null), null tree should be considered a depth of 0.
 - will deploy link lists with each index of the array list containing a reference to the linked list that holds the children of the next depth.
+
+#### Problem Issues
+
+#### Problem Solution
