@@ -199,4 +199,8 @@ Design an algorithm and write code to find the first common ancestor of two node
 
 #### Problem Issues
 
+
 #### Problem Solution
+- My implementation diverges on the assumption of handling the existence of only one.
+- Answer provides a new class to return, essentially a node wrapper that allows for data agumentation that indicates if two have ever been seen.
+- Other than that my solution follows the more aggressive approach.
