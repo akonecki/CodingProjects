@@ -198,7 +198,7 @@ Design an algorithm and write code to find the first common ancestor of two node
 - in the case of two the parent that sees both a left and right child populated will return itself.
 
 #### Problem Issues
-
+- None
 
 #### Problem Solution
 - My implementation diverges on the assumption of handling the existence of only one.
