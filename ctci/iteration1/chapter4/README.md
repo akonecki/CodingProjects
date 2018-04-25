@@ -179,8 +179,23 @@ Write an algorithm to find the `next` node (i.e. in successor order) of a given 
 Design an algorithm and write code to find the first common ancestor of two nodes in a binary tree.  Avoid storing additional nodes in a data structure.  This is not necessarily a BST.
 
 #### Problem Discussion
+- since not a BST will need to search both left and right nodes.
+- would need to determine if the information given is only the two nodes, this would mean that opposite side of the tree would not be accessible due to lack of parent reference, or if able to search starting from the main root of the tree (my guess would be from the root).
+- Due to limitation on storing nodes in data structures Queue, arrays are out of the question.  Does recursion count since you would be storing a reference on the stack?
+- are the two nodes guaranteed to exist within the tree?
 
 #### Problem Design
+- will assume that recursion is allowed but queues are not thus preventing a go to implementation of BFS
+- recusion implementation that will return the ancestor node.
+- couple of cases to consider, when find one node the possibilities for ancestor are
+  - the found node (the other node will either exist on the left or right links of the found node).
+  - a parent node (the other node does not exist under the found node, thus a parent node is responsible).
+- for the parent method need to know what to return.  Returning null would mean that no common parent was found, but what needs to indicate that one node was already discovered.
+- it takes two nodes to find, which means at some point a left and a right must exist, unless the nodes dont exist then there is difficult logic of needing to figure out if two nodes have ever been seen.
+- if both nodes dont exist (in the one case is one node its own ancestor)?
+- will assume that the implementation of only one node existing that the node itself is its own ancestor.
+- in the case of no nodes then null can be properly handled. 
+- in the case of two the parent that sees both a left and right child populated will return itself.
 
 #### Problem Issues
 
