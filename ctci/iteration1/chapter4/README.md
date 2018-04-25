@@ -172,3 +172,16 @@ Write an algorithm to find the `next` node (i.e. in successor order) of a given 
 - I had discussed this in the discussion but prefered to not provide this link but yet still derive the successor of a given node that exists within the tree.
 - The implementation can be improved to provide the successor to any value even if the node does not exist within the tree which is more ideal.
 - The book provided solution does allow better handling of duplicate key entries better however (get to select the exact node to find the successor of).  This is great in a whiteboard or individual function implementation but testing own solution requires more API (have to construct the trees etc).
+
+### Problem 7
+#### Problem Statement
+>
+Design an algorithm and write code to find the first common ancestor of two nodes in a binary tree.  Avoid storing additional nodes in a data structure.  This is not necessarily a BST.
+
+#### Problem Discussion
+
+#### Problem Design
+
+#### Problem Issues
+
+#### Problem Solution
