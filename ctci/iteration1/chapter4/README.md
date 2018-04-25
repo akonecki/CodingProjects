@@ -163,3 +163,12 @@ Write an algorithm to find the `next` node (i.e. in successor order) of a given 
 
 #### Problem Design 
 - For successor want the left most (least value) of all the nodes to the right of the current node, if none then parent if one exists, otherwise is itself.
+
+#### Problem Issues
+- None
+
+#### Problem Solution
+- The implementation takes into consideration of the parent link in the left or right node, which changes the base class and is a feature that is not typical in a BST tree node though not that difficult to add if you own the controlling node class.
+- I had discussed this in the discussion but prefered to not provide this link but yet still derive the successor of a given node that exists within the tree.
+- The implementation can be improved to provide the successor to any value even if the node does not exist within the tree which is more ideal.
+- The book provided solution does allow better handling of duplicate key entries better however (get to select the exact node to find the successor of).  This is great in a whiteboard or individual function implementation but testing own solution requires more API (have to construct the trees etc).
