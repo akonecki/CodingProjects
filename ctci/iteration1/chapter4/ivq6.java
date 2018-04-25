@@ -1,4 +1,6 @@
 import java.util.Random;
+import java.util.List;
+import java.util.ArrayList;
 
 public class ivq6 <T extends Comparable<T>> { 
     private Node<T> mRoot = null;
@@ -11,6 +13,32 @@ public class ivq6 <T extends Comparable<T>> {
         public Node(T value) {
             this.value = value;
         }
+    }
+
+    public void insert(T value) {
+        if (value == null) {
+            return;
+        }
+
+        this.mRoot = this.insert(this.mRoot, value);
+    }
+
+    private Node<T> insert(Node<T> root, T value) {
+        if (root == null) {
+            return new Node<T> (value);
+        }
+
+        if (root.value.compareTo(value) > 0) {
+            root.left = this.insert(root.left, value);
+        }
+        else if (root.value.compareTo(value) < 0) {
+            root.right = this.insert(root.right, value);
+        }
+        else {
+            return root;
+        }
+
+        return root;
     }
 
     public T successor(T value) {
@@ -73,7 +101,6 @@ public class ivq6 <T extends Comparable<T>> {
                     return this.findParent(root.left, value);
                 }
                 else {
-                    assert (root.value.compareTo(value) == 0);
                     return root;
                 }
             }
@@ -87,7 +114,6 @@ public class ivq6 <T extends Comparable<T>> {
                     return this.findParent(root.right, value);
                 }
                 else {
-                    assert (root.value.compareTo(value) == 0);
                     return root;
                 }
             }
@@ -128,6 +154,21 @@ public class ivq6 <T extends Comparable<T>> {
         }
         else {
             return root;
+        }
+    }
+
+    public static void main(String [] args) {
+        ivq6<Integer> tree = new ivq6<Integer>();
+        List<Integer> addedValues = new ArrayList<Integer>();
+        Random random = new Random();
+
+        for (int number : random.ints(1000).toArray()) {
+            tree.insert(number);
+            addedValues.add(number);
+        }
+
+        for (int number : addedValues) {
+            System.out.println(number + " " + tree.successor(number));
         }
     }
 }
