@@ -253,3 +253,14 @@ You are given a tree in which each node contains a value.  Design an algorithm t
 - if a value is greater than the sum
   - try dequeueing elements until the queue is empty (could be that a negative exists than is being mitigated by a set of values).
   - add the node (even if it is greater (exploring the left and))
+
+#### Problem Issues
+- Was approaching the problem in incorrectly, only from a does this node start a sum, had to study the solution.
+- My discussion does hit on a lot of the points form the solution which means I was going down the right track.
+
+#### Problem Solution
+- Looks at each node at the specific level it is at first then backwards.
+- The list of nodes will only be the current traversal set
+- Is the mentality of does this node result in the some.
+- is more along the lines of a stack in terms of pushing and poping values off, but need to traversal the full stack each time.
+- might be able to save some time by including a min and max value present at each node, then you would know if you could ever reach a specific value from a min max setting e.g. if need a negative number but the min or only positive no point in traversing any more.
