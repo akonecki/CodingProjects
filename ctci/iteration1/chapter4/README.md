@@ -228,5 +228,10 @@ A tree T2 is a subtree of T1 if there exists a node n in T1 such that the subtre
 - implementation will **NOT** consider wrapper modification w.r.t insertion.
 
 #### Problem Issues
+- None.
 
 #### Problem Solution
+- the assumptions even though stated in the problem is quite weak and not ideal.
+- the solution provided only does a top level traversal of T1 and when T1 node is identical to T2 node then the helper method is called.
+- augmented tree node could greatly reduce this complexity, size, depth, hash could reduce the run time significantly if willing to pay the cost at the insertion.  
+
