@@ -235,3 +235,7 @@ A tree T2 is a subtree of T1 if there exists a node n in T1 such that the subtre
 - the solution provided only does a top level traversal of T1 and when T1 node is identical to T2 node then the helper method is called.
 - augmented tree node could greatly reduce this complexity, size, depth, hash could reduce the run time significantly if willing to pay the cost at the insertion.  
 
+### Problem 9
+#### Problem Statement
+>
+You are given a tree in which each node contains a value.  Design an algorithm to print all paths which sum to a given value.  The path does not need to start at the root or a leaf, but it must go in a straight line down.
