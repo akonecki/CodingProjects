@@ -216,6 +216,7 @@ A tree T2 is a subtree of T1 if there exists a node n in T1 such that the subtre
 - looks to be more of a combination of the two traversal methods, start with BFS to find the root of T2 in T1.
 - Once the root is found then can perform dfs or bfs to compare nodes between the two trees.
 - if the tree ends up not being equal must continue with the original bfs until the either run out of nodes or until the depth that is left is less than the smaller tree.
+- if insertion is allowed then can manage the data of the tree on insertion (count, depth, hash) of those below.  This would make any run time subtree operations trival to where only a BFS or DFS is required.
 
 #### Problem Design
 - if want to prevent having to traverse the entire both trees (on average) then obtaining the actual height of the tree and managaing it is important.  
@@ -224,3 +225,4 @@ A tree T2 is a subtree of T1 if there exists a node n in T1 such that the subtre
 - break-up into at least two parts.
 - 1. finding the root of T2.
 - 2. Iterating between T1 & T2 for comparison.
+- implementation will **NOT** consider wrapper modification w.r.t insertion.
