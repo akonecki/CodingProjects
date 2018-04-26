@@ -204,3 +204,23 @@ Design an algorithm and write code to find the first common ancestor of two node
 - My implementation diverges on the assumption of handling the existence of only one.
 - Answer provides a new class to return, essentially a node wrapper that allows for data agumentation that indicates if two have ever been seen.
 - Other than that my solution follows the more aggressive approach.
+
+### Problem 8
+#### Problem Statement
+>
+You have two large binary trees: T1, with millions of nodes and T2, with hundreds of nodes.  Create an algorithm to decide if T2 is a subtree of T1.
+>
+A tree T2 is a subtree of T1 if there exists a node n in T1 such that the subtree of n is identical to T2.  That is if you cut off the tree at node n the two trees would be identical.
+
+#### Problem Discussion
+- looks to be more of a combination of the two traversal methods, start with BFS to find the root of T2 in T1.
+- Once the root is found then can perform dfs or bfs to compare nodes between the two trees.
+- if the tree ends up not being equal must continue with the original bfs until the either run out of nodes or until the depth that is left is less than the smaller tree.
+
+#### Problem Design
+- if want to prevent having to traverse the entire both trees (on average) then obtaining the actual height of the tree and managaing it is important.  
+- when traversing T1 if the max depth remaining is less than the depth of T2 then there can not be a subtree.
+- if can agument the `Node` data structure then this could already be provided along with the count of total number of nodes under the current node.  These values should match between T1 & T2, but this requires owning the insertion.
+- break-up into at least two parts.
+- 1. finding the root of T2.
+- 2. Iterating between T1 & T2 for comparison.
