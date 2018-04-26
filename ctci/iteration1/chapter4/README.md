@@ -226,3 +226,7 @@ A tree T2 is a subtree of T1 if there exists a node n in T1 such that the subtre
 - 1. finding the root of T2.
 - 2. Iterating between T1 & T2 for comparison.
 - implementation will **NOT** consider wrapper modification w.r.t insertion.
+
+#### Problem Issues
+
+#### Problem Solution
