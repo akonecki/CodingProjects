@@ -239,3 +239,17 @@ A tree T2 is a subtree of T1 if there exists a node n in T1 such that the subtre
 #### Problem Statement
 >
 You are given a tree in which each node contains a value.  Design an algorithm to print all paths which sum to a given value.  The path does not need to start at the root or a leaf, but it must go in a straight line down.
+
+#### Problem Discussion 
+- straight essentailly means that there are not jumps, so must always be root->left or root->right.  Not root->left->root->right (i.e. root and both its children).
+- will require full traversal of the tree.
+- when a path is complete or is invalidated will need to see if can start again from the parent's left or right node and propogate down.  Thus can perform with a wrapper that gets populated or utilize a first in first out strategy that way the overall value and path is maintained by the queue itself.
+- will need to handle flushing a queue when the path ends and there exists no other traversal directions to modify
+- queue is needed when a sum is finally found but there still exists deeper nodes, then next value could result in just needing to remove the root from the queue, or N values from the queue.
+- will actually need to know if negatives are allowed within the tree, otherwise you actually have to go down all leafs before being able to dequeue the head value (root).
+- if tree is actually a BST allows for easier determination.
+
+#### Problem Design
+- if a value is greater than the sum
+  - try dequeueing elements until the queue is empty (could be that a negative exists than is being mitigated by a set of values).
+  - add the node (even if it is greater (exploring the left and))
