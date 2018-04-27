@@ -14,8 +14,14 @@ Output:
 - N = 10000101100
 
 #### Problem Discussion
+- The whole number of M does not necessarily get to be placed in N.
+- The problem accounts for N having enough sapce to accomadate it.
+- Assumming the content of N at the positions provided is over-written completely.
 
 #### Problem Design
+- M will always be left shifted by i
+- Need a mask to accept only certain bits of M but also can clear N.
+- nMask = (-1 >> (32 - j)) | ~(-1 >> (32 - i))
 
 #### Problem Issues
 
