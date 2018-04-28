@@ -57,5 +57,19 @@ Given a real number between 0 and 1 that is passed in as a double, print the bin
 Given a positive integer, print the next smallest and the next largest number that have the same number of 1 bits in their binary representation.
 
 #### Problem Discussion
+- if the number is all 1s then there will be no next smallest.
+- otherwise the next smallest is an exchange of a one to the left of a zero with the zero, with the right most one-zero pair.
+- if the number is all 1s then the next largest will be << 1, with all lower 1s moved to the right, but only if the result is greater than 0.
+- otherwise the next largest is an exchange of a one to the right of a zero with the zero, with the right most zero-one pair.  On this point if the exchange happens with the most significant 1 and the zero afterwards then need to do the same thing as if all ones.
+- larger values strategy
+  - a temp exists for the worse case
+  - if a one is encountered and it is not the most significant 1, then save the one to a temp such that temp = temp << 1 | 1;
+  - if a zero is encountered and temp > 0 && !temp < 0 
 
 #### Problem Design
+- iterate through from the base with two masks `01` for the greater value and `10` for the lesser value.
+- the greater case needs to account for possible full shift and saving all detected ones in a temporary value with the same number of ones starting from the least significant bit position.
+- save the main number to a temporary.  use the temporary for manipulation i.e. shifting right by 1 for each time.
+- if the value is negative you can return due to the constraint of the problem.
+- in the case of lesser value if get to the end and no `10` pattern has been found then a lesser value is not possible (all ones up to the msb), print itself / error message.
+- in case of the upper need to watch out for roll-over to the negative range.  Which a swap occurs need to test the swap value for being negative.  If so print itself / error message.
