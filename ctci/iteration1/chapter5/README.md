@@ -50,3 +50,12 @@ Given a real number between 0 and 1 that is passed in as a double, print the bin
 #### Problem Solution
 - Fairly trival once you remember the fractional representation outside of IEEE standard for float / doubles.
 - .101 (base 2) = 1 * (2^1/2) + 0 * (2^1/4) + 1 * (2^1/8)
+
+### Problem 3
+#### Problem Statement
+>
+Given a positive integer, print the next smallest and the next largest number that have the same number of 1 bits in their binary representation.
+
+#### Problem Discussion
+
+#### Problem Design
