@@ -129,3 +129,9 @@ Write a function to determine the number of bits you would need to flip to conve
 - Correct Implementation (however Used library provided method).
 - In the non-library provided wrapper method how to count the number of 1s.
   - two solutions (logical right shift & compare against zero) & (c & (c - 1) compared against zero).
+
+### Problem 6
+#### Problem Statement
+>
+Write a program to swap odd and even bits in an integer with as few instructions as possible
+
