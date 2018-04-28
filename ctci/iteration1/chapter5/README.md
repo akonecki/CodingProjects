@@ -81,3 +81,26 @@ Given a positive integer, print the next smallest and the next largest number th
 - Correct implementation for bit manipulation.
 - There also exists an arithmetic solution as well.
 - Essentially counting 0s and 1s then either adding / subtracting from n depending on greater or less than.
+
+### Problem 4
+#### Problem Statement
+>
+Explain what the following code does.
+>
+```
+((n & (n - 1)) == 0)
+```
+
+#### Problem Discusison
+- Looks like it is detecting if it is a power of two value.
+
+#### Problem Design
+- Power of 2 only ever have 1 bit set.
+- Subtraction of 1 from any power of two (except 1) leads to all lower bits to be set to one.
+- If a value is not a power of two then there will exist some over lapping between n & (n - 1).
+
+#### Problem Issues
+- No code.
+
+#### Problem Solution
+- Correct
