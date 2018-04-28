@@ -24,5 +24,7 @@ Output:
 - nMask = (-1 >> (32 - j)) | ~(-1 >> (32 - i))
 
 #### Problem Issues
+- Need to remember that -1 is all 1s, and not just msb 1.
 
 #### Problem Solution
+- Book solution is similar, I however take into account that M could be trimmed down.
