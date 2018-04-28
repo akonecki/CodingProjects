@@ -42,3 +42,11 @@ Given a real number between 0 and 1 that is passed in as a double, print the bin
 #### Problem Design
 - Don't really know what the problem wants.
 - maybe wants to convert to where the number is like an integer?
+
+#### Problem Issues
+- completely forgot about fractional representation that is not IEEE floating / double.
+- Will need to revisit.
+
+#### Problem Solution
+- Fairly trival once you remember the fractional representation outside of IEEE standard for float / doubles.
+- .101 (base 2) = 1 * (2^1/2) + 0 * (2^1/4) + 1 * (2^1/8)
