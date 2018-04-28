@@ -73,3 +73,11 @@ Given a positive integer, print the next smallest and the next largest number th
 - if the value is negative you can return due to the constraint of the problem.
 - in the case of lesser value if get to the end and no `10` pattern has been found then a lesser value is not possible (all ones up to the msb), print itself / error message.
 - in case of the upper need to watch out for roll-over to the negative range.  Which a swap occurs need to test the swap value for being negative.  If so print itself / error message.
+
+#### Problem Issues
+- Remember when masking lower bits to use mask of all ones for the number of bits of interest.
+
+#### Problem Solution
+- Correct implementation for bit manipulation.
+- There also exists an arithmetic solution as well.
+- Essentially counting 0s and 1s then either adding / subtracting from n depending on greater or less than.
