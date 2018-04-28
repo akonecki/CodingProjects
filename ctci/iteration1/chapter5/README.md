@@ -28,3 +28,17 @@ Output:
 
 #### Problem Solution
 - Book solution is similar, I however take into account that M could be trimmed down.
+
+### Problem 2
+#### Problem Statement
+>
+Given a real number between 0 and 1 that is passed in as a double, print the binary representation.  If the number cannot be represented accurately in binary with at most 32 characters print error.
+
+#### Problem Discussion
+- Is this just calling Double.toBinaryString() and stopping at 32 bits?
+- or does this just want the mantissa part?
+- double on most systems is 64 bits.
+
+#### Problem Design
+- Don't really know what the problem wants.
+- maybe wants to convert to where the number is like an integer?
