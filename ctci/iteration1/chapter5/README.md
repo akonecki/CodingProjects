@@ -104,3 +104,28 @@ Explain what the following code does.
 
 #### Problem Solution
 - Correct
+
+### Problem 5
+#### Problem Statement
+>
+Write a function to determine the number of bits you would need to flip to convert integer A to integer B.
+
+#### Problem Discussion
+- first will need to know where A & B are the same and where they are different.
+- XOR does this for us
+- A ^ B zeros out all the matching 0's and matching 1s, leaving only a set of ones that are in either A or B but not in both.  
+- the ones form A represent the ones that exist in A and need to be flipped to B
+- the ones from B represent the ones that don't exist in A but need to be flipped to equal B
+- Thus count the number of 1s left after the XOR operation.
+
+#### Problem Design
+- xor the two integers
+- count the number of remaining 1s.
+
+#### Problem Issues
+- Not Implemented, fairly trival.
+
+#### Problem Solution
+- Correct Implementation (however Used library provided method).
+- In the non-library provided wrapper method how to count the number of 1s.
+  - two solutions (logical right shift & compare against zero) & (c & (c - 1) compared against zero).
