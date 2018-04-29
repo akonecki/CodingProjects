@@ -135,3 +135,15 @@ Write a function to determine the number of bits you would need to flip to conve
 >
 Write a program to swap odd and even bits in an integer with as few instructions as possible
 
+#### Problem Discussion
+- if both bits are the same value no point in swapping
+- upper order pairs of zeros wouldnt even need to be inspected.
+- want to have even odd masks for the integers.
+- shift the odd to the left to make it even
+- shift the even to the right to make it odd.
+
+#### Problem Design
+- have two masks one to pull the even and one to pull the odd bits from the provided value.
+  - 0xA (1010) & 0x5 (0101)
+- use the mask of the odd to pull out bits that will be used to become even and then shift
+- use the mask of the even to pull out bits that will be used to become odd and then shift
