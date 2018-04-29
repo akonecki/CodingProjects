@@ -158,3 +158,14 @@ Write a program to swap odd and even bits in an integer with as few instructions
 #### Problem Statement
 >
 An array A contains all the integers from 0 to n, except for one number which is missing.  In this problem we cannot access an entire integer in A with a single operation.  The elements of A are represented in binary, and the only operation we can use to access them is `fetch the jth bith of A[i]` which takes constant time.  Write code to find the missing integer.  Can you do it in O(n) time?
+
+#### Problem Discussion
+- could calculate the entire sum for the range from 0 to n.
+- then would just need to iterate through each number and reconstruct using the fetch command
+- for each number constructed subtract it from the total sum.
+- the value contained within the sum after iterating through all integers will be the value from 0 to n that is missing (including 0).
+
+#### Problem Design
+- have a temporary integer.  Will need to iterate lg N number of fetches for each number.
+- the temporary integer will be essentially forward concatention of the previous bits with the new bit at the correct shifted index.
+- for now will iterate through all 30 bits (don't have to iterate through to negative for simplicity).
