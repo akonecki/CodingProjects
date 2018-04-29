@@ -182,4 +182,30 @@ An array A contains all the integers from 0 to n, except for one number which is
 ### Problem 8
 #### Problem Statement
 >
-A monochrome screen is stored as a single array of bytes, allowing eight consecutive pixels to be stored in one byte.  The screen has width w, where w is divisible by 8 (that is, no byt will be split across rows).  The height of the screen,  of course, can be derived from the length of the array and the width.  Implment a function drawHorizontal(byte [] screen, int width, int x1, int x2, int y) which draws a horizontal line from (x1, y) to (x2, y).
+A monochrome screen is stored as a single array of bytes, allowing eight consecutive pixels to be stored in one byte.  The screen has width w, where w is divisible by 8 (that is, no byte will be split across rows).  The height of the screen,  of course, can be derived from the length of the array and the width.  Implment a function drawHorizontal(byte [] screen, int width, int x1, int x2, int y) which draws a horizontal line from (x1, y) to (x2, y).
+
+#### Problem Discussion
+- the line is only horizontal.
+- will need to determine the exact starting pixel in a row 
+- will need to determine the exact ending pixel in a row.
+- will assume that drawing a line is equal to setting the bit value to a value of 1.
+- will need to calculate the height, given is the screen (array length), and the width.  
+- total length of the array is like the area and is equal to length * width.
+- assuming width is not zero based.
+- width and height are number of pixels not number of bytes
+- assuming x and y values are zero based and always >= 0
+- heights are only one pixel high
+- width is at least 8 pixels
+
+#### Problem Design
+- height = (screen.length * 8) / width
+- assert ((height * width) == (screen.length * 8))
+- pixel @ (x, y) = screen[ (y * width / 8) + x / 8 + (x % 8 > 0 ? 1 : 0) ]
+- iterate from screen[ (y * width) + x1 ] to screen[ (y * width) + x2 ] setting all positions values to 1.
+- screen is in bytes not pixels will need bit mask for an individual byte.
+- (0x100 >> (x % 8)) && 0xFF // sets bit in poxition x in a given byte.
+- iterate from x1 to x2
+- this should work for individual bit setting but not block setting, needs a little bit more logic for difference between x1 and x2.
+  - for block will need to acocunt for x1 and x2 in any position within their respective blocks.
+  - x1 and x2 within the same block
+  - x1 and x2 in adjecent blocks
