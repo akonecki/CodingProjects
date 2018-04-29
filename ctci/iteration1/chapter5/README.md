@@ -147,3 +147,9 @@ Write a program to swap odd and even bits in an integer with as few instructions
   - 0xA (1010) & 0x5 (0101)
 - use the mask of the odd to pull out bits that will be used to become even and then shift
 - use the mask of the even to pull out bits that will be used to become odd and then shift
+
+#### Problem Issues
+- Need to remember to use bit-masks to eliminate the need to iterate.
+
+#### Problem Solution
+- Solution exactly matches.
