@@ -169,3 +169,12 @@ An array A contains all the integers from 0 to n, except for one number which is
 - have a temporary integer.  Will need to iterate lg N number of fetches for each number.
 - the temporary integer will be essentially forward concatention of the previous bits with the new bit at the correct shifted index.
 - for now will iterate through all 30 bits (don't have to iterate through to negative for simplicity).
+
+#### Problem Issues
+- implementation is O(n log n) due to operating on all 31 bits.
+
+#### Problem Solution
+- there is a more efficient means.
+- counting the number of 0s and 1s for each bit position.
+- when counting for the 0th position get the count
+- performs recursively through counts of the zero and one, 
