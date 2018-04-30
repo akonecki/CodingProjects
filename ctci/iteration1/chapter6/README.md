@@ -104,4 +104,23 @@ A bunch of people are living on an island, when a visitor comes with a strange o
 - the number of days the plan exists indicates the total number of blue eyed people, which means all people keep a tally.  Thus it takes n days where n is the number of blue eyed people and all leave on the same flight.
 - close but not needing a public count because the plane is the counter.
 
+### Problem 5
+#### Problem Statement
+>
+There is a building of 100 floors.  If an egg drops from the Nth floor or above, it will break.  If it is dropped from any floor below is will not break.  You are given two eggs.  Find N, while minimizing the number of drops for the worst case.
+
+#### Problem Discussion
+- using only one egg can determine by just dropping an egg from each floor.
+- could drop in increments of three.
+  - drop from floor 3 (if break then drop 2nd egg from floor 2, if it breaks then N is 1 if not then 2)
+  - if does not break from previous increment by 3.  if breaks then go to the floor below if surrives then it is that floor, otherwise the floor beneath the 2nd egg drop.
+- if divided the floors by two then would have to go from the floor up if an egg breaks.
+  - if start at 50 and the egg breaks then it can be floor 50 and below.  Would then have to perform increments of 1 up to 50 to double check.
+  - if start at floor 4 and the egg breaks then it can be floor 4 and below.  would then have to perform increments of 1 up to 4 to double check, but get range increase by 4 if the first egg survivies.  
+
+#### Problem Solution
+- want to load balance such that drop(A) + drop(B) is always the same no matter how many times A and B are dropped.
+- thus if doing a base increment of 10, A is droped at 10, if breaks then B must be dropped 10 - 1 times (9) for a total of 10 times.
+- if using the same scheme breaks at 100, then A is dropped 10 times, B will need to be dropped 9 times (91 - 99)
+- start at floor x go up by (x - 1) for egg A and (x - 2) for egg B.
 
