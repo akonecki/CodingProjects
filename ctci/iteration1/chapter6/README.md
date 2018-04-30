@@ -56,4 +56,34 @@ L D L D L D L D        L D L D L D L
 #### Problem Solution
 - Discussion points to the same conclusion as the solution.
 
+### Problem 3
+#### Problem Statement
+>
+You have a five quart jug, a three quart jug and an unlimited supply of water but no measuring cups.  How would you come up with exactly four quarts of water.  Note the jugs are oddly shaped, so any measurement except full and empty would not be able to give you exact measurements.
+
+#### Problem Discussion
+- can easily get 8 (5 + 3), 2 (5 filled thrown into 3 leaves 2 in the five)
+- can fill between the 3 and 5 quart jugs
+- 1. fill the 3 first, pour into the 5 (empty)
+- 2. 3 is now left with 0, 5 now has 3
+- 3. fill the 3 full
+- 4. 3 now has 3, 5 still has 3
+- 5. fill 5 to the top with 3
+- 6. 3 now has 1, 5 now has 5
+- 7. dump 5
+- 8. 3 still has 1, 5 has 0
+- 9. pour 3 into 5
+- 10. 3 has 0, 5 has 1
+- 11. fill 3
+- 12. 3 has 3, 5 has 1
+- 13. pour 3 into 5
+- 14. 3 has zero, 5 has 4
+
+#### Problem Solution
+- Correct
+- Note that the problem is rooted in prime numbers and that any number can be represented as a combination of prime numbers.
+- so you only have to show that the size of the jugs provide can provide the prime numbers less than them, and therefore can provide up to a total of their sums.
+
+
+
 
