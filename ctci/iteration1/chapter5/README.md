@@ -209,3 +209,14 @@ A monochrome screen is stored as a single array of bytes, allowing eight consecu
   - for block will need to acocunt for x1 and x2 in any position within their respective blocks.
   - x1 and x2 within the same block
   - x1 and x2 in adjecent blocks
+
+#### Problem Issues
+- just lot of bit keeping
+- working with bytes conversions between int and bytes is a pain (throws errors with bit manipulation so requires casting)
+- flipped implementation of x2.  Needs to be the same system of x1 (i.e. from the left instead of the right) caused testing and implementation to not work together.
+- debugging was painful due to output of 0 by default does not actually give you 32 / 8 zeros, only one for the value.  Forgot this caused some re-work when it wasn't necessary.
+
+#### Problem Solution
+- Solution is close to mine, a bit cleaner on the bit handling but the same.  Used strict values of 0xFF (which when casted is -1 due to arithmetic most significant 1 being expanded to the other bytes).
+- As discussed in my discussion / design it is trival to iterate through from x1 to x2.  
+- The more efficient algorithm still is a lg N more efficient but relies on a lot of right things.
