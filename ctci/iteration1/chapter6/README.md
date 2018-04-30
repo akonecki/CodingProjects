@@ -84,6 +84,24 @@ You have a five quart jug, a three quart jug and an unlimited supply of water bu
 - Note that the problem is rooted in prime numbers and that any number can be represented as a combination of prime numbers.
 - so you only have to show that the size of the jugs provide can provide the prime numbers less than them, and therefore can provide up to a total of their sums.
 
+### Problem 4
+#### Problem Statement
+>
+A bunch of people are living on an island, when a visitor comes with a strange order.  All blue-eyed people must leave the island as soon as possible.  There will be a flight out at 8 pm every day.  Each person can see everyone else's eye color, but they do not know their own (nor is anyone allowed to tell them).  Additionally, they do not know how many people have blue eyes, although they do know that at least one person does.  How many days will it take the blue eyed people to leave?
 
+#### Problem Discussion
+- this assumes that when all blue eyed people have left the island the flights will stop.
+- when a blue eyed person sees all brown eyed, they know they are blue and will leave.
+- when a brown eyed person sees a blue, they know there is at least one blue person.
+- when a blue eyed person sees another blued eyed they both know there is at least one blue eyed person.
+- if a brown eyed person sees everyone and counts the number of blue eyes and the same happens with a blue eyed person their counts will differ by one.  
+- Assuming it can be publicly known what the number of each person see of the total number of blue eyes, a blue eyed person will only ever see the (total number - 1).  thus they would then know that they are a blue eyed person.
+- it would only take one day in this scheme as long as public count is allowed of the total number of blue eyes each person sees and then conveyed to everyone the max number of blue eyed individuals seen.
+
+#### Problem Solution
+- close to the solution but there is missing information.  
+- the plane can leave with no people.
+- the number of days the plan exists indicates the total number of blue eyed people, which means all people keep a tally.  Thus it takes n days where n is the number of blue eyed people and all leave on the same flight.
+- close but not needing a public count because the plane is the counter.
 
 
