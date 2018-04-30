@@ -37,3 +37,20 @@ If p is the probability of making a particular shot, for which values of p shoul
 
 #### Problem Solution
 - Practice quadratic equation (-b +- sqrt(b^2 - 4ac)) / 2a
+
+### Problem 2
+#### Problem Statement
+>
+There are three anys on different vertices of a triangle.  What is the probability of collision (between any two or all three) if they start walking on the sides of the triangle?  Assume that each any randomly picks a direction, with either direction being equally likely to be chosen, and that they walk at the same speed.  Similarly, find the probability of collision with n ants on a n-vertex polygon
+
+#### Problem Discussion
+- if all ants go the same direction then they will never collide
+- decision of each ant for their direction is mutually exclusive from each other.
+- a line segment a ant only has two directions say left or right.
+- all three ant selecting left is 1/2 and 1/2 and 1/2 or all ants selecting right is 1/2 and 1/2 and 1/2.
+- for three ants this is 1/8 + 1/8 = 1/4
+- generally speaking it is [2 * 1/(2^n)] for n number of ants for a collision to not occur.
+- so a collision will occur 1 - [2 * 1/(2^n)] for any number of N ants and 3/4 for three ants.
+
+#### Problem Solution
+- Same as discussion above.
