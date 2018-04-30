@@ -124,3 +124,18 @@ There is a building of 100 floors.  If an egg drops from the Nth floor or above,
 - if using the same scheme breaks at 100, then A is dropped 10 times, B will need to be dropped 9 times (91 - 99)
 - start at floor x go up by (x - 1) for egg A and (x - 2) for egg B.
 
+### Problem 6
+#### Problem Statement
+>
+There are 100 closed lockers in a hallway.  A man begins by opening all 100 locks.  Next he closes every second locker.  Then on his third pass he toggles every their locker (closes it if it is open, opens it if it is closed).  This process continues for 100 passes such that on each pass i, the man toggles every ith locker.  After his 100 pass in the hallway in which he toggles only lock 100 how many lockers are open.
+
+#### Problem Discussion
+- like counting the number of divisible numbers within a given locker number.
+- all prime numbers would be closed 2,3,5,7,11,13,17,19,23,29,31,37,41,43,,47,53,59,61,67,71,73,79,83,89,97
+- if the number of divisors is even then the door is closed
+- if the number of divisors is odd then the door is open for perfect sqaures 1,4,9,16,25,36,49,64,81,100
+- thus 10 are opened because if not a perfect square then there are an even number of divisors for the given number.
+
+#### Problem Solution
+- The discussion above is correct.
+
