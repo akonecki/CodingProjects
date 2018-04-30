@@ -31,3 +31,29 @@ we can use the sacle unlimitedly.
 
 #### Problem Solution
 - Discussion points to the same conclusion as solution.
+
+### Problem 2
+#### Problem Statement
+>
+There is an 8x8 chess board in which diagonally opposite corners have been cut off.  You are given 31 dominos, and a single domino can cover exactly two squares.  Can you use the 31 dominos to cover the entire board?
+
+#### Problem Discussion
+- on the outer it will be 7 squares for the top, bottom, and sides to each other.
+- chess board always has reprenting light and dark patterns that alternate.  Thus a domino can never cover two dark spaces, must always cover a light a dark square.  
+>
+D L D L D L D L          L D L D L D L
+L D L D L D L D        L D L D L D L D
+D L D L D L D L        D L D L D L D L
+L D L D L D L D        L D L D L D L D
+D L D L D L D L        D L D L D L D L
+L D L D L D L D        L D L D L D L D
+D L D L D L D L        D L D L D L D L
+L D L D L D L D        L D L D L D L
+- thus because a domino must cover both a light and dark square (due to adjency) there must exist 31 light and 31 dark squares
+- cutting the ends of two opposite corners results in either 30 dark and 32 light or 32 dark and 30 light depending on which two corners are cut, making it impossible to cover the grid with 31 dominos if both squares removed are the same color opposite corners.
+- this improper count leads to not a correct number of light and dark squares for 31 dominos.
+
+#### Problem Solution
+- Discussion points to the same conclusion as the solution.
+
+
