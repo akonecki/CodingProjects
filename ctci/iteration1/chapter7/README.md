@@ -80,3 +80,11 @@ Given two lines on a Cartesian plane, determine whether the two lines would inte
 - a1, a2, b1, b2 can be calculated from the two given points (these are for the infinite plane lines).
 - a1x1 = b2 - b1 + a2x2, a1x1 - a2x2 = b2 - b1, a1x - a2x = b2 - b1, x(a1 - a2) = (b2 - b1), x = (b2 - b1) / (a1 - a2)
 - plug-in for y the will give the (x,y) coordinate where the two lines whould possible intersect.  if (x,y) lives in both lines then an intersection occurs else no intersection.
+
+#### Problem Issues
+- made the problem way harder than needed due to not wanting to handle the double's
+
+#### Problem Solution
+- difference between values to determine equality uses an epsilon to provide a level of accuracy.  
+- equations were the same which is good, basic geometry.
+
