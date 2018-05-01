@@ -88,3 +88,13 @@ Given two lines on a Cartesian plane, determine whether the two lines would inte
 - difference between values to determine equality uses an epsilon to provide a level of accuracy.  
 - equations were the same which is good, basic geometry.
 
+### Problem 4
+#### Problem Statement
+>
+Write the methods to implement the multiply, subtract and divide operations for integers.  Use only the add operator.
+
+#### Problem Discussion
+- multiplication should just be a loop on the addition operation of n times, can also left shift then add based on how much multiplication can not be done with left shifting.
+- subtract could just add the two's complement but don't know if that is what is desired.
+- division perform the implemented subtraction in loop if desired.
+- sounds like shifting really isnt allowed due to operation limitation.
