@@ -13,7 +13,7 @@ You have a basket ball hoop and someone says that you can play one of two games.
 If p is the probability of making a particular shot, for which values of p should you pick one game or the other.
 
 #### Problem Discussion
-- assumption that the probability of making any one shot is mutually exclusive from another, meaning that one does not impact the other.  You either make it or you dont.
+- assumption that the probability of making any one shot is independent from another, meaning that one does not impact the other.  You either make it or you dont.
 - if p = .5 
   - Game 1 : .5 (only one shot)
   - Game 2 : three shots each at .5 chance of making. 1/2 * 1/2 * 1/2 for problem of all three shots at p = .5 is 1/8 and chance of missing all three shots is also 1/8.  So three quarters support the other possibility ratios. 3 * 1/8 for 1 in 3, 3 * 1/8 for 2 in 3 + 1/8 for all three.
@@ -45,7 +45,7 @@ There are three anys on different vertices of a triangle.  What is the probabili
 
 #### Problem Discussion
 - if all ants go the same direction then they will never collide
-- decision of each ant for their direction is mutually exclusive from each other.
+- decision of each ant for their direction is independent from each other.
 - a line segment a ant only has two directions say left or right.
 - all three ant selecting left is 1/2 and 1/2 and 1/2 or all ants selecting right is 1/2 and 1/2 and 1/2.
 - for three ants this is 1/8 + 1/8 = 1/4
@@ -54,3 +54,29 @@ There are three anys on different vertices of a triangle.  What is the probabili
 
 #### Problem Solution
 - Same as discussion above.
+
+### Problem 3
+#### Problem Statement
+>
+Given two lines on a Cartesian plane, determine whether the two lines would intersect.
+
+#### Problem Discussion
+- in an infinitely large cartesian plane two lines will always intersect as long as their slopes are not parallel and they do not overlap each other unless end-points are considered.
+- guessing this is endpoint driven
+- supported x values for a given line would be x1 to x2 
+- supported y values for a given line would be y1 to y2 
+- need to know the range of x and y values for a given line that are valid
+- if the points are outside of each others ranges then will never intersect.
+- only have to examine if there is overlap in both x and y coordinates
+- should be able to just setup a system of equations and calculate the x y position needed for two lines to intersect then perform a range validation from these determined values
+
+#### Problem Design
+- line has two points
+- line will be ordered such that x1 <= x2 (major ordering element)
+- slope will also be determined from the end points
+- y1 = ax1 + b
+- y2 = ax2 + b
+- y1 == y2, x1 == x2 :: a1x1 + b1 = a2x2 + b2 
+- a1, a2, b1, b2 can be calculated from the two given points (these are for the infinite plane lines).
+- a1x1 = b2 - b1 + a2x2, a1x1 - a2x2 = b2 - b1, a1x - a2x = b2 - b1, x(a1 - a2) = (b2 - b1), x = (b2 - b1) / (a1 - a2)
+- plug-in for y the will give the (x,y) coordinate where the two lines whould possible intersect.  if (x,y) lives in both lines then an intersection occurs else no intersection.
