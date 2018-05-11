@@ -98,3 +98,40 @@ Write the methods to implement the multiply, subtract and divide operations for 
 - subtract could just add the two's complement but don't know if that is what is desired.
 - division perform the implemented subtraction in loop if desired.
 - sounds like shifting really isnt allowed due to operation limitation.
+
+#### Problem Issues
+- Scope of the problem led me down trying to do more bit manipulation.
+
+#### Problem Solution
+- Really just consider addition.
+- Need to handle negative correctly.
+
+### Problem 5
+#### Problem Statement
+>
+Given two squares in a two dimensional plane, find a line that divides both squares in half.  Assume the top and bottom sides run parallel to the x-axis.
+
+#### Problem Discussion
+- is no solution a valid solution.
+- if a solution exists then it must exist for one square as well.
+- iterating through all the lines that intersect one square and comparing with the other is not feasible.
+- have to use some percision factor for calculating the area to ensure that both squares 
+- at most 4 points above and 4 points below
+
+#### Problem Issues
+- Don't really know where to start.
+- line must always connect the two middles, this is quite critical since it provides the slope.
+
+#### Problem Solution
+- start with the middle since the line must always go through both centers.
+- have to consider the squares being vertical thus resulting in a divide by zero problem.
+
+### Problem 6
+#### Problem Statement
+>
+Given a two dimensional graph with points on it, find a line which passes the most number of points.
+
+#### Problem Discussion
+- brute force method can be to just iterate through all the points and connect to each one, recording the slope that occurs the most.
+- Similar to the colinear problem which performs sorting based on slope.  
+- Sort between three points, pivot point to the other two reference points and place in order
