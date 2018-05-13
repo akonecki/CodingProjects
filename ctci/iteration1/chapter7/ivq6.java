@@ -85,4 +85,8 @@ public class ivq6 {
             }
         }
     }
+
+    public int getMaxCollinearPoints(Point [] points) {
+        return 0;
+    }
 }
