@@ -1,6 +1,8 @@
+import java.util.Comparator;
+
 public class ivq6 {
 
-    private class Point extends Comparable<Point> {
+    private class Point {
         private final int mX;
         private final int mY;
 
@@ -39,7 +41,7 @@ public class ivq6 {
 
             if (diffX == 0) {
                 if (diffY >= 0) {
-                    return Double.INFINITY;
+                    return Double.POSITIVE_INFINITY;
                 }
                 else {
                     return Double.NEGATIVE_INFINITY;
