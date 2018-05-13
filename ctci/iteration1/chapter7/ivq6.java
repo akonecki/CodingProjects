@@ -1,4 +1,5 @@
 import java.util.Comparator;
+import java.lang.Math;
 
 public class ivq6 {
 
@@ -9,6 +10,10 @@ public class ivq6 {
         public Point(int x, int y) {
             this.mX = x;
             this.mY = y;
+        }
+
+        public String toString() {
+            return "Point <X,Y> :: <" + this.mX + ", " + this.mY + ">";
         }
 
         public int compareTo(Point p) {
@@ -64,7 +69,19 @@ public class ivq6 {
                 // -1 : slope (this, a) < slope (this, b)
                 //  0 : this === p
                 //  1 : slope (this, a) > slope (this, b)
-                return 0;
+                double slopeA = Point.this.slope(a);
+                double slopeB = Point.this.slope(b);
+
+                if (Math.abs(slopeA - slopeB) < 0.000001) {
+                    // Roughly equal.
+                    return 0;
+                }
+                else if (slopeA < slopeB) {
+                    return -1;
+                }
+                else {
+                    return 1;
+                }
             }
         }
     }
