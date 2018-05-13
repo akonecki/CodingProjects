@@ -2,7 +2,7 @@ import java.util.Comparator;
 
 public class ivq6 {
 
-    private class Point {
+    private class Point implements Comparable<Point> {
         private final int mX;
         private final int mY;
 
@@ -55,8 +55,15 @@ public class ivq6 {
             return ((double)diffY) / ((double)(diffX));
         }
 
-        private class ColinearOrder implements Comparator<Point> {
+        public Comparator<Point> slopeOrder() {
+            return new CollinearOrder();
+        }
+
+        private class CollinearOrder implements Comparator<Point> {
             public int compare(Point a, Point b) {
+                // -1 : slope (this, a) < slope (this, b)
+                //  0 : this === p
+                //  1 : slope (this, a) > slope (this, b)
                 return 0;
             }
         }
