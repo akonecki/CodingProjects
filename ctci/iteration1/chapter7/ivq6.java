@@ -1,5 +1,6 @@
 import java.util.Comparator;
 import java.lang.Math;
+import java.util.Arrays;
 
 public class ivq6 {
 
@@ -87,6 +88,24 @@ public class ivq6 {
     }
 
     public int getMaxCollinearPoints(Point [] points) {
+        int maxCollinearPoints = 0;
+        
+        if (points == null || points.length == 0) {
+            return 0;
+        }
+        else if (points.length == 1) {
+            return 1;
+        }
+        else if (points.length == 2) {
+            return 1;
+        }
+
+        // Should sort based off the comparable.
+        Arrays.sort(points);
+
+        // Now the points should be ordered based off of y-axis order then x-axis as the minor.
+        
+
         return 0;
     }
 }
