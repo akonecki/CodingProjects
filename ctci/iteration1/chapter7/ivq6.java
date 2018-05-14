@@ -108,7 +108,23 @@ public class ivq6 {
         Arrays.sort(points);
 
         // Now the points should be ordered based off of y-axis order then x-axis as the minor.
+        Point pivot = null;
+        for (int pivotIndex = 0; pivotIndex < points.length; pivotIndex++) {
+            pivot = points[pivotIndex];
 
+            // Now need to build the rest of the points, excluding the pivot.
+            Point [] subPoints = new Point[points.length - 1];
+            for (int subPointIndex = 0; subPointIndex < pivotIndex; subPointIndex++) {
+                subPoints[subPointIndex] = points[subPointIndex];
+            }
+
+            for (int subPointIndex = pivotIndex + 1; subPointIndex < points.length; subPointIndex++) {
+                subPoints[subPointIndex - 1] = points[subPointIndex];
+            }
+
+            // At this point the subpoints array has been built, sort with the comparator.
+            Arrays.sort(subPoints, pivot.slopeOrder());
+        }
 
         return 0;
     }
