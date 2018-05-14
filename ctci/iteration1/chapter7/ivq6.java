@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class ivq6 {
 
-    private class Point implements Comparable<Point> {
+    public static class Point implements Comparable<Point> {
         private final int mX;
         private final int mY;
 
@@ -15,6 +15,10 @@ public class ivq6 {
 
         public String toString() {
             return "Point <X,Y> :: <" + this.mX + ", " + this.mY + ">";
+        }
+
+        public boolean equals(Point p) {
+            return this.compareTo(p) == 0;
         }
 
         public int compareTo(Point p) {
@@ -104,8 +108,22 @@ public class ivq6 {
         Arrays.sort(points);
 
         // Now the points should be ordered based off of y-axis order then x-axis as the minor.
-        
+
 
         return 0;
+    }
+
+    public static void main(String [] args) {
+        Point [] points = new Point [100];
+
+        for (int rowIndex = 10; rowIndex > 0; rowIndex--) {
+            for (int colIndex = 10; colIndex > 0; colIndex--) {
+                points[(10 * (rowIndex - 1)) + colIndex - 1] = new Point(rowIndex - 1, colIndex - 1);
+            }
+        }
+
+        Arrays.sort(points);
+        // Ensuring that the sort is working properly.
+        // assert (points[0].equals(new Point(0,0)));
     }
 }
