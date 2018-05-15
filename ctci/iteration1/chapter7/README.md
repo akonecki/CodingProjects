@@ -148,3 +148,17 @@ Given a two dimensional graph with points on it, find a line which passes the mo
 >
 Design an algorithm to find the kth number such that the only prime factors are 3, 5, and 7.
 
+#### Problem Discussion
+- only using three factors limits the numbers.
+- values that are created from prime factors can be represented by the factor raised to a power.
+- 3^0 * 5^0 * 7^0 would be the starting expression for values that can be represented by these factors.
+- have to a 3^1 prior to a 5^1 which is also before a 7^1.  
+- Thus the power of 3 >= power of 5 >= power of 7.
+- power of three = k / 3 + (k % 3 == 1)
+- power of five = k / 3 + (k % 3 == 2)
+- power of seven = k / 3 + (k % 3 == 0)
+
+#### Problem Design
+- powers are always integers
+- worse case can just multiply them out (for the actual kth number)
+- just need to determine the power of each to determine the actual value.
