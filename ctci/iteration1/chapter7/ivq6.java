@@ -77,7 +77,7 @@ public class ivq6 {
                 double slopeA = Point.this.slope(a);
                 double slopeB = Point.this.slope(b);
 
-                if (Math.abs(slopeA - slopeB) < 0.000001) {
+                if (slopeA == slopeB) {
                     // Roughly equal.
                     return 0;
                 }
@@ -91,7 +91,7 @@ public class ivq6 {
         }
     }
 
-    public int getMaxCollinearPoints(Point [] points) {
+    public static int getMaxCollinearPoints(Point [] points) {
         int maxCollinearPoints = 0;
         
         if (points == null || points.length == 0) {
@@ -124,9 +124,31 @@ public class ivq6 {
 
             // At this point the subpoints array has been built, sort with the comparator.
             Arrays.sort(subPoints, pivot.slopeOrder());
+
+            // Now need to count the number of collinear points (don't care about total only about the longest found)
+            double slopeA = 0.0, slopeB = 0.0;
+            int count = 2;
+            maxCollinearPoints = 2;
+            slopeA = pivot.slope(subPoints[0]);
+            for (int index = 1; index < subPoints.length; index++) {
+                slopeB = pivot.slope(subPoints[index]);
+                if (Math.abs(slopeA - slopeB) < 0.000001) {
+                    // Same slope.
+                    count++;
+
+                    // Compare the number of collinear points to the max and if greater save.
+                    if (count > maxCollinearPoints) {
+                        maxCollinearPoints = count;
+                    }
+                }
+                else {
+                    count = 2;
+                }
+                slopeA = slopeB;
+            }    
         }
 
-        return 0;
+        return maxCollinearPoints;
     }
 
     public static void main(String [] args) {
@@ -138,8 +160,10 @@ public class ivq6 {
             }
         }
 
-        Arrays.sort(points);
+        // Arrays.sort(points);
         // Ensuring that the sort is working properly.
         // assert (points[0].equals(new Point(0,0)));
+
+        System.out.println(getMaxCollinearPoints(points));
     }
 }
