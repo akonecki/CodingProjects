@@ -135,3 +135,10 @@ Given a two dimensional graph with points on it, find a line which passes the mo
 - brute force method can be to just iterate through all the points and connect to each one, recording the slope that occurs the most.
 - Similar to the colinear problem which performs sorting based on slope.  
 - Sort between three points, pivot point to the other two reference points and place in order
+
+#### Problem Issues
+- None, implemented a solution based on sorting, might be abit slower.
+
+#### Problem Solution
+- Calls out recording the slope and end point in a hashtable and iterating through all to determine if the points already exist within the defined line segments with the consideration for eplsion values.
+- Epslion values in my solution would be taken care of in just comparing the slope values.
