@@ -142,3 +142,9 @@ Given a two dimensional graph with points on it, find a line which passes the mo
 #### Problem Solution
 - Calls out recording the slope and end point in a hashtable and iterating through all to determine if the points already exist within the defined line segments with the consideration for eplsion values.
 - Epslion values in my solution would be taken care of in just comparing the slope values.
+
+### Problem 7
+#### Problem Statement
+>
+Design an algorithm to find the kth number such that the only prime factors are 3, 5, and 7.
+
