@@ -162,3 +162,7 @@ Design an algorithm to find the kth number such that the only prime factors are 
 - powers are always integers
 - worse case can just multiply them out (for the actual kth number)
 - just need to determine the power of each to determine the actual value.
+- **Implementation is actually incorrect**
+
+#### Implementation Issues
+- The desired functionality does not follow how binary / numbers increment to the next smallest represented value of the primes.

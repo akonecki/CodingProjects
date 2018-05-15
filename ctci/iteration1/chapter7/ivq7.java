@@ -6,8 +6,21 @@ public class ivq7 {
         if (k < 1) {
             return 0;
         }
+        else if (k == 1) {
+            return 3;
+        }
+        else if (k == 2) {
+            return 5;
+        }
+        else if (k == 3) {
+            return 7;
+        }
 
-        int powerBase = (k - 1) / 3, power7 = 0, power5 = 0, power3 = 0;
+        // Need to actually build a base 3 system.
+        // k > 3
+
+        int powerBase = k / 3, power7 = 0, power5 = 0, power3 = 0;
+        int points = (k / 3) + (k % 3);
 
         switch(k % 3) {
             case 1:
@@ -38,9 +51,7 @@ public class ivq7 {
         assert (kthNumber(1) == 3);
         assert (kthNumber(2) == 5);
         assert (kthNumber(3) == 7);
-        assert (kthNumber(5) == (3 * 25 * 7));
-        // assert (kthNumber(6) == (3 * 5 * 49));
-        System.out.println(kthNumber(6));
-        assert (kthNumber(9) == (9 * 25 * 343));
+        assert (kthNumber(4) == 9);
+        assert (kthNumber(5) == 15;
     }
 }
