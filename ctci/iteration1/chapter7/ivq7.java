@@ -6,21 +6,13 @@ public class ivq7 {
         if (k < 1) {
             return 0;
         }
-        else if (k == 1) {
-            return 3;
-        }
-        else if (k == 2) {
-            return 5;
-        }
-        else if (k == 3) {
-            return 7;
-        }
-
-        // Need to actually build a base 3 system.
-        // k > 3
-
+    
         int powerBase = k / 3, power7 = 0, power5 = 0, power3 = 0;
-        int points = (k / 3) + (k % 3);
+        int sumOfPowers = (k / 3);
+
+        if (k % 3 != 0) {
+            sumOfPowers++;
+        }
 
         switch(k % 3) {
             case 1:

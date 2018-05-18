@@ -164,5 +164,12 @@ Design an algorithm to find the kth number such that the only prime factors are 
 - just need to determine the power of each to determine the actual value.
 - **Implementation is actually incorrect**
 
-#### Implementation Issues
+#### Problem Issues
 - The desired functionality does not follow how binary / numbers increment to the next smallest represented value of the primes.
+- Incorrect implementation.
+
+#### Problem Solution
+- solution uses essentially a queue for managing the multiplication.  When remove multiple by all others (3,5,7).
+- use three separate queues, one for each.
+- only operate on the lowest of the three
+- want to minimize deuplicates.
