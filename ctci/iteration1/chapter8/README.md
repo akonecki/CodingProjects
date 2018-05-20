@@ -18,5 +18,9 @@ This contains the questions that are reflected in Cracking the Coding Interview 
 - need a way to compare hands
 
 #### Problem Issues
+- left fairly generic
+- didn't know how deep to go into implementation
 
 #### Problem Solution
+- provides a full implementation.
+- solution provides a template solution of the definition of `Card` which was not taken into consideration for personal implementation.
