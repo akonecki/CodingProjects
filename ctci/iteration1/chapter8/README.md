@@ -24,3 +24,16 @@ This contains the questions that are reflected in Cracking the Coding Interview 
 #### Problem Solution
 - provides a full implementation.
 - solution provides a template solution of the definition of `Card` which was not taken into consideration for personal implementation.
+
+### Problem 2
+#### Problem Statement
+>
+Imagine you have a call center with three levels of employees: respondent, manager, and director.  An incoming call must be first allocated to a respondent who is free.  If the respondent cant handle the call, he or she must escalate the call to a manager.  If the manager is not free or not able to handle it then the call should be escalated to a director.  Design the classes and the data structures for this problem.  Implement a mehtod `dispatchCall()` which assigns a call to the first available employee.
+
+#### Problem Discussion
+
+#### Problem Design
+
+#### Problem Issues
+
+#### Problem Solution
