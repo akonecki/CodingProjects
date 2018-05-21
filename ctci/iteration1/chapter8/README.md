@@ -31,8 +31,16 @@ This contains the questions that are reflected in Cracking the Coding Interview 
 Imagine you have a call center with three levels of employees: respondent, manager, and director.  An incoming call must be first allocated to a respondent who is free.  If the respondent cant handle the call, he or she must escalate the call to a manager.  If the manager is not free or not able to handle it then the call should be escalated to a director.  Design the classes and the data structures for this problem.  Implement a mehtod `dispatchCall()` which assigns a call to the first available employee.
 
 #### Problem Discussion
+- appears that a call when never stay within the same level if it gets escalated.
+- all would fit under the employee class.
+- each type of employee would need to be unique and indicate if availble or not.
+- assumming an employee is free one the call is complete or escalated.
+- is there a specific order in which calls are dispatched within a level.  Will assume round robin.
+- when a call gets escalated does the employee dispatch it or does the system dispatch it.
+- will likely need an employee to determine if the call is completed or needs to be escalated.
 
 #### Problem Design
+- see implementation.
 
 #### Problem Issues
 
