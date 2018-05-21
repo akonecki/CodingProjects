@@ -85,3 +85,16 @@ Design a musical jukebox using OOP.
   - song
   - user
   - CD
+
+### Problem 4
+#### Problem Statement
+>
+Design a parking lot using OOP.
+
+#### Problem Discussion
+
+#### Problem Design
+
+#### Problem Issues
+
+#### Problem Solution
