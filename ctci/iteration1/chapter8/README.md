@@ -74,3 +74,14 @@ Design a musical jukebox using OOP.
 #### Problem Design
 - likely need the jukebox owning class to be a singleton (only supporting one instance).
 - the queue of songs will could be a doubly linked list to allow for easier insertions etc.
+
+#### Problem Issues
+- still a bit bland on actual details.
+
+#### Problem Solution
+- breaks down into separate classes for each of the distinguishing components.
+  - playlist
+  - player itself
+  - song
+  - user
+  - CD
