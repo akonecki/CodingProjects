@@ -43,5 +43,11 @@ Imagine you have a call center with three levels of employees: respondent, manag
 - see implementation.
 
 #### Problem Issues
+- don't really know who / what is responsible for the `dispatchCall()`.  Is the call center itself via another system or does the individual bare the responsibility.
 
 #### Problem Solution
+- Solution provides implementation of list of list for each type of employee.
+- Solution does not still provide logic on how to determine which list of employees to use.
+- Employee logic is more detailed.
+- the overall `CallHandler` class was treated as the callcenter.
+- `dispatchCall` is handled by the call center instead of the employees.
