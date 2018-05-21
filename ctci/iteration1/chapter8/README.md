@@ -51,3 +51,26 @@ Imagine you have a call center with three levels of employees: respondent, manag
 - Employee logic is more detailed.
 - the overall `CallHandler` class was treated as the callcenter.
 - `dispatchCall` is handled by the call center instead of the employees.
+
+### Problem 3
+#### Problem Statement
+>
+Design a musical jukebox using OOP.
+
+#### Problem Discussion
+- basic capabilities of a juke box is that is plays a set of songs.
+- is this a `need to pay` juke box or more of a juke box application?
+- will assume that it is a paying juke-box / supports only the playing of specific number of songs.
+- juke box will have a set of available songs.
+- an individual can select individual songs.
+- an individual can add songs to a queue that contains the order in which songs will be played.
+- songs can be removed from the queue (either through playing or removal prior to playing).
+- if a song is removed before being played this does not impact the number of available songs for the juke box session.
+- a song can be paused.
+- a song can be skipped (if within a specific window of time does not count toward song count allocation)
+- a user will need to be able to search for songs
+- the user must indicate to start playing (pressing play).
+
+#### Problem Design
+- likely need the jukebox owning class to be a singleton (only supporting one instance).
+- the queue of songs will could be a doubly linked list to allow for easier insertions etc.
