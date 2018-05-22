@@ -92,8 +92,14 @@ Design a musical jukebox using OOP.
 Design a parking lot using OOP.
 
 #### Problem Discussion
+- parking lot has some form of entry/exit (could be both can be distinct as well).
+- parking lot has only specific valid spaces.
+- a space will be a fixed size to accompany specific type of vehicles.
+- parking lot has specifc driving areas.
+- a parking space is drivable if no other object is present.
 
 #### Problem Design
+- will assume the parking lot design is like the parking lot monitor that indicates the number of open slots on a given floor.
 
 #### Problem Issues
 
