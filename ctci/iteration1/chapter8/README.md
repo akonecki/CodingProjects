@@ -102,5 +102,7 @@ Design a parking lot using OOP.
 - will assume the parking lot design is like the parking lot monitor that indicates the number of open slots on a given floor.
 
 #### Problem Issues
+- None spent more time & implementation logic on the monitoring system but same level of detail and paradigm used.
 
 #### Problem Solution
+- went more on on giving spots, but approach was roughly the same.
