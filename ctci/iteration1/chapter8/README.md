@@ -106,3 +106,9 @@ Design a parking lot using OOP.
 
 #### Problem Solution
 - went more on on giving spots, but approach was roughly the same.
+
+### Problem 5
+#### Problem Statement
+>
+Design the data structures for an online book reader system.
+
