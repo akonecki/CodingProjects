@@ -112,3 +112,21 @@ Design a parking lot using OOP.
 >
 Design the data structures for an online book reader system.
 
+#### Problem Discussion
+- book reader system
+- will ignore any hint of a purchasing system.
+- will need to determine how to add books to the system
+- will need to know the granularity of which books are availble on the system (are the books a collection or does each user have their own set of books).
+- there can be multiple copies of a book (i.e. more than one person can read the same book at a time)
+- it is unlikely that a user of the system will read a book to completion so will need to have save book information for each user.
+- a user may have multiple incomplete books (in-porgress) at the same time.
+- a user will be able to go between pages in a book.
+- a suer will need to be able to obtain a list of their current books.
+
+#### Problem Design
+- not going to support a rating system (per user / overall)
+- not going to support a user notes / save of pages, only progress
+
+#### Problem Issues
+
+#### Problem Solution
