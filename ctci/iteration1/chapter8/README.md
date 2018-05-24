@@ -128,5 +128,8 @@ Design the data structures for an online book reader system.
 - not going to support a user notes / save of pages, only progress
 
 #### Problem Issues
+- Not much, just didn't fill everything out due to time limit.
 
 #### Problem Solution
+- similar to the solution in terms of acting classes.
+- having a `UserManager` is suggested and was going to put into the `Library` class for the implementation.

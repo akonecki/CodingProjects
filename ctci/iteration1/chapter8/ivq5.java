@@ -14,7 +14,7 @@ public class ivq5 {
         private static Set<Book> mBooks = new TreeSet<Book>(); 
         
         // There will be a defined set of users for the library.
-        
+
 
         private void add(Book book) {
             if (book != null) {
@@ -26,6 +26,9 @@ public class ivq5 {
     }
 
     private static class BookReader {
+        private Book mBook;
+
+        
 
         public static void flipToPage(Book book, int page) {
 
