@@ -63,14 +63,14 @@ public class Challenge2 {
 
                 String word = sb.toString().toLowerCase();
                 Node node = null;
-                wordIndex++;
 
                 if (map.containsKey(word)) {
                     node = map.get(word);
                     node.wordCount++;
                 }
                 else {
-                    node = new Node(word, wordIndex); 
+                    node = new Node(word, wordIndex);
+                    wordIndex++; 
                     nodes.add(node);   
                 }
 
