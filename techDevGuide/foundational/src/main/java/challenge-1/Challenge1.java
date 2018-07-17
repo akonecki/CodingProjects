@@ -131,6 +131,78 @@ public class Challenge1 {
         }
     }
 
+    public static int AlphabetApproach(String S, ArrayList<String> D) {
+        int max = 0;
+        HashMap<Character, LinkedList<Tuple>> alphabet; 
+
+        if (S == null || S.isEmpty() || D == null || D.isEmpty()) {
+            return max;
+        }
+
+        // Build the tuple lists.
+        alphabet = new HashMap<Character, LinkedList<Tuple>>(D.size() * 2);
+
+        for (String W : D) {
+            if (W != null && !W.isEmpty() && W.length() <= S.length()) {
+                LinkedList<Tuple> tuples = null;
+                if (alphabet.containsKey(W.charAt(0))) {
+                    tuples = alphabet.get(W.charAt(0));
+                }
+                else {
+                    tuples = new LinkedList<Tuple>();
+                }
+                tuples.add(new Tuple(W));
+                alphabet.put(W.charAt(0), tuples);
+            }
+        }
+
+        // Now iterate through the S characters.
+        for (char character : S.toCharArray()) {
+            if (alphabet.containsKey(character)) {
+                LinkedList<Tuple> tuples = alphabet.get(character);
+                if (tuples != null) {
+                    int size = tuples.size();
+
+                    // Dont want to be dynamically changing the linked list
+                    // size and the algorithm removes.
+                    for (int count = 0; count < size; count++) {
+                        Tuple tuple = tuples.remove();
+                        // increment the W index
+                        tuple.index++;
+
+                        if (tuple.index == tuple.word.length() && tuple.word.length() > max) {
+                            max = tuple.word.length();
+                        }
+                        else if (tuple.index < tuple.word.length()) {
+                            // place the tuple back into the correct place.
+                            LinkedList<Tuple> targetTuple = null;
+                            if (alphabet.containsKey(tuple.word.charAt(tuple.index))) {
+                                targetTuple = alphabet.get(tuple.word.charAt(tuple.index));
+                            }
+                            else {
+                                targetTuple = new LinkedList<Tuple>();
+                            }
+
+                            targetTuple.add(tuple);
+                            alphabet.put(tuple.word.charAt(tuple.index), targetTuple);
+                        }
+                    }
+                }
+            }
+        }
+
+        return max;
+    }
+
+    private static class Tuple {
+        private String word;
+        private int index;
+
+        public Tuple(String word) {
+            this.word = word;
+        }
+    }
+
     public static void main(String [] args) {
         ArrayList<Integer> positions = new ArrayList<Integer>();
         positions.add(1);
@@ -158,5 +230,6 @@ public class Challenge1 {
         assert (BinarySearch(positions, 20) == -1);
         assert (GreedyLongestSubSequence("abppplee", D) == 5);
         assert (MapLongestSubSequence("abppplee", D) == 5);
+        assert (AlphabetApproach("abppplee", D) == 5);
     }
 }
