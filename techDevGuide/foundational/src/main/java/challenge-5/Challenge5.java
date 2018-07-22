@@ -4,8 +4,10 @@ public class Challenge5 {
         
         int gcd = numbers[0];;
 
-        for (int index = 1; index < numbers.length; index++) {
-            gcd = gcd(gcd, numbers[index]);
+        for (int num : numbers) {
+            if (num > 0) {
+                gcd = gcd(gcd, num);
+            }
         }
 
         return gcd;
