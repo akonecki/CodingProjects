@@ -116,10 +116,40 @@ public class Challenge10 {
         return results[index];
     }
 
+    // [T]urn Around the Solution
+    // Want to expand the subproblems and its base case to now be implemented in
+    // an iterative approach instead of recursive.
+    public static int counterIterativeDP(int [] nums) {
+        int [] dp = new int [nums.length + 1];
+
+        // Subproblems are the number of combinations from i to n.
+        // Since the subproblem approach fills in the data from the back to the front
+        // the subproblems can be inverted to state the number of combinations from
+        // 0 to i.    
+        for (int index = 0; index <= nums.length; index++) {
+            /*
+                Doubling of the previous step.
+            */
+            
+            if (index == 0) {
+                // empty set
+                dp[index] = 1;
+            }
+            else {
+                dp[index] = dp[index - 1] << 1;
+            }
+        }    
+
+        return dp[nums.length];
+    }
+
+    // Hard to flip the subproblem definition.
+    // Easy code but hard to understand.
+
     public static void main(String [] args) {
-        assert (counter(new int [] {1}) == counterDP(new int [] {1}));
-        assert (counter(new int [] {1,2}) == counterDP(new int [] {1,2}));
-        assert (counter(new int [] {1,2,3}) == counterDP(new int [] {1,2,3}));
-        assert (counter(new int [] {1,2,3,4}) == counterDP(new int [] {1,2,3,4}));
+        assert (counterIterativeDP(new int [] {1}) == counterDP(new int [] {1}));
+        assert (counterIterativeDP(new int [] {1,2}) == counterDP(new int [] {1,2}));
+        assert (counterIterativeDP(new int [] {1,2,3}) == counterDP(new int [] {1,2,3}));
+        assert (counterIterativeDP(new int [] {1,2,3,4}) == counterDP(new int [] {1,2,3,4}));
     }
 }
