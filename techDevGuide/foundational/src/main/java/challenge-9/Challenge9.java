@@ -59,11 +59,35 @@ public class Challenge9 {
         return dp[n];
     } 
 
+    // [T]urn Around the Solution
+    // Recusion is often slower due to function call stack
+    // Use subproblem previous and then build up each to get desired result.
+
+    // Time & space complexity are now O(N).
+    public static int bottomUpFib(int n) {
+        int [] dp = new int[n + 1];
+
+        // Start with base cases 
+        for (int index = 0; index <= n; index++) {
+            if (index == 0) {
+                dp[0] = 0;
+            }
+            else if (index == 1) {
+                dp[1] = 1;
+            }
+            else {
+                dp[index] = dp[index - 1] + dp[index - 2];
+            }
+        }
+
+        return dp[n];
+    }
+
     public static void main(String [] args) {
-        assert (recursiveFib(1) == fib(1));
-        assert (recursiveFib(2) == fib(1));
-        assert (recursiveFib(3) == fib(3));
-        assert (recursiveFib(10) == fib(10));
+        assert (recursiveFib(1) == fib(1) && fib(1) == bottomUpFib(1));
+        assert (recursiveFib(2) == fib(2)&& fib(2) == bottomUpFib(2));
+        assert (recursiveFib(3) == fib(3)&& fib(3) == bottomUpFib(3));
+        assert (recursiveFib(10) == fib(10)&& fib(10) == bottomUpFib(10));
 
     }
 }
