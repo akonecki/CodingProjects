@@ -96,10 +96,29 @@ public class Challenge10 {
         }
     }
 
+    // [S]ubproblem Identification & memoization
+    // Build out a wrapper first
+
+    public static int counterDP(int [] nums) {
+        int [] dp = new int [nums.length + 1];
+        return counter(nums, dp, 0);
+    }
+
+    private static int counter(int [] nums, int [] results, int index) {
+        if (results[index] == 0) {
+            if (index == nums.length) return 1;
+            int included = counter(nums, results, index + 1);
+            int excluded = counter(nums, results, index + 1);
+            results[index] = included + excluded;
+        }
+        
+        return results[index];
+    }
+
     public static void main(String [] args) {
-        assert (counter(new int [] {1}) == 2);
-        assert (counter(new int [] {1,2}) == 4);
-        assert (counter(new int [] {1,2,3}) == 8);
-        assert (counter(new int [] {1,2,3,4}) == 16);
+        assert (counter(new int [] {1}) == counterDP(new int [] {1}));
+        assert (counter(new int [] {1,2}) == counterDP(new int [] {1,2}));
+        assert (counter(new int [] {1,2,3}) == counterDP(new int [] {1,2,3}));
+        assert (counter(new int [] {1,2,3,4}) == counterDP(new int [] {1,2,3,4}));
     }
 }
