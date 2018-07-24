@@ -35,11 +35,35 @@ public class Challenge9 {
         }
     }
 
+    // Identify subproblems to supplement with memoizing.
+    // the subproblems that it calls is fib(n-1) and fib(n-2)
+    // [S]ubproblem Identification & translation to memoization.
+
+    /*
+        So now with memoizing the already computed values, those branches 
+        are no longer explored.
+    */
+
+    // wrapper function
+    public static int fib(int n) {
+        int [] dp = new int[n+1];
+        return fib(n, dp);
+    }
+
+    private static int fib(int n, int[] dp) {
+        if (dp[n] == 0) {
+            if (n==0) return 0;
+            if (n==1) return 1;
+            dp[n] = fib(n-1, dp) + fib(n-2, dp);
+        }
+        return dp[n];
+    } 
+
     public static void main(String [] args) {
-        assert (recursiveFib(1) == 1);
-        assert (recursiveFib(2) == 1);
-        assert (recursiveFib(3) == 2);
-        assert (recursiveFib(10) == 55);
+        assert (recursiveFib(1) == fib(1));
+        assert (recursiveFib(2) == fib(1));
+        assert (recursiveFib(3) == fib(3));
+        assert (recursiveFib(10) == fib(10));
 
     }
 }
