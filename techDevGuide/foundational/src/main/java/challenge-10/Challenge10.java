@@ -98,7 +98,8 @@ public class Challenge10 {
 
     // [S]ubproblem Identification & memoization
     // Build out a wrapper first
-
+    // couter(arr, i+1) is computing the number of combinations of elements i
+    // through n
     public static int counterDP(int [] nums) {
         int [] dp = new int [nums.length + 1];
         return counter(nums, dp, 0);
