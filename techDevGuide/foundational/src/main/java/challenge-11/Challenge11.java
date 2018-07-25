@@ -1,5 +1,5 @@
 public class Challenge11 {
-    public static int minChangeCoins(int amount, int [] reverseSortedCoinSet) {
+    public static int minChangeCoins(int amount, int [] reverseSortedCoinSet) {        
         return makeChange(amount, reverseSortedCoinSet);
     }
 
@@ -82,7 +82,44 @@ public class Challenge11 {
 
     // With the analysis it looks like this problem is a good candidate for dp.
 
+    // [S]ubproblem Identification & Momitization
+
+    public static int minChangeCoinsDP(int amount, int [] reverseSortedCoinSet) {        
+        // momization
+        int [] dp = new int [amount + 1];
+        return makeChange(amount, reverseSortedCoinSet, dp);
+    }
+
+    private static int makeChange(int amount, int [] reverseSortedCoinSet, int [] dp) {
+        int min = Integer.MAX_VALUE;
+
+        if (dp[amount] != 0) {
+            return dp[amount];
+        }
+
+        // will have to iterate on each.
+        for (int index = 0; index < reverseSortedCoinSet.length; index++) {
+            int value = reverseSortedCoinSet[index];
+
+            if (value == amount) {
+                return 1;
+            }
+            else if (value < amount) {
+                int result = makeChange(amount - value, reverseSortedCoinSet);
+
+                if (result + 1 < min + 1) {
+                    min = result + 1;
+                }
+            }
+        } 
+
+        dp[amount] = min;
+
+        // Dont want to perform the add of one here or else will skew from max.
+        return min;
+    }
+
     public static void main(String [] args) {
-        assert (minChangeCoins(24, new int [] {1, 6, 10}) == 4);
+        assert (minChangeCoins(33, new int [] {1, 6, 10}) == minChangeCoinsDP(33, new int [] {1, 6, 10}));
     }
 }
