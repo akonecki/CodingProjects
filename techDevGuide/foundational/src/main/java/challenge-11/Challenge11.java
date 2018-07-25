@@ -48,15 +48,40 @@ public class Challenge11 {
             else if (value < amount) {
                 int result = makeChange(amount - value, reverseSortedCoinSet);
 
-                if (result < min) {
-                    min = result;
+                if (result + 1 < min + 1) {
+                    min = result + 1;
                 }
             }
         } 
 
-        return min + 1;
+        // Dont want to perform the add of one here or else will skew from max.
+        return min;
     }
     
+    // [A]nalysis
+    // The number of branches is equal to the length of the coinset due to 
+    // the iteration that occurs for each call.  
+
+    // Let us call the number of elements in the coin set to be M thus the 
+    // branching set is M.
+
+    // The max depth in the case in which one is provided (worse case) would be 
+    // linear to the amount given on the call stack.
+    // Memory efficiency O(N).
+
+    // With the number of max branching sets along with the max depth then it is
+    // O(M^N) in time complexity with a O(N) space complexity due to the stack 
+    // space.
+
+    // [1] Does this fit the requirement of optimal subproblems? 
+    // yes, each step of the problem only has its own scope and can make decisions
+    // based on its current value.
+
+    // [2] Does this have reocccurring steps.
+    // yes, I repeat a few values a couple of times even with the simple.
+
+    // With the analysis it looks like this problem is a good candidate for dp.
+
     public static void main(String [] args) {
         assert (minChangeCoins(24, new int [] {1, 6, 10}) == 4);
     }
