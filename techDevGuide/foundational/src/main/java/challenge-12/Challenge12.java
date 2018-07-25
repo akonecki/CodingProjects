@@ -39,6 +39,30 @@ public class Challenge12 {
         }
     }
 
+    // [A]nalyze for optimal subproblems and subproblem re-use
+    // [1] Is the problem follow the optimal subproblem definition.
+    // Yes - each level is reliant on only its current level within the traversal
+    //       and does not work on global or instance values.
+    // [2] Do the subproblems exhibit reuse of values.
+    // Yes - there will be multiple calls to the same row, col pair multiple
+    //       times due to the 3-branch traversal.
+
+    // Can the performance be improved with DP?
+    // So the current run-time performance is as follows.
+    /*
+        [1] The max height for the problem shall be defined as N.  Max height
+            is limited by the largest dimension of the matrix, for now lets 
+            assume that it is a large matrix such that L === W thus N = L;
+        [2] The branching factor is 3 for each logical branch of going 
+            i) down
+            ii) diag
+            iii) right
+    */
+    // So the expected runtime should be in the order of O(N^3)
+
+    // Memory impact is most impacted by the recusive calls due to state 
+    // information being saved and thus is equal to the max height O(N) in
+    // this case.
 
     public static void main(String [] args) {
         assert (maxSubSquareMatrix(new boolean [][] {{false, true, false},{true, true, true},{false, true, true}}) == 2);
