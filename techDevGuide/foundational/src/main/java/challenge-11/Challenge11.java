@@ -48,7 +48,7 @@ public class Challenge11 {
             else if (value < amount) {
                 int result = makeChange(amount - value, reverseSortedCoinSet);
 
-                if (result + 1 < min + 1) {
+                if (result + 1 < min) {
                     min = result + 1;
                 }
             }
@@ -83,7 +83,6 @@ public class Challenge11 {
     // With the analysis it looks like this problem is a good candidate for dp.
 
     // [S]ubproblem Identification & Momitization
-
     public static int minChangeCoinsDP(int amount, int [] reverseSortedCoinSet) {        
         // momization
         int [] dp = new int [amount + 1];
@@ -107,7 +106,7 @@ public class Challenge11 {
             else if (value < amount) {
                 int result = makeChange(amount - value, reverseSortedCoinSet);
 
-                if (result + 1 < min + 1) {
+                if (result + 1 < min) {
                     min = result + 1;
                 }
             }
@@ -119,7 +118,52 @@ public class Challenge11 {
         return min;
     }
 
+    // [T]urn the Problem Around
+    // Now time to serialize it.  The recusive solution was very much a top down
+    // but now should be a bottom up 
+
+    // But what does each iteration of the subproblem mean?
+    // each amount passed is asking the question of what is the minimum number
+    // of coins it takes to equal this amount.
+    public static int minChangeCoinsSerialDP(int amount, int [] coins) {
+        int [] dp = new int [amount + 1];
+
+        for (int index = 0; index < dp.length; index++) {
+            if (index == 0 || index == 1) {
+                dp[index] = index;
+            }
+            else {
+                int min = Integer.MAX_VALUE;
+                // the current index w.r.t dp is the current value that we are 
+                // interested in.
+                // will need to iterate through the coins for the value.
+                for (int coinIndex = 0; coinIndex < coins.length; coinIndex++) {
+                    int coinValue = coins[coinIndex];
+                    
+                    if (coinValue == index) {
+                        // no other single coin will be able to do better.
+                        min = 1;
+                    }
+                    else if (coinValue < index) {
+                        if (dp[index - coinValue] + 1 < min) {
+                            min = dp[index - coinValue] + 1;
+                        }
+                    }
+                }
+
+                dp[index] = min;
+            }
+        }
+
+        return dp[amount];
+    }
+
     public static void main(String [] args) {
-        assert (minChangeCoins(33, new int [] {1, 6, 10}) == minChangeCoinsDP(33, new int [] {1, 6, 10}));
+        System.out.println(minChangeCoins(12, new int [] {1, 6, 10}));
+        System.out.println(minChangeCoinsDP(12, new int [] {1, 6, 10}));
+        System.out.println(minChangeCoinsSerialDP(12, new int [] {1, 6, 10}));
+
+        assert (minChangeCoins(12, new int [] {1, 6, 10}) == minChangeCoinsDP(12, new int [] {1, 6, 10}));
+        assert (minChangeCoinsSerialDP(12, new int [] {1, 6, 10}) == minChangeCoins(12, new int [] {1, 6, 10}));
     }
 }
