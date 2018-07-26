@@ -64,12 +64,58 @@ public class Challenge12 {
     // information being saved and thus is equal to the max height O(N) in
     // this case.
 
+    // [S]ubproblem Inspection for Mometization
+    // The difficult part is having to maintain two pieces of information. The
+    // current subsquare size w.r.t the current position, and the max that has
+    // been seen w.r.t the position.  This is required at still due to the top
+    // down approach.
+    
+    // The saving of the values allows to trim the tree to by O(N^2) for 
+    // run time performance assumming L === W for the matrix dimensions.
+    public static int maxSubSquareMatrixDB(boolean [][] matrix) {
+        int [][] dpValue = new int [matrix.length + 1][matrix[0].length + 1];
+        int [][] dpMax = new int [matrix.length + 1][matrix[0].length + 1];
+        maxSubSquareMatrix(matrix, 0, 0, dpValue, dpMax);
+
+        return dpMax[0][0];
+    }
+
+    public static void maxSubSquareMatrix(boolean [][] matrix, int row, int col, int [][] dpValue, int [][] dpMax) {
+        if (row >= matrix.length || col >= matrix[row].length) {
+            return;
+        }
+        
+        if (dpValue[row][col] != 0) {
+            return;
+        }
+
+        maxSubSquareMatrix(matrix, row + 1, col, dpValue, dpMax);
+        maxSubSquareMatrix(matrix, row, col + 1, dpValue, dpMax);
+        maxSubSquareMatrix(matrix, row + 1, col + 1, dpValue, dpMax);
+
+        int value = Integer.MIN_VALUE;
+
+        if (matrix[row][col]) {
+            value = Math.min(dpValue[row + 1][col], Math.min(dpValue[row][col + 1], dpValue[row + 1][col + 1]));
+            if (value == Integer.MIN_VALUE) {
+                value = 1;
+            }
+            else {
+                value += 1;
+            }
+        }
+
+        dpValue[row][col] = value;
+        int max = Math.max(value, Math.max(dpMax[row + 1][col], Math.max(dpMax[row + 1][col + 1], dpMax[row][col + 1])));
+        dpMax[row][col] = max;
+    }
+
     public static void main(String [] args) {
-        assert (maxSubSquareMatrix(new boolean [][] {{false, true, false},{true, true, true},{false, true, true}}) == 2);
-        assert (maxSubSquareMatrix(new boolean [][] {{true}}) == 1);
-        assert (maxSubSquareMatrix(new boolean [][] {{false}}) == 0);
-        assert (maxSubSquareMatrix(new boolean [][] {{true, true, true},{true, false, true},{true, true, true}}) == 1);
-        assert (maxSubSquareMatrix(new boolean [][] {{false, true, true},{true, true, true},{true, true, false}}) == 2);
+        assert (maxSubSquareMatrix(new boolean [][] {{false, true, false},{true, true, true},{false, true, true}}) == maxSubSquareMatrixDB(new boolean [][] {{false, true, false},{true, true, true},{false, true, true}}));
+        assert (maxSubSquareMatrix(new boolean [][] {{true}}) == maxSubSquareMatrixDB(new boolean [][] {{true}}));
+        assert (maxSubSquareMatrix(new boolean [][] {{false}}) == maxSubSquareMatrixDB(new boolean [][] {{false}}));
+        assert (maxSubSquareMatrix(new boolean [][] {{true, true, true},{true, false, true},{true, true, true}}) == maxSubSquareMatrixDB(new boolean [][] {{true, true, true},{true, false, true},{true, true, true}}));
+        assert (maxSubSquareMatrix(new boolean [][] {{false, true, true},{true, true, true},{true, true, false}}) == maxSubSquareMatrixDB(new boolean [][] {{false, true, true},{true, true, true},{true, true, false}}));
 
     }
 }
