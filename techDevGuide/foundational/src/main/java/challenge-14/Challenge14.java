@@ -89,7 +89,7 @@ public class Challenge14 {
     }
 
     public static void main (String [] args) {
-        assert (targetSum(new int [] {1,2,3,4}, 0) == 2);
-        assert (targetSumDP(new int [] {1,2,3,4}, 0) == 2);
+        assert (targetSum(new int [] {1,2,3,4}, 10) == 1);
+        assert (targetSumDP(new int [] {1,2,3,4}, 10) == 1);
     }
 }
