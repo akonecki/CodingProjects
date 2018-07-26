@@ -123,7 +123,53 @@ public class Challenge13 {
         }
     }
 
+    // [T]urn the Problem Around
+    // So instead of progressing from the max weight down will progress from 
+    // the lower weight until the max weight for serializing the DP cache.
+
+    // Original sentence was "the max value at a given weight for a specific
+    // weightValue pair is X down to 0"
+    // Now want to say same thing but going from 0 to the weight.
+
+    /*
+
+            0 1 2  3
+        0   0 0 0  0
+        1   0 0 0  0 
+        2   0 6 10 10
+        3   0 6 10 12
+        4   0 6 16 16
+        5   0 6 16 22
+    */
+
+    public static int knapsackSerialDP(int [][] weightValues, int maxWeight) {
+        int [][] dp = new int [maxWeight + 1][weightValues.length + 1];
+
+        // Assuming no items that have a weight of 0 or less.
+        for (int row = 1; row < dp.length; row++) {
+            for (int col = 1; col < dp[row].length; col++) {
+                // row is the weight
+                // col is the index into weightValues
+                if (weightValues[col - 1][0] <= row) {
+                    // get previous column's left over after including current
+                    // columns weight
+                    int include = dp[row - weightValues[col - 1][0]][col - 1] + weightValues[col - 1][1];
+                    
+                    dp[row][col] = Math.max(include, dp[row][col - 1]);
+                }
+                else {
+                    // just use previous
+                    // dp[row][col] = Math.max(dp[row - 1][col], dp[row][col - 1]);
+                    dp[row][col] = dp[row][col - 1];
+                }
+            }
+        }
+
+        return dp[maxWeight][weightValues.length];
+    }
+
     public static void main(String [] args) {
         assert (knapsack(new int [][] {{2,6},{2,10},{3,12}}, 5) == knapsackDP(new int [][] {{2,6},{2,10},{3,12}}, 5));
+        assert (knapsackSerialDP(new int [][] {{3,12},{2,6},{2,10}}, 5) == 22);
     }
 }
