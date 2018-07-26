@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.ArrayList;
+
 public class Challenge14 {
 
     // [F]unctional Implementation
@@ -40,7 +43,53 @@ public class Challenge14 {
     // Is equal to the height of the recursion tree due to manging the memory 
     // associated with the call stack.  So O(N)
 
+    // [S]ubproblem Identification & Memoization
+    public static int targetSumDP(int [] nums, int target) {
+        ArrayList<HashMap<Integer, Integer>> dp = new ArrayList<HashMap<Integer, Integer>>(nums.length);
+
+        for (int index = 0; index < nums.length; index++) {
+            dp.add(null);
+        }
+
+        return targetSum(nums, target, 0, dp);
+    }
+
+    private static int targetSum(int [] nums, int target, int index, ArrayList<HashMap<Integer, Integer>> dp) {
+        if (index >= nums.length) {
+            if (target == 0) {
+                return 1;
+            }
+            else {
+                return 0;
+            }
+        }
+
+        assert (dp.size() == nums.length);
+        int sum = 0;
+
+        if (dp.get(index) == null || !dp.get(index).containsKey(target)) {
+            HashMap<Integer, Integer> map = dp.get(index);
+
+            if (map == null) {
+                map = new HashMap<Integer, Integer>();
+            }
+
+            sum = targetSum(nums, target + nums[index], index + 1, dp) 
+                + targetSum(nums, target - nums[index], index + 1, dp);
+
+            map.put(target, sum);
+
+            dp.set(index, map);
+        }
+        else {
+            sum = dp.get(index).get(target).intValue();
+        }
+
+        return  sum;  
+    }
+
     public static void main (String [] args) {
         assert (targetSum(new int [] {1,2,3,4}, 0) == 2);
+        assert (targetSumDP(new int [] {1,2,3,4}, 0) == 2);
     }
 }
