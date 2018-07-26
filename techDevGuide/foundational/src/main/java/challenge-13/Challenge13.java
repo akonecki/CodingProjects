@@ -25,7 +25,7 @@ public class Challenge13 {
         if (index >= weightValues.length) {
             return 0;
         }
-        System.out.println(index);
+        // System.out.println(index);
         int [] weightValue = weightValues[index];
 
         int includedValue = knapsack(weightValues, 
@@ -67,7 +67,63 @@ public class Challenge13 {
     // recursion tree so the max height of the tree is N thus O(N) for memory
     // impact.
 
+    // [S]ubproblem Identification & Memoization
+    // First need to determine what is being memoizied.
+
+    // This is the hard part I think for this problem due to the fact that
+    // the include does not always occur due to weight limits.  Might require
+    // a 2D matrix???
+
+    // Should be memoization about like what is the max value that you can
+    // have at a specific weight.
+    public static int knapsackDP(int [][] weightValues, int maxWeight) {
+        // Multi-factor considerations require multi-dimensional with respect 
+        // to the factors.
+        int [][] dp = new int [maxWeight + 1][weightValues.length + 1];
+        
+        for (int row = 0; row < dp.length; row++) {
+            for (int col = 0; col < dp[row].length; col++) {
+                dp[row][col] = -1;
+            }
+        }
+
+        return knapsack(weightValues, maxWeight, 0, dp);
+    }
+
+    private static int knapsack(int [][] weightValues, int maxWeight, int index, int [][] dp) {
+        if (index >= weightValues.length) {
+            return 0;
+        }
+        
+        if (dp[maxWeight][index] != -1) {
+            return dp[maxWeight][index];
+        }
+
+        int [] weightValue = weightValues[index];
+
+        int includedValue = knapsack(weightValues, 
+            maxWeight >= weightValue[0] ? maxWeight - weightValue[0] : maxWeight, 
+            index + 1, dp);
+
+        if (maxWeight >= weightValue[0]) {
+            includedValue += weightValue[1];
+        }
+
+        int notIncludedValue =  knapsack(weightValues, 
+            maxWeight, 
+            index + 1, dp);
+
+        if (includedValue > notIncludedValue) {
+            dp[maxWeight][index] = includedValue;
+            return includedValue;
+        }
+        else {
+            dp[maxWeight][index] = notIncludedValue;
+            return notIncludedValue;
+        }
+    }
+
     public static void main(String [] args) {
-        assert (knapsack(new int [][] {{2,6},{2,10},{3,12}}, 5) == 22);
+        assert (knapsack(new int [][] {{2,6},{2,10},{3,12}}, 5) == knapsackDP(new int [][] {{2,6},{2,10},{3,12}}, 5));
     }
 }
