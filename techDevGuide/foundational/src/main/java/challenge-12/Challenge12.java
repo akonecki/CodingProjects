@@ -110,12 +110,55 @@ public class Challenge12 {
         dpMax[row][col] = max;
     }
 
+    // [T]urn Around the Solution
+    // Previously was going top down or from the upper left corner down to the
+    // bottom right corner and then back up to determine the max size and value
+    // impact for each cell.
+
+    // now should be able to turn it around 
+    // each cell in the value indicates largest consecutive size up to this point
+    // (i.e. is the bottom right most cell).
+    // each cell in the max indicates largest square seen up to this cell growing
+    // down to the bottom.
+
+    public static int maxSubSquareMatrixSerialDB(boolean [][] matrix) {
+        // Memory impact can be reduced to only the size of the row since 
+        // processing the matrix on a row by row basis.
+        int [][] dpValue = new int [matrix.length + 1][matrix[0].length + 1];
+        int [][] dpMax = new int [matrix.length + 1][matrix[0].length + 1];
+        
+        for (int row = 1; row < dpValue.length; row++) {
+            for (int col = 1; col < dpValue[row].length; col++) {
+                int value = 0;
+                if (matrix[row - 1][col - 1]) {
+                    value = Math.min(dpValue[row - 1][col - 1], Math.min(dpValue[row - 1][col], dpValue[row][col - 1])) + 1;
+                }
+                
+                dpValue[row][col] = value;
+                dpMax[row][col] = Math.max(value, Math.max(dpMax[row - 1][col - 1], Math.max(dpMax[row - 1][col], dpMax[row][col - 1])));
+            }
+        }
+
+        /*
+        for (int row = 0; row < dpValue.length; row++) {
+            for (int col = 0; col < dpValue[row].length; col++) {
+                System.out.print(dpValue[row][col]);
+            }
+            System.out.println("");
+        }
+        System.out.println("");
+
+        System.out.println(dpMax[matrix.length][matrix[0].length]);
+        */
+        return dpMax[matrix.length][matrix[0].length];
+    }
+
     public static void main(String [] args) {
         assert (maxSubSquareMatrix(new boolean [][] {{false, true, false},{true, true, true},{false, true, true}}) == maxSubSquareMatrixDB(new boolean [][] {{false, true, false},{true, true, true},{false, true, true}}));
         assert (maxSubSquareMatrix(new boolean [][] {{true}}) == maxSubSquareMatrixDB(new boolean [][] {{true}}));
         assert (maxSubSquareMatrix(new boolean [][] {{false}}) == maxSubSquareMatrixDB(new boolean [][] {{false}}));
         assert (maxSubSquareMatrix(new boolean [][] {{true, true, true},{true, false, true},{true, true, true}}) == maxSubSquareMatrixDB(new boolean [][] {{true, true, true},{true, false, true},{true, true, true}}));
         assert (maxSubSquareMatrix(new boolean [][] {{false, true, true},{true, true, true},{true, true, false}}) == maxSubSquareMatrixDB(new boolean [][] {{false, true, true},{true, true, true},{true, true, false}}));
-
+        assert (maxSubSquareMatrixSerialDB(new boolean [][] {{true, true, true},{true, false, true},{true, true, true}}) == 1);
     }
 }
