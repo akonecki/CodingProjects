@@ -133,6 +133,45 @@ public class Challenge14 {
         return  sum;  
     }
 
+    // [T]urn the Problem Around Addition
+    // want to have the subproblem be targetSum(nums, T, i, sum) is the number 
+    // of ways to get the first i elements to add up to sum.
+    public static int targetSumSerialDP2nd(int [] nums, int target) {
+        int [][] dp;
+        int sum = 0;
+        for (int num : nums) {
+            sum += Math.abs(num);
+        }
+
+        dp = new int [nums.length + 1][2 * sum + 1];
+        // 0 case in which there are no nums and target is 0.
+        dp[0][sum] = 1;
+
+        for (int row = 1; row < dp.length; row++) {
+            for (int col = 0; col < dp[row].length; col++) {
+                if (col - nums[row - 1] >= 0) {
+                    // has enough to perform subtraction and stay in the matrix
+                    dp[row][col] += dp[row - 1][col - nums[row - 1]];
+                }
+                if (col + nums[row - 1] < dp[row].length) {
+                    // has enough to perform addition and stay in the matrix
+                    dp[row][col] += dp[row - 1][col + nums[row - 1]];
+                }
+            }
+        }
+
+        for (int row = 0; row < dp.length; row++) {
+            for (int col = 0; col < dp[row].length; col++) {
+                System.out.print(dp[row][col]);
+            }
+            System.out.println("");
+        }
+        System.out.println("");
+
+        System.out.println(dp[nums.length][sum + target]);
+        return dp[nums.length][sum + target];
+    }
+
     // [T]urn the Problem Around
     public static int targetSumSerialDP(int [] nums, int target) {
         ArrayList<HashMap<Integer, Integer>> dp = new ArrayList<HashMap<Integer, Integer>>(nums.length);
@@ -208,13 +247,9 @@ public class Challenge14 {
         return sum;
     }
 
-    // [T]urn the Problem Around Addition
-    // want to have the subproblem be targetSum(nums, T, i, sum) is the number 
-    // of ways to get the first i elements to add up to sum.
-
     public static void main (String [] args) {
         assert (targetSum(new int [] {1,2,3,4}, 10) == targetSumDPSecond(new int [] {1,2,3,4}, 10));
-        assert (targetSumDP(new int [] {1,2,3,4}, 10) == 1);
+        assert (targetSumDP(new int [] {1,2,3,4}, 10) == targetSumSerialDP2nd(new int [] {1,2,3,4}, 10));
         assert (targetSumSerialDP(new int [] {1,2,3,4}, 0) == 2);
         assert (targetSumSerialDP(new int [] {0,1,2,3,4,5,6,7,8,9,10}, 0) == targetSumDP(new int [] {0,1,2,3,4,5,6,7,8,9,10}, 0));
     }
