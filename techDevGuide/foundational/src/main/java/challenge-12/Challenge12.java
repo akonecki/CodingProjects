@@ -50,18 +50,20 @@ public class Challenge12 {
     // Can the performance be improved with DP?
     // So the current run-time performance is as follows.
     /*
-        [1] The max height for the problem shall be defined as N.  Max height
-            is limited by the largest dimension of the matrix, for now lets 
-            assume that it is a large matrix such that L === W thus N = L;
+        [1] The max height for the problem shall be defined as H.  Max height
+            is limited by the largest dimension of the matrix, H = L + W,
+            let L = N & W = M.
         [2] The branching factor is 3 for each logical branch of going 
             i) down
             ii) diag
             iii) right
     */
-    // So the expected runtime should be in the order of O(N^3)
+    // So the expected runtime should be in the order of O(M * N * 3^(H))
+    // Byte-to-byte has flipped the analysis on each problem.  Should be
+    // O(M * N * 3^(H))
 
     // Memory impact is most impacted by the recusive calls due to state 
-    // information being saved and thus is equal to the max height O(N) in
+    // information being saved and thus is equal to the max height O(H) in
     // this case.
 
     // [S]ubproblem Inspection for Mometization
