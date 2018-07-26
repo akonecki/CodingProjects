@@ -88,8 +88,85 @@ public class Challenge14 {
         return  sum;  
     }
 
+    // [T]urn the Problem Around
+    public static int targetSumSerialDP(int [] nums, int target) {
+        ArrayList<HashMap<Integer, Integer>> dp = new ArrayList<HashMap<Integer, Integer>>(nums.length);
+
+        // for (int index = 0; index < nums.length; index++) {
+        //    dp.add(null);
+        //}
+
+        // Now the hashmap maintains the following mantra
+        // key - current value with operation from previous
+        // value - number of numbers of variations for the specific value
+        HashMap<Integer, Integer> prevNegMap = new HashMap<Integer, Integer>();
+        HashMap<Integer, Integer> prevPosMap = new HashMap<Integer, Integer>();
+
+        for (int index = 0; index < nums.length; index++) {    
+            if (index == 0) {
+                prevPosMap.put(0 + nums[index], 1);
+                prevNegMap.put(0 - nums[index], 1);
+            }
+            else {
+                HashMap<Integer, Integer> currPosMap = new HashMap<Integer, Integer>();
+                HashMap<Integer, Integer> currNegMap = new HashMap<Integer, Integer>();
+
+                for (int key : prevNegMap.keySet()) {
+                    if (currPosMap.containsKey(key + nums[index])) {
+                        currPosMap.put(key + nums[index], currPosMap.get(key + nums[index]).intValue() + prevNegMap.get(key).intValue() + 1);    
+                    }
+                    else {
+                        currPosMap.put(key + nums[index], prevNegMap.get(key).intValue() + 1);
+                    }
+
+                    if (currNegMap.containsKey(key - nums[index])) {
+                        currNegMap.put(key - nums[index], currNegMap.get(key - nums[index]).intValue() + prevNegMap.get(key).intValue() + 1);    
+                    }
+                    else {
+                        currNegMap.put(key - nums[index], prevNegMap.get(key).intValue() + 1);
+                    }
+                }
+
+                for (int key : prevPosMap.keySet()) {
+                    if (currPosMap.containsKey(key + nums[index])) {
+                        currPosMap.put(key + nums[index], currPosMap.get(key + nums[index]).intValue() + prevPosMap.get(key).intValue() + 1);    
+                    }
+                    else {
+                        currPosMap.put(key + nums[index], prevPosMap.get(key).intValue() + 1);
+                    }
+
+                    if (currNegMap.containsKey(key - nums[index])) {
+                        currNegMap.put(key - nums[index], currNegMap.get(key - nums[index]).intValue() + prevPosMap.get(key).intValue() + 1);    
+                    }
+                    else {
+                        currNegMap.put(key - nums[index], prevPosMap.get(key).intValue() + 1);
+                    }
+                }
+
+                prevNegMap = currNegMap;
+                prevPosMap = currPosMap;
+            }
+        }
+
+        // System.out.println(prevNegMap.getOrDefault(target, 0).intValue() + " " + prevPosMap.getOrDefault(target, 0).intValue());
+
+        int sum = 0;
+
+        if (prevNegMap.getOrDefault(target, 0).intValue() != 0) {
+            sum += prevNegMap.getOrDefault(target, 0).intValue() / nums.length;
+        }
+
+        if (prevPosMap.getOrDefault(target, 0).intValue() != 0) {
+            sum += prevPosMap.getOrDefault(target, 0).intValue() / nums.length;
+        }
+
+        return sum;
+    }
+
     public static void main (String [] args) {
         assert (targetSum(new int [] {1,2,3,4}, 10) == 1);
         assert (targetSumDP(new int [] {1,2,3,4}, 10) == 1);
+        assert (targetSumSerialDP(new int [] {1,2,3,4}, 0) == 2);
+        assert (targetSumSerialDP(new int [] {0,1,2,3,4,5,6,7,8,9,10}, 0) == targetSumDP(new int [] {0,1,2,3,4,5,6,7,8,9,10}, 0));
     }
 }
