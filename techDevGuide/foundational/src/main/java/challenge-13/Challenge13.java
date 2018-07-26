@@ -48,6 +48,25 @@ public class Challenge13 {
         }
     }
     
+    // [A]nalysis
+    // [1] Does the problem contain optimal substructure?
+    // Yes - each level of the recursion is self contained.
+    // [2] Does the problem have re-occurring states?
+    // Yes - there are multiple states in dealing with the the same item.
+
+    // Run Time Performance
+    // [1] Maximum height of the tree is equal to the total length of the list
+    // of items N.
+    // [2] The branching factor is (2) one for the include state and another for
+    // the not included item state.
+
+    // With this, the result is O(2^N).
+
+    // Memory Performance
+    // The memory performance impact is strictly hit by the depth of the 
+    // recursion tree so the max height of the tree is N thus O(N) for memory
+    // impact.
+
     public static void main(String [] args) {
         assert (knapsack(new int [][] {{2,6},{2,10},{3,12}}, 5) == 22);
     }
