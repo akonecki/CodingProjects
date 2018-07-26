@@ -88,6 +88,51 @@ public class Challenge14 {
         return  sum;  
     }
 
+    // [S]ubproblem Inspection & Memoization Additional No HashMap
+    public static int targetSumDPSecond(int [] nums, int target) {
+        int [][] dp;
+        int sum = 0;
+        for (int num : nums) {
+            sum += Math.abs(num);
+        }
+
+        dp = new int [nums.length + 1][2 * sum + 1];
+
+        for (int row = 0; row < dp.length; row++) {
+            for (int col = 0; col < dp[row].length; col++) {
+                dp[row][col] = -1;
+            }
+        }
+
+        return targetSum(nums, target, 0, dp);
+    }
+
+    private static int targetSum(int [] nums, int target, int index, int [][] dp) {
+        if (index >= nums.length) {
+            if (target == 0) {
+                return 1;
+            }
+            else {
+                return 0;
+            }
+        }
+
+        // assert (dp.size() == nums.length);
+        int sum = 0;
+
+        if (dp[index][target] == -1) {
+            sum = targetSum(nums, target + nums[index], index + 1, dp) 
+                + targetSum(nums, target - nums[index], index + 1, dp);
+
+            dp[index][target] = sum;
+        }
+        else {
+            sum = dp[index][target];
+        }
+
+        return  sum;  
+    }
+
     // [T]urn the Problem Around
     public static int targetSumSerialDP(int [] nums, int target) {
         ArrayList<HashMap<Integer, Integer>> dp = new ArrayList<HashMap<Integer, Integer>>(nums.length);
@@ -163,8 +208,12 @@ public class Challenge14 {
         return sum;
     }
 
+    // [T]urn the Problem Around Addition
+    // want to have the subproblem be targetSum(nums, T, i, sum) is the number 
+    // of ways to get the first i elements to add up to sum.
+
     public static void main (String [] args) {
-        assert (targetSum(new int [] {1,2,3,4}, 10) == 1);
+        assert (targetSum(new int [] {1,2,3,4}, 10) == targetSumDPSecond(new int [] {1,2,3,4}, 10));
         assert (targetSumDP(new int [] {1,2,3,4}, 10) == 1);
         assert (targetSumSerialDP(new int [] {1,2,3,4}, 0) == 2);
         assert (targetSumSerialDP(new int [] {0,1,2,3,4,5,6,7,8,9,10}, 0) == targetSumDP(new int [] {0,1,2,3,4,5,6,7,8,9,10}, 0));
