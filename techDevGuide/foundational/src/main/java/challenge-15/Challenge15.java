@@ -48,6 +48,73 @@ public class Challenge15 {
         }
     }
 
+    // [A]nalysis
+    // [1] Does the problem have optimal substructure?
+    // Yes the problem has optimal substructure due to the fact that it is self
+    // contained at each iteration / call of the recursive method.
+    // [2] Does the problem have re-occurring subproblems?
+
+    /*
+        Call Graph
+        Input: ABCD, ACBD
+        
+        (s1,s2, 0, 0, 4)
+        // only has a single call graph tree since the lengths are already the 
+        // same, this forces all possible traversals to be only the 
+        // modification operation.
+
+        (s1,s2, 0, 0, 4)
+            (Match) -> (s1,s2, 1, 1, 4)
+                            (Modification) -> (s1,s2, 2, 2, 4)
+                                                    (Modification) -> (s1,s2, 3, 3, 4)
+                                                                            (Match) -> (s1,s2, 4, 4, 4)
+                                                                            <- 0
+                                                    <- (1 + 0)
+                            <- (1 + 1)
+            <- 2
+        <- 2
+
+
+        Input: AD, ACBD
+
+        (s1, s2, 0, 0, 2)
+            (Match) -> (s1, s2, 1, 1, 2)
+                            (Insert) -> (s1, s2, 1, 2, 3)
+                                            (Insert) -> (s1, s2, 1, 3, 4)
+                                                            (Match) -> (s1, s2, 2, 4, 4)
+                                                                            (Base Case)
+                                                                            <- 0
+                                                            <- 0
+                                            <- (1 + 0)
+                                            (Modification) -> (s1, s2, 2, 3, 3)
+                                                                    (Insert) -> (s1, s2, 2, 4, 4)
+                                                                                    (Base Case)
+                                                                                    <- 0
+                                                                    <- (1 + 0)
+                                            <- (1 + 1)
+                                            Actual Returned
+                                            <- (1 + 0)
+                            <- (1 + 1)
+                            (Modification) -> (s1, s2, 2, 2, 2)
+                                                    (Insert) -> (s1, s2, 2, 3, 3)
+                                                                    (Insert) -> (s1, s2, 2, 4, 4)
+                                                                                    (Base Case)
+                                                                                    <- 0
+                                                                    <- (1 + 0)
+                                                                    // Cant do Modification
+                                                    <- (1 + 1)
+                                                    // Cant do Modification
+                            <- (1 + 2)
+                            Actual Returned
+                            <- (1 + 1)
+            <- (2)
+        <- (20)
+    */
+
+    // Repeating cases are present so [2] for repeating subproblems so YES.
+
+    
+
     public static void main(String [] args) {
         assert (operationCount("ABCD", "ACBD") == 2);
         assert (operationCount("D", "ACBD") == 3);
