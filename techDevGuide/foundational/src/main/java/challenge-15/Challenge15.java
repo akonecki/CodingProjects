@@ -195,10 +195,56 @@ public class Challenge15 {
         return amount;
     }
 
+    // [T]urn the Problem Around
+    public static int operationCountDPSerial(String s1, String s2) {
+        if (s1.length() > s2.length()) {
+            // Not supporting the delete operation only the insertion and 
+            // modification operation
+            return 0;
+        }
+
+        int [][] dp = new int [s1.length() + 1][s2.length() + 1];
+
+        for (int row = 1; row < dp.length; row++) {
+            for (int col = 1; col < dp[row].length; col++) {
+                // diag means match
+                // left will mean insertion
+                // top will mean modification
+                if (s1.charAt(row - 1) == s2.charAt(col - 1)) {
+                    if (row - 1 > 0) {
+                        dp[row][col] = dp[row - 1][col - 1];
+                    }
+                    else {
+                        dp[row][col] = dp[row][col - 1];
+                    }
+                }
+                else if (row - 1 > 0) {
+                    dp[row][col] = Math.min(dp[row - 1][col - 1], dp[row][col - 1]) + 1;
+                }
+                else {
+                    dp[row][col] = dp[row][col - 1] + 1;
+                }
+            }
+        }
+
+        for (int row = 0; row < dp.length; row++) {
+            for (int col = 0; col < dp[row].length; col++) {
+                System.out.print(dp[row][col] + " ");
+            }
+            System.out.println("");
+        }
+
+        System.out.println("");
+
+        return dp[s1.length()][s2.length()];
+    }
+
     public static void main(String [] args) {
         assert (operationCount("ABCD", "ACBD") == 2);
         assert (operationCount("D", "ACBD") == 3);
         assert (operationCountDP("ABCD", "ACBD") == 2);
         assert (operationCountDP("D", "ACBD") == 3);
+        assert (operationCountDPSerial("ABCD", "ACBD") == 2);
+        assert (operationCountDPSerial("D", "ACBD") == 3);
     }
 }
