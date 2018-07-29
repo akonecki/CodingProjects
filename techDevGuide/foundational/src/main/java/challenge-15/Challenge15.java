@@ -129,8 +129,76 @@ public class Challenge15 {
 
     // O(N)
 
+    // [S]ubproblem Identification & Memoization
+    // The subproblem with the use of caching allows for stating 
+    // "what is the minimum value that can be index i to N.
+    public static int operationCountDP(String s1, String s2) {
+        if (s1.length() > s2.length()) {
+            // Not supporting the delete operation only the insertion and 
+            // modification operation
+            return 0;
+        }
+
+        int [][] dp = new int [s1.length() + 1][s2.length() + 1];
+
+        for (int row = 0; row < dp.length; row++) {
+            for (int col = 0; col < dp[row].length; col++) {
+                dp[row][col] = -1;
+            }
+        }
+
+        return operationCount(s1, s2, 0, 0, s1.length(), dp);
+    }
+
+    private static int operationCount(String s1, String s2, int s1Index, int s2Index, int s1ModLength, int [][] dp) {
+        if (s1Index >= s1.length() && s2Index >= s2.length()) {
+            return 0;
+        }
+
+        if (dp[s1Index][s2Index] != -1) {
+            return dp[s1Index][s2Index];
+        }
+
+        int amount = 0;
+
+        if (s1Index >= s1.length()) {
+            // ran out of characters to process, just insert until s2Index is caught up.
+            amount = operationCount(s1, s2, s1Index, s2Index + 1, s1ModLength + 1) + 1;
+        }
+        // There are two operations possible for each character in a string.
+        // [1] A new character can be added to the string.
+        //     A character can only be added if s1 length is less than the 
+        //     length of s2.
+        // [2] A character can be modified to another character.
+        else if (s1.charAt(s1Index) != s2.charAt(s2Index)) {
+            int insertCost = Integer.MAX_VALUE;
+            int modifyCost = Integer.MAX_VALUE;
+
+            if (s1ModLength < s2.length()) {
+                insertCost = operationCount(s1, s2, s1Index, s2Index + 1, s1ModLength + 1) + 1;
+            }
+
+            modifyCost = operationCount(s1, s2, s1Index + 1, s2Index + 1, s1ModLength) + 1;
+
+            if (insertCost < modifyCost) {
+                amount = insertCost;
+            }
+            else {
+                amount = modifyCost;
+            }
+        }
+        else {
+            amount = operationCount(s1, s2, s1Index + 1, s2Index + 1, s1ModLength);
+        }
+
+        dp[s1Index][s2Index] = amount;
+        return amount;
+    }
+
     public static void main(String [] args) {
         assert (operationCount("ABCD", "ACBD") == 2);
         assert (operationCount("D", "ACBD") == 3);
+        assert (operationCountDP("ABCD", "ACBD") == 2);
+        assert (operationCountDP("D", "ACBD") == 3);
     }
 }
