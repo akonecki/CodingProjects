@@ -113,7 +113,21 @@ public class Challenge15 {
 
     // Repeating cases are present so [2] for repeating subproblems so YES.
 
-    
+    // Run Time & Memory Analysis
+    // The number of possilbe branching factors is [2] 
+    //  one for the insertion case 
+    //  one for the modification case
+
+    // The maximum height of the tree is the length of the second string, the 
+    // longer of the two (N).
+
+    // therefore the total run-time performance that can be expected in the 
+    // worse case scenario is O(2^N) exponential factor.
+
+    // Memory consumption is bounded in this problem by the stack used for the
+    // recursion calls, thus is tied to the maximum height of the tree.
+
+    // O(N)
 
     public static void main(String [] args) {
         assert (operationCount("ABCD", "ACBD") == 2);
