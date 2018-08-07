@@ -11,6 +11,7 @@ A child is running up a staircase with n steps and can hop either 1, 2, or 3 ste
 #### Problem Discussion
 - Likely will fit into the category of a dynamic coding question.
 - Plan to start with general recurisive solution, followed by analysis, momeization, then serial solution via the FAST methodology.
+- Need to determine if the first step is always required or if the counts start from a base to step 1, step 2, or step 3.
 
 #### Problem Design
 - There are three possible choices at any given step (assuming there are that many steps left).
