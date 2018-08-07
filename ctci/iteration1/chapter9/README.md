@@ -1,0 +1,24 @@
+# Chapter 9 - Recursion & Dynamic Programming
+## Description
+This contains the questions that are reflected in Cracking the Coding Interview Fifth Edition specifically chapter 8.
+
+## Problems
+### Problem 1
+#### Problem Statement
+> 
+A child is running up a staircase with n steps and can hop either 1, 2, or 3 steps at a time.  Implement a method to count how many possible ways the child can run up the stairs.
+
+#### Problem Discussion
+- Likely will fit into the category of a dynamic coding question.
+- Plan to start with general recurisive solution, followed by analysis, momeization, then serial solution via the FAST methodology.
+
+#### Problem Design
+- There are three possible choices at any given step (assuming there are that many steps left).
+- Expected number of branch conditions will likely be three.
+- Expected base case will occur when the nth step is fulfilled.
+
+#### Problem Issues
+- 
+
+#### Problem Solution
+- 
