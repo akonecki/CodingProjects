@@ -19,7 +19,8 @@ A child is running up a staircase with n steps and can hop either 1, 2, or 3 ste
 - Expected base case will occur when the nth step is fulfilled.
 
 #### Problem Issues
-- 
+- Realizing that I need to perform the recursion on steps N - 1 & N - 2 took a bit of time.
+- Building out the sets made this easier to realize.
 
 #### Problem Solution
-- 
+- N/A
