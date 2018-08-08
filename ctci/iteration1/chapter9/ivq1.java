@@ -113,10 +113,62 @@ public class ivq1 {
     // Due to the stack traversal (ignoring the population of the sets) is bound
     // by N. Therefore is O(N).
 
+    // [S]ubproblem Identification & Momeization
+    // As stated within the comments the current top down recursive implementation 
+    // states the following statement.
+    // `getNumberOfWays` provides the total ways to reach from N to 1 with steps
+    // of 1, 2, and 3.
+    public static int getNumberOfWaysDP(int N) {
+        int [] dp = new int [N + 1];
+        
+        // Series that starts with step one and step N - 2
+        getNumberOfWays(N - 2, dp);
+
+        // Series that starts with Step one and step N - 1
+        getNumberOfWays(N - 1, dp);
+
+        // series that starts with step one and step N
+        getNumberOfWays(N, dp);
+        //     1 -> N  1 -> (N - 1)  1 -> (N -2)
+        return dp[N] + dp[N - 1] + dp[N - 2];
+    }
+
+    private static int getNumberOfWays(int N, int [] dp) {
+        int sum = 0;
+        
+        if (N <= 0) {
+            return 0;
+        }
+        else if (N == 1) {
+            dp[N] = 1;
+            return 1;
+        }
+
+        if (dp[N] == 0) {
+            if (N - 3 > 0) {
+                sum = getNumberOfWays(N - 3, dp);
+            }
+            if (N - 2 > 0) {
+                sum += getNumberOfWays(N - 2, dp);
+            }
+            if (N - 1 >= 0) {
+                sum += getNumberOfWays(N - 1, dp);
+            }
+
+            dp[N] = sum;
+        }
+        else {
+            return dp[N];
+        }
+
+        return sum;
+    }
+
     public static void main(String [] args) {
-        System.out.println(getNumberOfWays(5));
-        //assert (getNumberOfWays(3) == 4);
-        //assert (getNumberOfWays(4) == 7);
-        //assert (getNumberOfWays(5) == 14);
+        System.out.println(getNumberOfWays(5) + " " + getNumberOfWaysDP(5));
+        assert (getNumberOfWays(3) == getNumberOfWaysDP(3));
+        assert (getNumberOfWays(4) == getNumberOfWaysDP(4));
+        assert (getNumberOfWays(5) == getNumberOfWaysDP(5));
+        assert (getNumberOfWays(15) == getNumberOfWaysDP(15));
     }
 }
