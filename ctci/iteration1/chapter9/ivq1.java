@@ -32,7 +32,6 @@ public class ivq1 {
     */
     /*
         N = 5
-        1->2->end
         1->3->end
         1->4->end
         1->2->3->end
@@ -93,6 +92,26 @@ public class ivq1 {
 
         return sum;
     }
+
+    // [A]nalysis
+    // 1. Does the problem contain optimal substructure?
+    // Yes each recursive iteration is self contained.
+    // 2. Does the problem contain re-occurring states?
+    // Yes from the above individual callout of possible state configurations 
+    // it is seen that there are multiple times that the same lower values are
+    // accessed.
+
+    // Run Time Analysis
+    // 1. Branching Factor is at most 3
+    // 2. Height of the tree is N due to the worse case of single increments 
+    // down to one.
+
+    // Overall run-time complexity that is expected with this implementation is
+    // therefore O(3^N) in the worse case.
+
+    // Memory Analysis
+    // Due to the stack traversal (ignoring the population of the sets) is bound
+    // by N. Therefore is O(N).
 
     public static void main(String [] args) {
         System.out.println(getNumberOfWays(5));
