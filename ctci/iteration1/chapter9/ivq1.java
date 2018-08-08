@@ -164,11 +164,38 @@ public class ivq1 {
         return sum;
     }
 
+    // [T]urn the Problem Around
+    // Want to know perform serial implementation such that instead of going
+    // down from a given number will build upto a desired number.
+    private static int getNumberOfWaysDPSerial(int N) {
+        int [] dp = new int [N + 1];
+        dp[0] = 0;
+        dp[1] = 1;
+
+        for (int index = 2; index < dp.length; index++) {
+            int sum = 0;
+
+            if (index - 1 >= 0) {
+                sum += dp[index - 1];
+            }
+            if (index - 2 >= 0) {
+                sum += dp[index - 2];
+            }
+            if (index - 3 >= 0) {
+                sum += dp[index - 3];
+            }
+
+            dp[index] = sum;
+        }
+
+        return dp[N] + dp[N - 1] + dp[N - 2];
+    }
+
     public static void main(String [] args) {
-        System.out.println(getNumberOfWays(5) + " " + getNumberOfWaysDP(5));
+        System.out.println(getNumberOfWays(5) + " " + getNumberOfWaysDPSerial(5));
         assert (getNumberOfWays(3) == getNumberOfWaysDP(3));
         assert (getNumberOfWays(4) == getNumberOfWaysDP(4));
         assert (getNumberOfWays(5) == getNumberOfWaysDP(5));
-        assert (getNumberOfWays(15) == getNumberOfWaysDP(15));
+        assert (getNumberOfWaysDPSerial(15) == getNumberOfWaysDP(15));
     }
 }
