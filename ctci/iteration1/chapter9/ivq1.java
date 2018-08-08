@@ -49,7 +49,12 @@ public class ivq1 {
     */
     public static int getNumberOfWays(int N) {
         ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+        // series that starts with step one and step N
         getNumberOfWays(N, result, new ArrayList<Integer>());
+        // Series that starts with Step one and step N - 1
+        getNumberOfWays(N - 1, result, new ArrayList<Integer>());
+        // Series that starts with step one and step N - 2
+        getNumberOfWays(N - 2, result, new ArrayList<Integer>());
 
         for (ArrayList<Integer> list : result) {
             for (int num : list) {
@@ -76,10 +81,10 @@ public class ivq1 {
 
         list.add(N);
 
-        if (N - 3 >= 0) {
+        if (N - 3 > 0) {
             sum = getNumberOfWays(N - 3, result, new ArrayList(list));
         }
-        if (N - 2 >= 0) {
+        if (N - 2 > 0) {
             sum += getNumberOfWays(N - 2, result, new ArrayList(list));
         }
         if (N - 1 >= 0) {
