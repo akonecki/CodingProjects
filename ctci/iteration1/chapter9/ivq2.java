@@ -82,9 +82,48 @@ public class ivq2 {
     // Is based on the height of the tree to account for the stack, and is
     // therefore O(M+N+1).
 
-    public static void main(String [] args) {
-        int [][] matrix = new int [][] {{0, 0, 0}, {0, 1, 0}, {0, 0, 0}};
+    // [S]ubproblem Identification & Momeization
+    public static int totalPathsDP(int [][] matrix) {
+        int [][] dp = new int [matrix.length][matrix[matrix.length - 1].length];
 
-        assert (totalPaths(matrix) == 2);
+        for (int row = 0; row < dp.length; row++) {
+            for (int col = 0; col < dp[row].length; col++) {
+                dp[row][col] = -1;
+            }
+        }
+
+        return totalPaths(matrix, 0, 0, dp);
+    }
+
+    private static int totalPaths(int [][] matrix, 
+        int row, 
+        int col, 
+        int [][] dp) 
+    {
+        if (row + 1 == matrix.length && col + 1 == matrix[row].length) {
+            return 1;
+        }
+        else if (row >= matrix.length || col >= matrix[row].length) {
+            return 0;
+        }
+        else if (matrix[row][col] == 1) {
+            dp[row][col] = 0;
+            return 0;
+        }
+        else if (dp[row][col] != -1) {
+            return dp[row][col];
+        }
+
+        int sum = totalPaths(matrix, row + 1, col, dp) + 
+            totalPaths(matrix, row, col + 1, dp);
+        dp[row][col] = sum;
+
+        return sum;
+    }
+
+    public static void main(String [] args) {
+        int [][] matrix = new int [][] {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}};
+
+        assert (totalPaths(matrix) == totalPathsDP(matrix));
     }
 }
