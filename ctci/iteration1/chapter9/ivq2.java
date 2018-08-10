@@ -121,9 +121,38 @@ public class ivq2 {
         return sum;
     }
 
-    public static void main(String [] args) {
-        int [][] matrix = new int [][] {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}};
+    // [T]urn the Problem Around
+    public static int totalPathsDPSerial(int [][] matrix) {
+        int [][] dp = new int [matrix.length + 1][matrix[matrix.length - 1].length + 1];
 
-        assert (totalPaths(matrix) == totalPathsDP(matrix));
+        for (int row = 1; row < dp.length; row++) {
+            for (int col = 1; col < dp[row].length; col++) {
+                if (matrix[row - 1][col - 1] == 0) {
+                    if (row == 1 && col == 1) {
+                        dp[row][col] = 1;
+                    }
+                    else {
+                        dp[row][col] = dp[row - 1][col] + dp[row][col - 1];
+                    }
+                }
+            }
+        }
+
+        for (int row = 0; row < dp.length; row++) {
+            for (int col = 0; col < dp[row].length; col++) {
+                System.out.print(dp[row][col] + " ");
+            }
+            System.out.println("");
+        }
+
+        System.out.println("");
+
+        return dp[matrix.length][matrix[matrix.length - 1].length];
+    }
+
+    public static void main(String [] args) {
+        int [][] matrix = new int [][] {{0, 0, 0, 0}, {1, 0, 1, 0}, {0, 0, 0, 0}};
+
+        assert (totalPathsDPSerial(matrix) == totalPathsDP(matrix));
     }
 }
