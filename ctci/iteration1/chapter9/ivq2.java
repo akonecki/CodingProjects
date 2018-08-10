@@ -13,13 +13,16 @@ public class ivq2 {
         else if (row >= matrix.length || col >= matrix[row].length) {
             return 0;
         }
+        else if (matrix[row][col] == 1) {
+            return 0;
+        }
 
         return totalPaths(matrix, row + 1, col) + totalPaths(matrix, row, col + 1);
     }
 
     public static void main(String [] args) {
-        int [][] matrix = new int [][] {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
+        int [][] matrix = new int [][] {{0, 0, 0}, {0, 1, 0}, {0, 0, 0}};
 
-        assert (totalPaths(matrix) == 6);
+        assert (totalPaths(matrix) == 2);
     }
 }
