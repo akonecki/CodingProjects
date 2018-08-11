@@ -44,6 +44,36 @@ Same rules but if there are spaces in which the path is blocked.
 - FAST methodology will only cover the blocking situation.
 
 #### Problem Issues
-
+- None. 
 
 #### Problem Solution
+- Same
+
+### Problem 3
+#### Problem Statement
+>
+Given an array A[0...n-1] such that an index is defined to be such that A[i] = i.  Given a sorted array of distinct integers, find the index where A[i] = i if one exists.  
+>
+What happens if the values are not distinct?
+
+#### Problem Discussion
+- values contained within the array can be negative.
+- values are sorted, meaning that want to operate on the first non-negative number.  This can be found by a simple binary search.
+- worse case all values are off by 1 of their index meaning that will have to search the whole array O(N) is expected worse case.
+- Non-distinct values will force a bit more logic on the jumping.
+
+#### Problem Design
+- if A[i] == i 
+  -  return true
+- else if A[i] != i && A[i] >= 0 && A[i] > i 
+  -  i = A[i]
+- else if A[i] != i && A[i] >= 0 
+  - i = binarySearch(A, A[i] + 1) // get the next non A[i] element index
+else 
+  - i = binarySearch(A, 0) // get the next non negative element index
+
+#### Problem Issues
+-
+
+#### Problem Solution
+-
