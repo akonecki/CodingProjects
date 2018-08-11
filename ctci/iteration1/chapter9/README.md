@@ -73,7 +73,9 @@ else
   - i = binarySearch(A, 0) // get the next non negative element index
 
 #### Problem Issues
--
+- Serial Implementation was very error prone for the search due to needing to limit the lower index for the greater value.
+- Recursive implementation was trival, just forgot how to think about it.
+- Not a recursive implementation due to only hitting each index only once.
 
 #### Problem Solution
--
+- Matches recursive implementation although there is a quicker serial implementation that also reduces the memory footprint but more error prone.
