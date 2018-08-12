@@ -95,7 +95,8 @@ Write a method to return all subsets of a set.
 - will need to examine if the problem can support an optimal sub-structure.
 
 #### Problem Issues
-- 
+- None
 
 #### Problem Solution
-- 
+- Recursive implementation matches.
+- There also exists a serial implementation as well but might implement another time.
