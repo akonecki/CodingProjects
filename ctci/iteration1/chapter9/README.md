@@ -146,7 +146,8 @@ Write a method to print all valid combinations of n-pair of parentheses.
 - the possibility rules for including a closed is that the closed count must be less than N and be less than the open count.
 
 #### Problem Issues
-- 
+- Tried to optimize on the the string builder.  In the end this led back to repeated strings and incorrect.  
+- Went ahead and just did full string builder copy for the open and close, minor issue.
 
 #### Problem Solution
--
+- Matches solution.
