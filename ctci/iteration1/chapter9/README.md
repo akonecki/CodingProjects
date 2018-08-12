@@ -79,3 +79,23 @@ else
 
 #### Problem Solution
 - Matches recursive implementation although there is a quicker serial implementation that also reduces the memory footprint but more error prone.
+
+### Problem 4
+#### Problem Statement
+>
+Write a method to return all subsets of a set.
+
+#### Problem Discussion
+- this is a full combinratics problems
+
+#### Problem Design
+- for the set will have two states
+  - 1. include
+  - 2. exclude
+- will need to examine if the problem can support an optimal sub-structure.
+
+#### Problem Issues
+- 
+
+#### Problem Solution
+- 
