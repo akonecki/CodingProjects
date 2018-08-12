@@ -127,3 +127,27 @@ Write a method to compute all permutations of a string of unique characters.
   - this can mean that the permutations can only have unique characters (my implementaiton revolves around this)
   - the string given has all unique characters, therefore limited to say 26 characters long in the set defined above.
 - In the end it still boils down to an inclusion / exclusion problem for the branching factors. 
+
+### Problem 6
+#### Problem Statement
+>
+Write a method to print all valid combinations of n-pair of parentheses.
+
+#### Problem Discussion
+- In order for a closing pair to exist it must have a pre-existing opening.
+- requires all pairs up to N, not all permutations of N.  Thus if N == 3 then there will be three pairs no matter what.
+
+#### Problem Design
+- There is upto only N number of open and N number of closed parentheses that can exist.
+- Will have two branching factors per level of recursion.
+  - 1. Include open parentheses if possible
+  - 2. Include close parentheses if possible
+- the possibility rules for including an open is that the open count must be less than N
+- the possibility rules for including a closed is that the closed count must be less than N and be less than the open count.
+
+#### Problem Issues
+- Tried to optimize on the the string builder.  In the end this led back to repeated strings and incorrect.  
+- Went ahead and just did full string builder copy for the open and close, minor issue.
+
+#### Problem Solution
+- Matches solution.
