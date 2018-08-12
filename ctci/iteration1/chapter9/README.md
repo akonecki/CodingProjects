@@ -100,3 +100,27 @@ Write a method to return all subsets of a set.
 #### Problem Solution
 - Recursive implementation matches.
 - There also exists a serial implementation as well but might implement another time.
+
+### Problem 5
+#### Problem Statement
+>
+Write a method to compute all permutations of a string of unique characters.
+
+#### Problem Discussion
+- this is another comb. problem, but only supporting the computation if it is a unique character.
+- for now will only consider the ASCII characters 'a' - 'z' for reduction of scope.
+- permutations will be limited by the set of unique characters
+
+#### Problem Design
+- for the set will have two states
+  - 1. include
+  - 2. exclude
+- due to expanding of all the sets optimal substructure in the recursive form will be difficult due to state information from another step impacting the lowers, although it is possible.
+- will need to maintain a total set of characters that currently exists for the given permutation
+- ordering will differ based on letter occurrance, therefore will also need to maintain a hash of all strings that have already been seen.  Do not want duplicates within the final set.
+
+#### Problem Issues
+- 
+
+#### Problem Solution
+- 
