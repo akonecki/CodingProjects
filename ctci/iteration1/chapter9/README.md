@@ -120,7 +120,10 @@ Write a method to compute all permutations of a string of unique characters.
 - ordering will differ based on letter occurrance, therefore will also need to maintain a hash of all strings that have already been seen.  Do not want duplicates within the final set.
 
 #### Problem Issues
-- 
+- None on implementation.
 
 #### Problem Solution
-- 
+- I would say that I disagree with the solution due to the fact that the problem states `permutations of a string of unique characters`.  
+  - this can mean that the permutations can only have unique characters (my implementaiton revolves around this)
+  - the string given has all unique characters, therefore limited to say 26 characters long in the set defined above.
+- In the end it still boils down to an inclusion / exclusion problem for the branching factors. 
