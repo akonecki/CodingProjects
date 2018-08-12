@@ -47,6 +47,27 @@ public class ivq6 {
                 
     */
 
+    // [A]nalysis
+    // 1. Does the problem have optimal substructure?
+    // In the current form for obtaining all the actual pairs, the generation of
+    // new data at each level breaks this.  So does not fit in with gaining 
+    // benefits typically associated with dynamic programming.
+    // 2. Does the problem have reoccurring subproblems?
+    // Not in all the arguments due to the generation of the actual string sets.
+
+    // Not ideal in terms of gaining performance with dynamic programming.  It is
+    // still likely that can be implemented in a serial manner however by 
+    // performing a iteraion builder from a bottom up problem
+
+    // Run Time Performance
+    // There are two possible branching factors
+    // The total depth of the tree is equal to N + 1 (to handle the insertion).
+    // Therefore the worse possible is O(2^N) without considering the conditional
+    // checks.
+
+    // Memory impact is going to be O(N + 1) for the call stack plus 
+    // (2*N) choose 2 times 2*N for the storage of the permutations.
+
     public static void main(String [] args) {
         for (String string : getParenthesesSets(3)) {
             System.out.println(string);
