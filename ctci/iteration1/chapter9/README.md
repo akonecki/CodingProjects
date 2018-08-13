@@ -177,3 +177,25 @@ Implement a fill function when given a 2D array, a point within the matrix, and 
 
 #### Problem Solution
 - Solution does provide a note about that screen and matrix column / rows are typically switched.  In my implementation I over look this issue due to not calling it a graphical tool.  Filling a matrix can be a numerical tool as well.
+
+### Problem 8
+#### Problem Statement
+>
+Given an infinite number of coins of values .25, .10, .05, and .01 determine the the total number of ways to represent n cents.
+
+#### Problem Discussion
+- Permutation counting problem, where coin order does not matter, only the number of coins of each denomination.
+- will assume that cents will never be given as a negative and will not need to be converted from say dollars.
+
+#### Problem Design
+- will have the coin denomiations as an array.  Will be in reverse order, but this is not a requirement for corrections of implementation.
+- at each iteration can either add or not add the denomination.
+- if run out of denominations and the value is not zero then return 0, else return 1.
+- this should fit a dynamic programming question, so will attempt to provide all of the FAST steps.
+
+#### Problem Issues
+- Recursive implementation was trival.
+- Implementing the dynamic lead to trying to only do it with an array w.r.t the cents.  This is not correct as the denomination being used along with the cents (2 variable) should be used instead.
+
+#### Problem Solution
+- Matches solution for both the recursive and dp
