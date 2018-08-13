@@ -168,7 +168,12 @@ Implement a fill function when given a 2D array, a point within the matrix, and 
 - likely will want to record the positions that of which have already been visited
 
 #### Problem Issues
-- 
+- Only need to remember to account for the case of the current value is equal to the desire value.
+- A serial implementation can also be performed.
+  - Start at indicated value
+  - Switch to desired
+  - if directional is the same as the `from` value push into a queue
+  - loop until the queue is empty.
 
 #### Problem Solution
-- 
+- Solution does provide a note about that screen and matrix column / rows are typically switched.  In my implementation I over look this issue due to not calling it a graphical tool.  Filling a matrix can be a numerical tool as well.
