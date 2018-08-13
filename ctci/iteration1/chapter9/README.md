@@ -151,3 +151,29 @@ Write a method to print all valid combinations of n-pair of parentheses.
 
 #### Problem Solution
 - Matches solution.
+
+### Problem 7
+#### Problem Statement
+>
+Implement a fill function when given a 2D array, a point within the matrix, and a new value.  Fillin the surrounding area until the value changes from the orignal to the new value.
+
+#### Problem Discussion
+- will assume that the only directions that can be filled are left, right, up down.
+- need to make sure to not keep going i.e. if it is a bulls-eye, should not turn all the opposing layers to a single color.  Only a single layer should be filled.
+- will only fill for those values that are the same as the original spot.
+- if you fill top down / bottom up.
+
+#### Problem Design
+- could perform with a duplicate matrix (space), along with direction branches is the worse case likely brute force solution.
+- likely will want to record the positions that of which have already been visited
+
+#### Problem Issues
+- Only need to remember to account for the case of the current value is equal to the desire value.
+- A serial implementation can also be performed.
+  - Start at indicated value
+  - Switch to desired
+  - if directional is the same as the `from` value push into a queue
+  - loop until the queue is empty.
+
+#### Problem Solution
+- Solution does provide a note about that screen and matrix column / rows are typically switched.  In my implementation I over look this issue due to not calling it a graphical tool.  Filling a matrix can be a numerical tool as well.
