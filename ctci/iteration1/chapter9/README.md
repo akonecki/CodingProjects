@@ -218,7 +218,8 @@ Print all the ways of arranging N queens on an N by N chess board such that none
 - will only print the solution if it is valid, thus will convert to a display function.
 
 #### Problem Issues
-- 
+- Small issue with trying to perform a remove operation when referencing an iterator.  
 
 #### Problem Solution
-- 
+- Solution provided only keeps track of columns for the queen placement in an array with the array index representing the row.
+- this is fine as well it is likely better in time and memory performance since each placement check is only linear.  Still results in a O(N^2) solution.  My solution is likely more due to significant amount of copies.

@@ -8,18 +8,18 @@ public class ivq9 {
     public static void printValidNQueens(int N) {
         HashMap<Integer, HashSet<Integer>> board = buildEmptyBoard(N);
 
-        printValidNQueens(N, board, 0, 0);
+        System.out.println(printValidNQueens(N, board, 0, 0));
     }
 
-    private static void printValidNQueens(int N, HashMap<Integer, HashSet<Integer>> board, int row, int count) {
+    private static int printValidNQueens(int N, HashMap<Integer, HashSet<Integer>> board, int row, int count) {
         if (row >= board.size()) {
             if (count != N) {
-                return;
+                return 0;
             }
             else {
                 // Print the board
                 printBoard(N, board);
-                return;
+                return 1;
             }
         }
         else {
@@ -28,14 +28,18 @@ public class ivq9 {
             HashSet<Integer> boardRow = board.get(row);
 
             if (boardRow.isEmpty()) {
-                return;
+                return 0;
             }
             else {
+                int sum = 0;
+
                 for (int col : boardRow) {
                     HashMap<Integer, HashSet<Integer>> newBoard = buildEmptyBoard(board);
                     removeSpaces(newBoard, row, col);
-                    printValidNQueens(N, newBoard, row + 1, count + 1);
+                    sum += printValidNQueens(N, newBoard, row + 1, count + 1);
                 }
+
+                return sum;
             }
         }
     }
@@ -169,6 +173,6 @@ public class ivq9 {
     }
 
     public static void main(String [] args) {
-        printValidNQueens(10);
+        printValidNQueens(8);
     }
 }
