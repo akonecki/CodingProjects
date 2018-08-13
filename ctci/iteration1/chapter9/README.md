@@ -194,7 +194,8 @@ Given an infinite number of coins of values .25, .10, .05, and .01 determine the
 - this should fit a dynamic programming question, so will attempt to provide all of the FAST steps.
 
 #### Problem Issues
-- 
+- Recursive implementation was trival.
+- Implementing the dynamic lead to trying to only do it with an array w.r.t the cents.  This is not correct as the denomination being used along with the cents (2 variable) should be used instead.
 
 #### Problem Solution
-- 
+- Matches solution for both the recursive and dp
