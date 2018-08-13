@@ -1,7 +1,7 @@
 public class ivq8 {
     // [F]unctional 
     public static int permutationsOfCoins(int cents) {
-        return permutationsOfCoins(cents, new int [] {25, 10, 5, 1}, 0);
+        return permutationsOfCoins(cents, new int [] {100, 50, 25, 10, 5, 1}, 0);
     }
 
     private static int permutationsOfCoins(int cents, int [] denominations, int index) {
@@ -116,8 +116,57 @@ public class ivq8 {
     // recursion tree, thus is limited to a depth of 5, O(C) if the number of
     // coin denominations is realistic.  If not then would be linear.
 
+    // [S]ubproblem Identification & Momeization
+    // The original problem asked how many ways can I represent N cents.
+    // With recursion this can be done by caching the value as it is built back
+    // up and provided to the top down level.
+    public static int permutationsOfCoinsDP(int cents) {
+        int [] dp = new int [cents + 1];
+        permutationsOfCoins(cents, new int [] {100, 50, 25, 10, 5, 1}, 0, dp);
+
+        for (int value : dp) {
+            System.out.print(value + " ");
+        }
+        System.out.println("");
+        return dp[cents];
+    }
+
+    private static int permutationsOfCoins(int cents, int [] denominations, int index, int [] dp) {
+        if (index >= denominations.length) {
+            if (cents == 0) {
+                return 1;
+            }
+            else {
+                return 0;
+            }
+        }
+        else if (dp[cents] != 0) {
+            return dp[cents];
+        }
+        else {
+            int sum = 0, save = cents;;
+
+            // Excluded
+            sum += permutationsOfCoins(cents, denominations, index + 1, dp);
+
+            // Included
+            while (denominations[index] <= cents) {
+                dp[cents - denominations[index]] = permutationsOfCoins(cents - denominations[index], denominations, index + 1, dp);
+                sum += dp[cents - denominations[index]];
+                cents -= denominations[index];
+            }
+            
+            dp[save] = sum;
+
+            return sum;
+        }
+    }
+
     public static void main(String [] args) {
-        assert (permutationsOfCoins(5) == 2);
-        assert (permutationsOfCoins(10) == 4);
+        //System.out.println(permutationsOfCoins(100) + " " + permutationsOfCoinsDP(100));
+
+        //assert (permutationsOfCoins(5) == permutationsOfCoinsDP(5));
+        //assert (permutationsOfCoins(10) == permutationsOfCoinsDP(10));
+        assert (permutationsOfCoins(15) == permutationsOfCoinsDP(15));
     }
 }
