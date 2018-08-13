@@ -223,3 +223,25 @@ Print all the ways of arranging N queens on an N by N chess board such that none
 #### Problem Solution
 - Solution provided only keeps track of columns for the queen placement in an array with the array index representing the row.
 - this is fine as well it is likely better in time and memory performance since each placement check is only linear.  Still results in a O(N^2) solution.  My solution is likely more due to significant amount of copies.
+
+### Problem 10
+#### Problem Statement
+>
+With a stack of N boxes each having their own width and height and depth.  The boxes cannot be rotated and only stacked on each other iff each box in the stack is strictly larger than the box above it in terms of width, height, depth.  Build the tallest stack possible, where the height of a stack is the sum of the heights of each box.
+
+#### Problem Discussion
+- rotation of the boxes is not allowed therefore the dimension / orientation are fixed.
+- the strict callout that all dimensions must be larger for each lower level is a strong condition.
+- more than likely the wording of stack of N boxes is not good word choice and should be a bin of N boxes since their provided order does not matter nor guarantee that it meets the strict requirements.
+- it might be beneifical to actually sort based on the dimensions
+
+#### Problem Design
+- Build out a comparator to sort relatively.  Absolute order will be allowed if it meets the strict requirements and others will be ordered just by height, width, then depth.
+- implement a `isLarger` method that will provide a value if one is larger than another.
+- two max branches in the case that boxes are not aboslutely larger. 
+
+#### Problem Issues
+-  
+
+#### Problem Solution
+- 
