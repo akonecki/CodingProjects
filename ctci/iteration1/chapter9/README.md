@@ -199,3 +199,27 @@ Given an infinite number of coins of values .25, .10, .05, and .01 determine the
 
 #### Problem Solution
 - Matches solution for both the recursive and dp
+
+### Problem 9
+#### Problem Statement
+>
+Print all the ways of arranging N queens on an N by N chess board such that none are in the same row, same column, or share a diagional in any direction.
+
+#### Problem Discussion
+- will need to expand N into an actual board
+- will need function to build a board.
+- will need function to remove spaces when queen is placed
+- will need function to print a valid configuration of queens.
+- the total queen count must equal the dimension of the board in one direction
+- the difficult part is deciding what data structure want to mantain the queen positions, since there will be a large amount of copying
+
+#### Problem Design
+- will maintain an arraylist of string buffers to allow for modification without having more memory impact than what is already going to occur.
+- will only print the solution if it is valid, thus will convert to a display function.
+
+#### Problem Issues
+- Small issue with trying to perform a remove operation when referencing an iterator.  
+
+#### Problem Solution
+- Solution provided only keeps track of columns for the queen placement in an array with the array index representing the row.
+- this is fine as well it is likely better in time and memory performance since each placement check is only linear.  Still results in a O(N^2) solution.  My solution is likely more due to significant amount of copies.
