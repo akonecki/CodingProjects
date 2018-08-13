@@ -5,10 +5,10 @@ import java.util.HashSet;
 public class ivq9 {
     
     // [F]uncation Implementation
-    public static void printValidNQueens(int N) {
+    public static int printValidNQueens(int N) {
         HashMap<Integer, HashSet<Integer>> board = buildEmptyBoard(N);
 
-        System.out.println(printValidNQueens(N, board, 0, 0));
+        return printValidNQueens(N, board, 0, 0);
     }
 
     private static int printValidNQueens(int N, HashMap<Integer, HashSet<Integer>> board, int row, int count) {
@@ -172,7 +172,61 @@ public class ivq9 {
         return board;
     }
 
+    public static int printValidNQueensMemory(int N) {
+        ArrayList<Integer []> results = new ArrayList<Integer []>();
+
+        return printValidNQueens(N, 0, new Integer [N], results);
+    }
+
+    private static int printValidNQueens(int N, int row, Integer [] columns, ArrayList<Integer []> results) {
+        if (row < N) {
+            int sum = 0;
+
+            for (int col = 0; col < N; col++) {
+                if (isValid(columns, row, col)) {
+                    Integer [] newColumns = columns.clone();
+                    newColumns[row] = col;
+
+                    sum += printValidNQueens(N, row + 1, newColumns, results);
+                }
+            }
+
+            return sum;
+        }   
+        else {
+            results.add(columns);
+            return 1;
+        } 
+    }
+
+    private static boolean isValid(Integer [] columns, int row, int col) {
+        int queenRow = 0;
+        for (Integer column : columns) {
+            if (column != null) {
+                // if the column is the same as the new queen col.
+                if (column.intValue() == col) {
+                    return false;
+                }
+
+                // if the slope is + 1 or - 1 then it is on the diagonal.
+                int num = queenRow - row;
+                int den = column.intValue() - col;
+
+                if (Math.abs(num) == Math.abs(den)) {
+                    return false;
+                }
+            }
+            else {
+                break;
+            }
+
+            queenRow++;
+        }
+        
+        return true;
+    }
+
     public static void main(String [] args) {
-        printValidNQueens(8);
+        assert (printValidNQueens(10) == printValidNQueensMemory(10));
     }
 }
