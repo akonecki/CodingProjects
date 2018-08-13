@@ -173,11 +173,35 @@ public class ivq8 {
         }
     }
 
-    public static void main(String [] args) {
-        System.out.println(permutationsOfCoins(100) + " " + permutationsOfCoinsDP(100));
+    // [T]urn the Problem Around
+    // The serial implementation makes it now clear that the problem can be 
+    // executed in O(M * N) time complexity with a space complexity now of
+    // O(M * N).  The space could be further reduced to a single row with the 
+    // size being the delta between the largest and smallest denomination.
+    public static int permutationsOfCoinsDPSerial(int cents) {
+        int [] denominations = {100, 50, 25, 10, 5, 1};
+        int [][] dp = new int [denominations.length + 1][cents + 1];
 
-        //assert (permutationsOfCoins(5) == permutationsOfCoinsDP(5));
-        //assert (permutationsOfCoins(10) == permutationsOfCoinsDP(10));
+        for (int row = 1; row < dp.length; row++) {
+            for (int col = 0; col < dp[row].length; col++) {
+                if (col == 0) {
+                    dp[row][col] = 1;
+                }
+                else {
+                    dp[row][col] = dp[row - 1][col] + 
+                        (denominations[row - 1] <= col ? dp[row][col - denominations[row - 1]] : 0);
+                }
+            }
+        }
+
+        return dp[denominations.length][cents];
+    }
+
+    public static void main(String [] args) {
+        assert (permutationsOfCoins(5) == permutationsOfCoinsDP(5));
+        assert (permutationsOfCoinsDPSerial(100) == permutationsOfCoinsDP(100));
+        assert (permutationsOfCoins(10) == permutationsOfCoinsDP(10));
         assert (permutationsOfCoins(15) == permutationsOfCoinsDP(15));
+        assert (permutationsOfCoins(100) == permutationsOfCoinsDP(100));
     }
 }
