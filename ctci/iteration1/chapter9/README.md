@@ -287,7 +287,9 @@ Explanination
 ```
 
 #### Problem Issues
-- 
+- Can generate all possible pairs of parentheses, but over much so to have extras which is not desired.
 
 #### Problem Solution
-- 
+- The book solution breaks down the problem of evaluating the expression always as two pieces.  Then moves the two pieces into the recursive call.
+- Is possible to perform with dynamic, by just keeping the string with the count.
+- This is a catalan number problem as well for determining the total number of ways.
