@@ -241,7 +241,10 @@ With a stack of N boxes each having their own width and height and depth.  The b
 - two max branches in the case that boxes are not aboslutely larger. 
 
 #### Problem Issues
--  
+- Initial recursive implementation tried to cut corners and ended up with an incorrect solution.
+- Went ahead and then implemented a full copy solution that then invesigates all possible orders of the boxes.
 
 #### Problem Solution
-- 
+- The book problem does not describe the other helper methods so it is hard to know if the recursive solution is functionaly the same.
+- Could not see the dynamic implementation due to the constant layers actually impacting the data they were operating upon. 
+- Dynamic used a hashmap with the box class as the key, so likely just builds the arraylist for each individual base of all those that are absolutely smaller than the base w.r.t maximum height.
