@@ -16,7 +16,7 @@ Given two sorted arrays, A and B, where A has a large enough buffer at the end t
 - will implement under the guise of two arrays being provided with the first array containing the sufficient size of addressable indices.
 
 #### Problem Issues
-- 
+- None
 
 #### Problem Solution
-- 
+- Matches solution.
