@@ -248,3 +248,46 @@ With a stack of N boxes each having their own width and height and depth.  The b
 - The book problem does not describe the other helper methods so it is hard to know if the recursive solution is functionaly the same.
 - Could not see the dynamic implementation due to the constant layers actually impacting the data they were operating upon. 
 - Dynamic used a hashmap with the box class as the key, so likely just builds the arraylist for each individual base of all those that are absolutely smaller than the base w.r.t maximum height.
+
+### Problem 11
+#### Problem Statement
+>
+Given a boolean expression with the symbols of 0, 1, &, |, and ^ and a desired result, implement a function to count the number of ways of parenthesizing the expression to give the desired result.
+>
+Expression
+```
+1^0|0|1
+false
+
+Explanination
+1^((0|0)|1) and 1^(0|(0|1))
+```
+
+#### Problem Discussion
+- will be given a valid string
+- typical evaluation of this would require a stack. 
+- likely will need to generate something like a stack to get the affect of adding parentheses to the problem to obtain a desired result.
+- could also do it brute force and add parentheses and if the expression ends and the result does not match then you dont count it as a valid way.
+- do not support parentheses just around a single boolean value e.g. `(1)`
+
+#### Problem Design
+- will want to maintain the count of open and closed parentheses just like in the building of valid parentheses set.
+- after building the parentheses will then need to evaluate the results.
+- can maintain a stack per recursion tree 
+>
+```
+1^0|0|1
+
+1^0|0|1
+(1^0)|0|1
+(1^0|0)|1
+(1^0|0|1)
+(1^0|0|1
+...
+```
+
+#### Problem Issues
+- 
+
+#### Problem Solution
+- 
