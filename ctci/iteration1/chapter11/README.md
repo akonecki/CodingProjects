@@ -40,7 +40,8 @@ Sort an array of strings so all anagrams are next to each other.
 - do this until the end of the sorted lexiographic first anagrams is complete.
 
 #### Problem Issues
-- 
+- None
 
 #### Problem Solution
-- 
+- The solution is fairly simple and does not require or implement the overall ordering of the words.
+- My implementation is more complex with the requirement of being lexiographically correct w.r.t the anagram words and the overall list as well.
