@@ -8,6 +8,36 @@ public class ivq10 {
     // 1 - height
     // 2 - depth
     public static int maxHeight(int [][] boxes) {
+        return maxHeight(boxes, null);
+    }
+
+    private static int maxHeight(int [][] boxes, int [] prevBox) {
+        int max = 0;
+        
+        int index = 0;
+        for (int [] box : boxes) {
+            if (prevBox == null || (box != null && compareBoxes(box, prevBox) == 1)) {
+                int [][] newBoxes = boxes.clone();
+                newBoxes[index] = null;
+                int height = maxHeight(newBoxes, box);
+            
+                if (height > max) {
+                    max = height;
+                }
+            }
+            index++;
+        }
+
+        if (prevBox != null) {
+            return max + prevBox[1];
+        }
+        else {
+            return max;
+        }
+    }
+
+    /*
+    public static int maxHeight(int [][] boxes) {
         LinkedList<int []> boxList = new LinkedList<int []>();
 
         for (int [] box : boxes) {
@@ -15,12 +45,12 @@ public class ivq10 {
         }
 
         int [] firstBox = boxList.remove();
-        return maxHeight(boxList, 0, firstBox);
+        return maxHeight(boxList, firstBox);
     }
 
-    public static int maxHeight(LinkedList<int []> boxes, int height, int [] prevBox) {
+    public static int maxHeight(LinkedList<int []> boxes, int [] prevBox) {
         if (boxes.isEmpty()) {
-            return height + prevBox[1];
+            return 0;
         }
         else {
             // Remove the head of the boxes
@@ -29,20 +59,21 @@ public class ivq10 {
 
             if (compareBoxes(box, prevBox) == 1) {
                 // current prevBox is larger
-                max = maxHeight(boxes, height + prevBox[1], box);
+                max = prevBox[1] + box[1] + maxHeight(boxes, box);
             }
             else if (compareBoxes(box, prevBox) == -1) {
                 // box is larger than prevBox
-                max = maxHeight(boxes, height + box[1], prevBox);
+                max = prevBox[1] + box[1] + maxHeight(boxes, prevBox);
             }
             else {
                 // no box is strictly larger
-                max = Math.max(maxHeight(boxes, height, prevBox), maxHeight(boxes, height, box));
+                max = Math.max(maxHeight(boxes, prevBox), maxHeight(boxes, box));
             }
 
             return max;
         }
     }
+    */
 
     public static int compareBoxes(int [] box1, int [] box2) {
         if (box1[0] < box2[0] &&
@@ -66,9 +97,12 @@ public class ivq10 {
         int [][] boxes = {
             {3, 4, 5},
             {4, 4, 4},
-            {4, 5, 6}
+            {4, 5, 6},
+            {9, 6, 7},
+            {1, 2, 3},
+            {2, 5, 3}
         };
 
-        assert (maxHeight(boxes) == 9);
+        assert (maxHeight(boxes) == 17);
     }
 }
