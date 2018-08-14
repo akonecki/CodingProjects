@@ -85,5 +85,10 @@ public class ivq2 {
         for (String string : anagramOrder(new String [] {"p", "a", "cd", "ca"})) {
             System.out.println(string + " ");
         }
+
+        assert (buildAnagramKey("p").equals(buildAnagramKey("p")));
+        assert (!buildAnagramKey("a").equals(buildAnagramKey("p")));
+        assert (buildAnagramKey("pa").equals(buildAnagramKey("ap")));
+        assert (!buildAnagramKey("paa").equals(buildAnagramKey("pa")));
     }
 }
