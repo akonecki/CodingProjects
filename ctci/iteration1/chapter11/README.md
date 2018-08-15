@@ -84,3 +84,27 @@ Given a sorted array of integers that has been rotated an unknown amount of time
 - the solution actually considers the case of duplicates, which my solution only considers discrete.
 - in the even of duplicate values when the low == current index value and current index value == high then actually need to search both halves due to a break can occur on either side.
 - this case is more easily handled in a recursive search than in a serial implementation due to being able to traverse both from a top down implementation.
+
+### Problem 4
+#### Problem Statement
+> 
+Given a very large file, that contains one string per line.  Describe how to sort the file.
+
+#### Problem Discussion
+- will assume that a string can be very large, or even small.
+- the file itself is acting as the array.
+- would not be able to store in program memory, will need temporary file(s) based on sorting approach.
+- could sort in discrete sections, then essentially perform a merge sort operation until reaching a final single file that is completely sorted.
+- determine a specifc size and have multiple thread sort those sections.  Once adjacent sections are complete then could merge them as well.
+
+#### Problem Design
+- say each thread will process a specific size power of two 4096 for a page size, which translates into X number of lines with the last thread doing the remaining.  
+- Each thread will start off just like in merge sort perform by two, then by four and so on. 
+- when two adjacent sections are complete, the host application, will need to be responsible for thread to section mapping to determine adjacent criteria
+- as the lower sizes are all completed then will need to handle the merging of the large sections in designated chunks.  This can be done in multiple threads in separate regions.
+
+#### Problem Issues
+- none
+
+#### Problem Solution
+- solution is an over simplification but is along the same lines.  It is technically labeled as an external sort, the system memory is being used as the sorting buffer with the result being written back to disk to preserve the modification.
