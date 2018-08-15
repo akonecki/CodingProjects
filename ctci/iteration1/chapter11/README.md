@@ -123,7 +123,7 @@ Given a sorted array of Strings, which can contain empty strings between any ele
 - likely will lead to a full N traversal in the end.  Would have to argue the benefit of encurring additional run-time overhead over just performing an iterative implementation.
 
 #### Problem Issues
-- 
+- None
 
 #### Problem Solution
-- 
+- The solution performs a linear traversal in both directions when an empty string is found.  This is alright, but begs the question how sparse is the data set going to be to allow this to be an efficient means.  Wose case still requires O(N/2).
