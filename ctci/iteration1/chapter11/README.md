@@ -78,7 +78,9 @@ Given a sorted array of integers that has been rotated an unknown amount of time
 - should still be able to implement a binary search.  Instead of blindly going to one half or another will need to look at the low and high index w.r.t the current inspected index.
 
 #### Problem Issues
-- 
+- can be quite tricky to get the logic correct due to minor mistakes.
 
 #### Problem Solution
-- 
+- the solution actually considers the case of duplicates, which my solution only considers discrete.
+- in the even of duplicate values when the low == current index value and current index value == high then actually need to search both halves due to a break can occur on either side.
+- this case is more easily handled in a recursive search than in a serial implementation due to being able to traverse both from a top down implementation.
