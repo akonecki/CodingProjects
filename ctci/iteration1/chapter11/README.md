@@ -108,3 +108,22 @@ Given a very large file, that contains one string per line.  Describe how to sor
 
 #### Problem Solution
 - solution is an over simplification but is along the same lines.  It is technically labeled as an external sort, the system memory is being used as the sorting buffer with the result being written back to disk to preserve the modification.
+
+### Problem 5
+#### Problem Statement
+> 
+Given a sorted array of Strings, which can contain empty strings between any elements, write a method to find the location of a given string.
+
+#### Problem Discussion
+- unlikely to want to process the strings that are not empty to another array.
+- can perform binary search with a recursive implementation fairly easily where if an empty string is encounted will have to explose both the left and right of it.
+- return the index if found.
+
+#### Problem Design
+- likely will lead to a full N traversal in the end.  Would have to argue the benefit of encurring additional run-time overhead over just performing an iterative implementation.
+
+#### Problem Issues
+- None
+
+#### Problem Solution
+- The solution performs a linear traversal in both directions when an empty string is found.  This is alright, but begs the question how sparse is the data set going to be to allow this to be an efficient means.  Wose case still requires O(N/2).
