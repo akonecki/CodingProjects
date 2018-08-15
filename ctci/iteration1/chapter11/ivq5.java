@@ -1,4 +1,4 @@
-public class ivq4 {
+public class ivq5 {
     public static int findIndex(String [] strings, String value) {
         return findIndex(strings, value, 0, strings.length - 1);
     }
