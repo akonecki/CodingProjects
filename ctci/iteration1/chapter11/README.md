@@ -45,3 +45,42 @@ Sort an array of strings so all anagrams are next to each other.
 #### Problem Solution
 - The solution is fairly simple and does not require or implement the overall ordering of the words.
 - My implementation is more complex with the requirement of being lexiographically correct w.r.t the anagram words and the overall list as well.
+
+### Problem 3
+#### Problem Statement
+> 
+Given a sorted array of integers that has been rotated an unknown amount of times, write code to find an element within the array.  The array was originally sorted.
+>
+```
+{33, 41, 52, -23, 3, 12, 18, 21, 28, 31}
+12
+
+5
+```
+
+#### Problem Discussion
+- can double the array to get the middle to be completely sorted.
+>
+```
+{33, 41, 52, -23, 3, 12, 18, 21, 28, 31} => {33, 41, 52, -23, 3, 12, 18, 21, 28, 31, 33, 41, 52, -23, 3, 12, 18, 21, 28, 31}
+```
+- can be done in a single linear inspection of the dta once the dip from high to low occurs. the counted offset then signifies then beginning and end index in which to perform a search.
+- if no rotation exist, can just perform the search 
+- no rotation can be inspected by just examining if the first number is larger than the last number
+- if rotation exists then will likely want to iterate from the front looking to see when the number goes from high to low.  
+
+#### Problem Design
+- determine if rotation has occurred.
+- no rotation just search based on a start index and end index
+- if rotation has occurred need to find the start and end indices.
+- same binary search algorithm can be used in both cases
+- this is likely worse than just doing a linear search.
+- should still be able to implement a binary search.  Instead of blindly going to one half or another will need to look at the low and high index w.r.t the current inspected index.
+
+#### Problem Issues
+- can be quite tricky to get the logic correct due to minor mistakes.
+
+#### Problem Solution
+- the solution actually considers the case of duplicates, which my solution only considers discrete.
+- in the even of duplicate values when the low == current index value and current index value == high then actually need to search both halves due to a break can occur on either side.
+- this case is more easily handled in a recursive search than in a serial implementation due to being able to traverse both from a top down implementation.
