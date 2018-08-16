@@ -78,9 +78,29 @@ public class ivq6 {
         return null;
     }
 
+    public static Position findElementGeneral(int [][] matrix, int value) {
+        int row = 0;
+        int col = matrix[row].length - 1;
+
+        while (row < matrix.length && col >= 0) {
+            if (matrix[row][col] == value) {
+                return new Position(row, col);
+            }
+            else if (matrix[row][col] > value) {
+                col--;
+            }
+            else {
+                row++;
+            }
+        }
+
+        return null;
+    }
+
     public static void main(String [] args) {
         assert (findElementStrict(new int [][] {{1,2,3,4}, {5,6,7,8}, {9,10,11,12}}, 6) != null);
         assert (findElementStrict(new int [][] {{1,2,3,4}, {5,6,7,8}, {9,10,11,12}}, 6).equals(new Position(1, 1)));
         assert (findElementStrict(new int [][] {{1,2,3,4}, {5,6,7,8}, {9,10,11,12}}, 6).equals(findElement(new int [][] {{1,2,3,4}, {5,6,7,8}, {9,10,11,12}}, 6)));
+        assert (findElementStrict(new int [][] {{1,2,3,4}, {5,6,7,8}, {9,10,11,12}}, 6).equals(findElementGeneral(new int [][] {{1,2,3,4}, {5,6,7,8}, {9,10,11,12}}, 6)));
     }
 }

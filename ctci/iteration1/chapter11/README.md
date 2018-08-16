@@ -144,7 +144,8 @@ Given a non-square matrix with each row and column sorted, find an element.
 - the second will use the binary search first on getting the mid row.  Then if the first is than or equal and the last for the row is greater or equal binary search on the row is performed.  If not then inspect the first element is the vlaue is less than go up in rows, else go down in rows.
 
 #### Problem Issues
-- 
+- None
 
 #### Problem Solution
-- 
+- The solutions are a bit tricky.
+- First that would be expected to be able to implement is a movement by row / column.  Essentially just make one movement at a time starting on the first row last column.  If the value is geater the the current then increase the row.  If the value is less than the current decrease the column.  Continue until a violation of the row or column occurs.
