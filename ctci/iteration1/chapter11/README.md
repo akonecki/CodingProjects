@@ -149,3 +149,13 @@ Given a non-square matrix with each row and column sorted, find an element.
 #### Problem Solution
 - The solutions are a bit tricky.
 - First that would be expected to be able to implement is a movement by row / column.  Essentially just make one movement at a time starting on the first row last column.  If the value is geater the the current then increase the row.  If the value is less than the current decrease the column.  Continue until a violation of the row or column occurs.
+- Second that is more complex
+  - bottom right corner for any square / subsquare in the matrix is always the largest.
+  - the top left corner for any square / subsquare in the matrix is always the smallest.
+  - can search the diagonal with a binary search as well.
+  - break the problem into zones, one that is known that all values are less than it
+  - one that is know that all values are greater than it
+  - two that of which the value may exist
+  - 1. perform the search on the diagonal (since not square might not have both row and column be out of bounds), until encounter first element that is larger or equal than desired value.
+  - 2. if equal just return that index
+  - 3. search the upper right and lower left and repeat the diagonal again.
