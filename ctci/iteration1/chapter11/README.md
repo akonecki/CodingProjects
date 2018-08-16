@@ -127,3 +127,35 @@ Given a sorted array of Strings, which can contain empty strings between any ele
 
 #### Problem Solution
 - The solution performs a linear traversal in both directions when an empty string is found.  This is alright, but begs the question how sparse is the data set going to be to allow this to be an efficient means.  Wose case still requires O(N/2).
+
+### Problem 6
+#### Problem Statement
+> 
+Given a non-square matrix with each row and column sorted, find an element.
+
+#### Problem Discussion
+- would need to determine the definition of the matrix.  
+  - if matrix is if each row was taken and iterated through the columns and placed in a single array and the array is sorted then can obtain a worse case execution of the search of O(lgMlgN).
+  - if the matrix is expanded into a single array one row at a time and the array is no longer sorted then the worse case execution of the search will be
+  O(MlgN).
+
+#### Problem Design
+- both are fairly simple to implement so will go ahead and implement both.  One will just iterate through all the rows in order.  A bianry search is only performed if the value is greater than or equal to the first in the row and less than or equal to the last element in the row.
+- the second will use the binary search first on getting the mid row.  Then if the first is than or equal and the last for the row is greater or equal binary search on the row is performed.  If not then inspect the first element is the vlaue is less than go up in rows, else go down in rows.
+
+#### Problem Issues
+- None
+
+#### Problem Solution
+- The solutions are a bit tricky.
+- First that would be expected to be able to implement is a movement by row / column.  Essentially just make one movement at a time starting on the first row last column.  If the value is geater the the current then increase the row.  If the value is less than the current decrease the column.  Continue until a violation of the row or column occurs.
+- Second that is more complex
+  - bottom right corner for any square / subsquare in the matrix is always the largest.
+  - the top left corner for any square / subsquare in the matrix is always the smallest.
+  - can search the diagonal with a binary search as well.
+  - break the problem into zones, one that is known that all values are less than it
+  - one that is know that all values are greater than it
+  - two that of which the value may exist
+  - 1. perform the search on the diagonal (since not square might not have both row and column be out of bounds), until encounter first element that is larger or equal than desired value.
+  - 2. if equal just return that index
+  - 3. search the upper right and lower left and repeat the diagonal again.
