@@ -159,3 +159,25 @@ Given a non-square matrix with each row and column sorted, find an element.
   - 1. perform the search on the diagonal (since not square might not have both row and column be out of bounds), until encounter first element that is larger or equal than desired value.
   - 2. if equal just return that index
   - 3. search the upper right and lower left and repeat the diagonal again.
+
+### Problem 7
+#### Problem Statement
+> 
+Given heights and weights determine the total number of heights that contibrute to the tallest possible if an element can only exist above another element if it is both shorter and lighter than the one below it.
+
+#### Problem Discussion
+- could implement a comparator the the entries however, dont know what really to do with the non-absolute less and non-absolute more pairs.
+- resembles the box problem from the recusion version which implemented a comparator for the base implementation.
+- thinking about a multi-key tree but that leads to the same issues and will still incur a performance penalty.
+
+#### Problem Design
+- 
+
+#### Problem Issues
+- didnt really know where to start / handle the case where absolute order is not indicated.
+
+#### Problem Solution
+- does provide a comparable for the sorting on the class definition `compareTo` ends up performing against the integer first on height then width.
+- Longest increasing sub sequence problem
+- first sort based on height
+- then use a recursive `longest increasing sub-sequence`
