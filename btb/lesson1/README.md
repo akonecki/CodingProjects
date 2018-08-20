@@ -15,6 +15,7 @@ public static int f1(int N) {
 
 #### Desired Outputs
 ##### f1(3)
+Call Tree
 >
 f1(3)
     -> f1(2)
@@ -44,6 +45,7 @@ f1(3)
     <- ((1 + 0 + 0) + 1 + 0) + (1 + 0 + 0) + (1) = 4
 
 ##### f1(5)
+Call Tree
 >
 f1(5)
     -> f1(4)
@@ -139,6 +141,7 @@ f1(5)
     <- ((((1 + 0 + 0) + 1 + 0) + (1 + 0 + 0) + (1)) + ((1 + 0 + 0) + 1 + 0) + (1 + 0 + 0)) + (((1 + 0 + 0) + 1 + 0) + (1 + 0 + 0) + (1)) + ((1 + 0 + 0) + 1 + 0) = 13
 
 ### Problem 2
+Call Tree
 >
 ```java
 public static int f2(int N) {
@@ -156,6 +159,7 @@ public static int f2(int N) {
 
 #### Desired Outputs
 ##### f2(3)
+Call Tree
 >
 f2(3)
     // i = 0
@@ -199,6 +203,7 @@ f2(3)
 <- (2) + (1) + (2) = 5
 
 ##### f2(4)
+Call Tree
 >
 f2(4)
     // i = 0
@@ -273,6 +278,7 @@ private static void f3(int[] n, int i, List<List<Integer>> results,
 
 #### Desired Outputs
 ##### f3({1,2,3})
+Call Tree
 >
 f3({1,2,3}, 0, [[]], [])
     // newPath = [1]
@@ -307,6 +313,7 @@ f3({1,2,3}, 0, [[]], [])
 <- [[], [3], [2], [2, 3], [1], [1, 3], [1, 2], [1, 2, 3]]
 
 ##### f3({1,2,3,4,5})
+Call Tree
 >
 f3({1,2,3,4,5}, 0, [[]], [])
     // newPath = [1]
@@ -395,6 +402,7 @@ public static int f4(int n, int m) {
 
 #### Desired Outputs
 ##### f4(2,6)
+Call Tree
 >
 f4(2,6)
     // i = 1
