@@ -255,3 +255,62 @@ f2(4)
         <- 1
     <- (5 * 1) = 5
 <- 5 + 2 + 2 + 5 = 14
+
+### Problem 3
+>
+```java
+public static List<List<Integer>> f3(int[] n) {
+    List<List<Integer>> results = new LinkedList();
+    f3(n, 0, results, new LinkedList<Integer>());
+    return results;
+}
+
+private static void f3(int[] n, int i, List<List<Integer>> results,  
+                       List<Integer> path) {
+    if (i == n.length) {
+        results.add(path);
+        return;
+    }
+
+    List<Integer> newPath = new LinkedList(path);
+    newPath.add(n[i]);
+
+    f3(n, i+1, results, path);
+    f3(n, i+1, results, newPath);
+}
+```
+
+#### Desired Outputs
+##### f3({1,2,3})
+>
+f3({1,2,3}, 0, [[]], [])
+    // newPath = [1]
+    -> f3({1,2,3}, 1, [[]], [])
+        // newPath = [2]
+        -> f3({1,2,3}, 2, [[]], [])
+            // newPath = [3]
+            -> f3({1,2,3}, 3, [[]], [])
+                <- [] added to results
+            -> f3({1,2,3}, 3, [[]], [3])
+                <- [3] added to results
+        -> f3({1,2,3}, 2, [[]], [2])
+            // newPath = [2, 3]
+            -> f3({1,2,3}, 3, [[]], [2])
+                <- [2] added to results
+            -> f3({1,2,3}, 3, [[]], [2, 3])
+                <- [2, 3] added to results
+    -> f3({1,2,3}, 1, [[]], [1])
+        // newPath = [1, 2]
+        -> f3({1,2,3}, 2, [[]], [1])
+            // newPath = [1, 3]
+            -> f3({1,2,3}, 3, [[]], [1])
+                <- [1] added to results
+            -> f3({1,2,3}, 3, [[]], [1, 3])
+                <- [1,3] added to results
+        -> f3({1,2,3}, 2, [[]], [1, 2])
+            // newPath = [1, 2, 3]
+            -> f3({1,2,3}, 3, [[]], [1, 2])
+                <- [1, 2] added to the results
+            -> f3({1,2,3}, 3, [[]], [1, 2, 3])
+                <- [1, 2, 3] added to the results
+<- [[], [3], [2], [2, 3], [1], [1, 3], [1, 2], [1, 2, 3]]
