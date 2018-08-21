@@ -181,3 +181,24 @@ Given heights and weights determine the total number of heights that contibrute 
 - Longest increasing sub sequence problem
 - first sort based on height
 - then use a recursive `longest increasing sub-sequence`
+
+### Problem 8
+#### Problem Statement
+>
+Given an unknown number of values, that can repeat, provide the capability to determine the current number of values that are less than a specific value provide via a function called rank.
+
+#### Problem Discussion
+- since there is an unknown number of values and they are added one at a time, maintaining an ordered list makes little since since the insertion time plus the sorting time likely will be O(NlgN).
+- a O(lgN) solution can be obtained by using a balanced binary tree for inserting new elements and to perform the rank operation.  Insertion in a binary tree is O(lgN).
+
+#### Problem Design
+- will first implement with just a BST for simpleness, then will try to support a red/black tree implementation to support inserting into a balanced BST.
+- to prevent having to traverse the tree will use agumented node to maintain the count of lower and higher and total number of nodes w.r.t the parent.  This might have to change when performing any rotations for a red black tree.
+
+#### Problem Issues
+- at first tired to find the successor or the node.  This led to incorrect values.  
+- need to only return a count instead since a node if found might be a leaf node, dependent on insertion order but still have nodes that are less than it.
+
+#### Problem Solution
+- Matches
+- Problem also states the issue of balanced but does not implement a balanced BST.
