@@ -90,5 +90,6 @@ public class ivq8 {
         assert (mSolution.rank(3) == 1);
         System.out.println(mSolution.rank(4));
         assert (mSolution.rank(4) == 3);
+        assert (mSolution.rank(12) == 8);
     }
 }

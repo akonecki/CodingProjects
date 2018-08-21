@@ -196,7 +196,9 @@ Given an unknown number of values, that can repeat, provide the capability to de
 - to prevent having to traverse the tree will use agumented node to maintain the count of lower and higher and total number of nodes w.r.t the parent.  This might have to change when performing any rotations for a red black tree.
 
 #### Problem Issues
--
+- at first tired to find the successor or the node.  This led to incorrect values.  
+- need to only return a count instead since a node if found might be a leaf node, dependent on insertion order but still have nodes that are less than it.
 
 #### Problem Solution
--
+- Matches
+- Problem also states the issue of balanced but does not implement a balanced BST.
