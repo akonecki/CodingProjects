@@ -12,27 +12,32 @@ public class Problem2 {
 
         // Perform the iteration, where the iteration provides the starting 
         // index to be used within the recursive function.
-        for (int index = 0; index < string.length(); index++) {
-            substrings(string, index, index + 1, result);
-        }
+        //for (int index = 0; index < string.length(); index++) {
+        //    substrings(string, index, index + 1, result);
+        //}
+
+        substrings(string, 0, result);
 
         return result;
     }
 
-    private static void substrings(String string, int startIndex, int endIndex, List<String> result) {
+    private static void substrings(String string, int startIndex, List<String> result) {
         // Input assumptions of the recursive method.
-        assert (startIndex != endIndex);
-        assert (startIndex < endIndex);
+        assert (startIndex < string.length() + 1);
         assert (startIndex >= 0);
         assert (string != null && !string.isEmpty());
         assert (result != null);
-        
-        if (endIndex > string.length()) {
+
+        if (startIndex >= string.length()) {
             return;
         }
         else {
-            result.add(string.substring(startIndex, endIndex));
-            substrings(string, startIndex, endIndex + 1, result);
+            for (int index = startIndex + 1; index <= string.length(); index++) {
+                result.add(string.substring(startIndex, index));
+            }
+
+            // result.add(string.substring(startIndex, endIndex));
+            substrings(string, startIndex + 1, result);
         }
     }
 
@@ -42,7 +47,7 @@ public class Problem2 {
         assert (substrings("abcd").size() == ("abcd".length() * ("abcd".length() + 1)) / 2);
         assert (substrings("a").size() == ("a".length() * ("a".length() + 1)) / 2);
         assert (substrings("abcde").size() == ("abcde".length() * ("abcde".length() + 1)) / 2);
-
+        
         for (String string : substrings("abcde")) {
             System.out.println(string);
         }
