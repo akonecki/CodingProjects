@@ -77,3 +77,46 @@ Find all substrings of a string.
 
 #### Problem Issues
 - None
+
+### Problem 3
+#### Problem Statement
+>
+Implement the `Towers of Hanoi` to find the total number of moves it takes to move N disks.
+>
+Provide the following within the implementation.
+- refer to the source destination and aux positions as indicies {0,1,2}
+- create a `Move` class that represents a move of a disk.  Include the disk index, source and destination.  Set the return value of moving to be the list of `Move` objects.
+
+#### Problem Discussion
+- would have thought more of creating a `Disk` class over a `Move` class with the `Disk` having a move method.
+- know that a disk can only be moved to another location iff
+  - the location has no disks
+  - the top disk at a specific location is larger than the disk being moved to a target location.
+
+#### Problem Design
+- have three stacks, contained within an array.  
+- use the indicies provided above to index into for a from to destination
+- will only need to perform push and pop operations to move disks around
+- disks will be valued 1 through N
+
+#### Problem Issues
+- I can not see the solution programmatically.
+- I have done this problem around 10 to 15 times in my career but always have to look at the solution.
+- Don't know the correct mental reference for approaching this problem.
+- Problems in this class where I can not see the sub-problem logic prevents me from making a solution.
+- This problem is on my `memorize` set of problems prior to an interview.  Can you help me move it off this list?
+- I don't see the aid of stair step problem usage for this, even though I can answer the stair step problem in an interview and have.
+
+### Problem 4
+#### Problem Statement
+>
+Given a binary tree with distinct elements, print all possible arrays that could have led to this tree.
+
+#### Problem Discussion
+- depth of the node determines some order with respect to lower order nodes for a given tree branch.
+- problem should be around a divide and conquer technique
+
+#### Problem Design
+- create supporting code to support the generation of a BST.
+- nodes at the same level can occur in any order since they will end up in the same place
+- due to the level being a controlling factor will likely need to support a depth first search approach to the problem to create the permutation of the insertion arrays. 
