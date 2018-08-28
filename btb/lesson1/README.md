@@ -145,7 +145,7 @@ f1(5)
 ```
 
 ### Problem 2
-Call Tree
+Caount the number of ways to build a proper BST.
 >
 ```java
 public static int f2(int N) {
