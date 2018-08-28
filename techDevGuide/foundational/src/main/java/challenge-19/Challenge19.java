@@ -10,11 +10,11 @@ public class Challenge19 {
 
     public static int search(int [] sortedNums) {
         int linearResults = searchLinear(sortedNums);
-        //int serialResults = searchSerial(sortedNums);
+        int serialResults = searchSerial(sortedNums);
         int recursiveResults = searchRecursive(sortedNums, 0, sortedNums.length - 1);
 
         System.out.println("Result is " + linearResults);
-        assert (linearResults == recursiveResults);// && linearResults == recursiveResults);
+        assert (linearResults == recursiveResults && linearResults == recursiveResults);
         return linearResults;//search(sortedNums, 0, sortedNums.length - 1);    
     }
 
@@ -48,7 +48,7 @@ public class Challenge19 {
                     
                     // push on the right first if possible
                     if (sortedNums[index] < sortedNums.length) {
-                        lowHighToCheck.push(new Integer [] {sortedNums[index], sortedNums.length - 1});
+                        lowHighToCheck.push(new Integer [] {sortedNums[index], high});
                     }
                     // push on the left second, range can not be deduced.
                     lowHighToCheck.push(new Integer [] {low, index - 1});
@@ -58,7 +58,7 @@ public class Challenge19 {
                     lowHighToCheck.push(new Integer [] {index + 1, high});
                     // push on the left if possible
                     if (sortedNums[index] >= 0) {
-                        lowHighToCheck.push(new Integer [] {0, sortedNums[index]});
+                        lowHighToCheck.push(new Integer [] {low, sortedNums[index]});
                     }
                 }
                 else {
@@ -95,7 +95,7 @@ public class Challenge19 {
                         return -1;
                     }
                     else {
-                        return searchRecursive(sortedNums, index + 1, rightIndex);
+                        return searchRecursive(sortedNums, sortedNums[index], rightIndex);
                     }
                 }
                 else {
@@ -104,7 +104,7 @@ public class Challenge19 {
             } 
             else if (sortedNums[index] < index) {
                 // explore left index if possible
-                int leftValue = searchRecursive(sortedNums, 0, sortedNums[index]);
+                int leftValue = searchRecursive(sortedNums, leftIndex, sortedNums[index]);
 
                 if (leftValue == -1) {
                     return searchRecursive(sortedNums, index + 1, rightIndex);
@@ -143,7 +143,7 @@ public class Challenge19 {
         int [] randomSet = new int [100];
 
         for (int index = 0; index < randomSet.length; index++) {
-            randomSet[index] = (new Random()).nextInt(randomSet.length * 2) + 1;
+            randomSet[index] = (new Random()).nextInt(randomSet.length) + 2;
             System.out.print(randomSet[index] + " ");
         }
         System.out.println("");
