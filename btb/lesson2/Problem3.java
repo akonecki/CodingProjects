@@ -38,6 +38,7 @@ public class Problem3 {
         
     }
 
+    // dont know how to relate stair step type of problem to this
     private class Move {
         public ArrayList<Move> moveDisk(int diskIndex, int source, int destination) {
             return null;
