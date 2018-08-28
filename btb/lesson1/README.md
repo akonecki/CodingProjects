@@ -396,6 +396,8 @@ f3({1,2,3,4,5}, 0, [[]], [])
 
 #### Problem 4
 >
+Egg drop problem of N stories of M eggs.
+>
 ```java
 public static int f4(int n, int m) {
     if (m == 0) return 0;
