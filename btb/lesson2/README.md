@@ -115,8 +115,14 @@ Given a binary tree with distinct elements, print all possible arrays that could
 #### Problem Discussion
 - depth of the node determines some order with respect to lower order nodes for a given tree branch.
 - problem should be around a divide and conquer technique
+- expect the time complexity to be greater than that of O(2^N) due to iterating over both left and right arraylists along with numerous copies.
 
 #### Problem Design
 - create supporting code to support the generation of a BST.
 - nodes at the same level can occur in any order since they will end up in the same place
 - due to the level being a controlling factor will likely need to support a depth first search approach to the problem to create the permutation of the insertion arrays. 
+
+#### Problem Issues
+- just a lot of code.
+- spent a lot of time trying to address the array permutation.  Was trying to approach it differently but ended up going with what I knew how to do.
+- once figured out how I wanted to do the permutations of each list, was not difficult.
