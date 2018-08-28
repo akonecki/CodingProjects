@@ -126,3 +126,13 @@ Given a binary tree with distinct elements, print all possible arrays that could
 - just a lot of code.
 - spent a lot of time trying to address the array permutation.  Was trying to approach it differently but ended up going with what I knew how to do.
 - once figured out how I wanted to do the permutations of each list, was not difficult.
+
+### Problem 5
+#### Problem Statement
+>
+- 1. What did you like about this submission?
+  - I liked that it was actual coding.
+- 2. What didn't you like about this assignment?
+  - Would have liked some more on how to approach the specific patterns besides just answer the questions.
+  - From the lecture on the review of lesson 1, if I was asked to say implement some of the pieces I would not know how.  
+- 3. Would like the problems to build off of each other, so that way I can see a bit more of how to approach the patterns.  At the moment it is very much of if I see it I can answer it.  If I can not then I have issues.  This is quite true in problem 3 even though it is a problem I have answered numerous times throughout the years.
