@@ -122,7 +122,7 @@ Given a binary tree with distinct elements, print all possible arrays that could
 
 #### Problem Discussion
 - depth of the node determines some order with respect to lower order nodes for a given tree branch.
-- problem should be around a divide and conquer technique
+- problem should be around a divide and conquer technique & permutation
 - expect the time complexity to be greater than that of O(2^N) due to iterating over both left and right arraylists along with numerous copies.
 
 #### Problem Design
