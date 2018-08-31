@@ -3,11 +3,11 @@ import java.util.ArrayList;
 
 public class Challenge21 {
 
-    private static class StringDistance {
+    private static class StringDistanceLinear {
         
         private HashMap<String, ArrayList<Integer>> stringToIndices = new HashMap<String, ArrayList<Integer>>();
 
-        public StringDistance(String [] strings) {
+        public StringDistanceLinear(String [] strings) {
             if (strings == null || strings.length < 1) {
                 return;
             }
@@ -86,9 +86,57 @@ public class Challenge21 {
         }
     }
 
+    private static class StringDistanceConstant {
+        // 
+        HashMap<String, Integer> stringLastIndex = new HashMap<String, Integer>();
+        HashMap<String, HashMap<String, Integer>> stringToStringDistance = new HashMap<String, HashMap<String, Integer>>();
+        
+        public StringDistanceConstant(String [] strings) {
+            if (strings == null || strings.length < 1) {
+                return;
+            }
+
+            for (int index = 0; index < strings.length; index++) {
+                String string = strings[index];
+                HashMap<String, Integer> toOthers = stringToStringDistance.get(string);
+                int lastIndex = index; 
+
+                if (toOthers == null) {
+                    toOthers = new HashMap<String, Integer>();
+                    toOthers.put(string, -1);
+                }
+                else {
+                    lastIndex = this.stringLastIndex.get(string).intValue();
+                }
+
+                // now need to iterate through all 
+                for (String key : this.stringLastIndex.keySet()) {
+                    int keyLastIndex = this.stringLastIndex.get(key);
+
+                
+                } 
+
+                // update the last index to the current
+                this.stringLastIndex.put(string, index);
+            }
+        }
+
+        public int indexDistanceOfStrings(String str1, String str2) {
+            if (str1 == null || str2 == null || str1.isEmpty() || str2.isEmpty()) {
+                return -1;
+            }
+
+            if (!stringToStringDistance.containsKey(str1) || !stringToStringDistance.containsKey(str2)) {
+                return -1;
+            }
+
+            return stringToStringDistance.get(str1).get(str2).intValue();
+        }
+    }
+
     public static void main(String [] args) {
         String [] single = new String [] {"a", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"};
-        StringDistance singleDistances = new StringDistance(single);
+        StringDistanceLinear singleDistances = new StringDistanceLinear(single);
         
         assert (singleDistances.indexDistanceOfStrings(null, "fox") == -1);
         assert (singleDistances.indexDistanceOfStrings("fox", null) == -1);
@@ -108,7 +156,7 @@ public class Challenge21 {
         }
 
         String [] duplicates = new String [] {"the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"};
-        StringDistance duplicateDistances = new StringDistance(duplicates);
+        StringDistanceLinear duplicateDistances = new StringDistanceLinear(duplicates);
 
         assert (duplicateDistances.indexDistanceOfStrings("the", "fox") == 3);
         assert (duplicateDistances.indexDistanceOfStrings("the", "jumps") == 2);
