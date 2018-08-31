@@ -58,6 +58,7 @@ Find all substrings of a string.
 - this is an iterative pattern
 - total number of strings being generated should be on the order of O(N^2) where N is the length of the original string.
 - will have something along the lines of `N + (N - 1) + (N - 2) + ... 2 + 1 = N(N + 1) / 2 = O(N^2)`
+- want only the unique set of substrings, thus if have repeating patterns will get repeating substrings.
 
 #### Problem Design
 - the original code provided multiple functions, 3 in total and wants to remove the unnecessary third.
@@ -74,6 +75,7 @@ Find all substrings of a string.
   - `d`
 - the presentation of the data is position ordered
 - can take the original code and move the iteration control to the first function with the substring functionality contained to the second function / the first recursive function.
+- keep a `HashSet` of all substrings seen.  If the substring is a new string then add it to the set.
 
 #### Problem Issues
 - None
