@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Stack;
+import java.util.Arrays;
+import java.util.List;
 
 public class Problem3 {
 
@@ -30,23 +32,68 @@ public class Problem3 {
 
     // dont really know what the base case / individual logic is.
     private static int movement(int disksToMove, int source, int destination) {
-        if (diskCount == 0) {
-
-        }
+        return 0;
 
 
         
     }
 
-    // dont know how to relate stair step type of problem to this
-    private class Move {
-        public ArrayList<Move> moveDisk(int diskIndex, int source, int destination) {
-            return null;
+    private static enum Position {
+        SRC { 
+            public String toString() {
+                return "SRC";
+            }
+        },
+        DST {
+            public String toString() {
+                return "DST";
+            }
+        },
+        AUX {
+            public String toString() {
+                return "AUX";
+            }
         }
     }
 
+    private static class Move {
+        private int disk;
+        Position src;
+        Position dst;
+
+        public Move(int disk, Position src, Position dst) {
+            this.disk = disk;
+            this.src = src;
+            this.dst = dst;
+        }
+
+        public String toString() {
+            return "" + this.disk + " from " + src + " to " + dst;
+        }
+    }
+
+    public static List<Move> moves(int N) {
+        return moves(N, Position.SRC, Position.DST, Position.AUX);
+    }
+
+    private static List<Move> moves(int N, Position src, Position dst, Position aux) {
+        if (N == 1) {
+            return Arrays.asList(new Move(N, src, dst));
+        }
+
+        List<Move> result = new ArrayList<Move>();
+        // move all above desired to aux
+        result.addAll(moves(N - 1, src, aux, dst));
+        // move desired to destination
+        result.add(new Move(N, src, dst));
+        // move all above from aux to dst
+        result.addAll(moves(N - 1, aux, dst, src));
+        return result;
+    }
 
     public static void main(String [] args) {
-
+        for (Move move : moves(3)) {
+            System.out.println(move);
+        }
     }
 }

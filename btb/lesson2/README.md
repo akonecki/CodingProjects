@@ -109,6 +109,12 @@ Provide the following within the implementation.
 - This problem is on my `memorize` set of problems prior to an interview.  Can you help me move it off this list?
 - I don't see the aid of stair step problem usage for this, even though I can answer the stair step problem in an interview and have.
 
+#### Problem Solution
+- three main operations
+  - move N - 1 elements that are above N from source to aux
+  - move the Nth element from source to destination
+  - move all the N-1 elements from aux to destination
+
 ### Problem 4
 #### Problem Statement
 >
