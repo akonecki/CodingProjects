@@ -19,8 +19,24 @@ public class Problem2 {
         //}
 
         substrings(string, 0, result, unique);
-
+        result = new ArrayList<String>();
+        substrings(string, 0, 1, result);
         return result;
+    }
+
+    // This implmentation only provides uniqueness in terms of the starting 
+    // vs stopping index of the substring, which the original already handled.
+    private static void substrings(String string, int i, int j, List<String> result) {
+        if (i >= string.length() || j > string.length()) {
+            return;
+        }
+
+        if (i + 1 == j) {
+            substrings(string, i + 1, i + 2, result);
+        }
+        substrings(string, i, j + 1, result);
+
+        result.add(string.substring(i, j));
     }
 
     private static void substrings(String string, int startIndex, List<String> result, HashSet<String>unique) {
