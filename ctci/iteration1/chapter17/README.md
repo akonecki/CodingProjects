@@ -21,3 +21,28 @@ Given a positive number `N` determine the total number of trailing zeros if you 
 #### Problem Solution
 - Essentially the same, book is faster due to increasing in power each time
 - Mine wholly loops through on `% 5` == 0, so as the multiple of 5 increases more iterations will be needed.
+
+### Problem 6
+#### Problem Statement
+> 
+Given an array find two indices within the array such that if all the numbers between those two indices are sorted then the entire array would then be sorted.
+
+#### Problem Discussion
+- could be that the entire array needs to be sorted, or the entire array is already sorted
+- in the case that the array is already sorted then just return -1, -1 for the two indices 
+
+#### Problem Design
+- find the first occurrence in which sorted order is violated.
+- record the indices, because will need to perform a binary search to find out where the violated minimum value sits within the beginning of the sorted array.
+- second find the ending index of violation w.r.t the growing maximum.
+- record the minimum along the way
+- once reach the end of the array, perform a binary search to determine the index in which the minimum would need to exist.  This will be the lower bound of the index that needs to be sorted.
+
+#### Problem Issues
+- None
+
+#### Problem Solution
+- Solution does not perform a binary search but instead just splits into three parts
+- the beginning, middle and end
+- then iterates on determining when the lowest middle element is contained within beginning
+- then iterates on determine when the highest element of middle contained within end
