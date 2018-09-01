@@ -99,5 +99,7 @@ public class ivq6 {
         assert (searchMinIndex(new int [] {1,2,3,4,5}, 0, 4, 5) == 5);
         assert (searchMinIndex(new int [] {1,2,3,4,5}, 0, 4, 6) == 5);
         assert (isEqual(findSortingIndices(new int [] {1,2,4,7,10,11,7,12,6,7,16,18,19}), new int [] {3,9}));
+        assert (isEqual(findSortingIndices(new int [] {1,2,4,7,10,11,7,12,6,7,16,18,-1}), new int [] {0,12}));
+        assert (isEqual(findSortingIndices(new int [] {1,2,4,7,10,11,11,12,14,15,16,18,19}), new int [] {-1,-1}));
     }
 }
