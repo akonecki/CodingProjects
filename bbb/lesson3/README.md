@@ -23,7 +23,14 @@ Output : ["apple pine apple", "apple pineapple"]
 ```
 
 #### Problem Discussion
+- can not necessarily guarantee that all the character spaces are going to be used
+- will be a lot of include / not include of a word window
+- can use the detail about the longest word to set a maximum on the window
+- could use a trie to aid in reducing some of the searching of invalid strings
+- dont know if there can be invalid strings within the string as well and just record the valid ones
+- will only record those in which the entire string can be broken into a valid string with spaces
 
 #### Problem Design
+- use the include / exclude at each word find
 
 #### Problem Issues
