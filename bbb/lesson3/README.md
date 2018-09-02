@@ -33,4 +33,19 @@ Output : ["apple pine apple", "apple pineapple"]
 #### Problem Design
 - use the include / exclude at each word find
 
+#### Problem Analysis
+- Say given dictionary of something like {a,aa,aaa,aaaa,....}
+- Max Depth Expected
+  - this will cause it to work on the smallest string set first will see something like "a a a a a a....a a a a"
+  - depth will be length of `s` / min{dict{element -> element.length}}
+  - worse case depth is `s.length()` / 1
+- Max Branching Factor Expected
+  - incrementing by 1 in the outer loop
+  - incrementing by 1 up to `maxLength` which is the maximum length string contained within the dict, on the inner loop
+  - in the worse case above each index produces a valid string
+  - worse case branching factor is expected to be `s.length() * maxLength`
+- timing ignoring copying of the `StringBuilder` buffer is `O((s.length() * maxLength)^(s.length())`
+  - when copy of the `StringBuilder` occurs could be `s.length()` 
+  - so could see an order of `O((s.length()^2 * maxLength)^(s.length())`
+
 #### Problem Issues

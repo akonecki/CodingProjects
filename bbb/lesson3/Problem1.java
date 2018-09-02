@@ -8,7 +8,9 @@ public class Problem1 {
         }
 
         int longestWord = 0;
-        
+
+        // Cost complexit is O(M) where M is equal to the number of elements 
+        // within the dictionary.
         for (String key : dict) {
             if (key.length() > longestWord) {
                 longestWord = key.length();
@@ -31,6 +33,9 @@ public class Problem1 {
         // Once the startIndex is beyond the indexable string, then place the 
         // stringbuffer within the result.
         if (startIndex >= s.length()) {
+            // Copying of a string buffer to a non-mutable element is O(L) 
+            // where L is the total length of the buffer.  Best case is it
+            // equals the length of string `s`.
             if (sb.length() > 0) {
                 result.add(sb.toString());
             }
@@ -38,6 +43,10 @@ public class Problem1 {
         }
     
         // Make sure within the proper length amount.
+        // Say given dictionary of something like
+        // {a,aa,aaa,aaaa,....}
+        // this will cause it to work on the smallest string set first so worse case
+        // depth will be length of `s` / min{dict{element -> element.length}}
         for (int pivotIndex = startIndex; pivotIndex < s.length(); pivotIndex++) {
             int index = pivotIndex + 1;
             for (; index <= s.length() && (index - pivotIndex <= maxLength); index++) {
