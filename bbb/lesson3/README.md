@@ -79,5 +79,20 @@ arrayOfArrays({{1,2}, {3}, {4,5}}) == {{1,3,4}, {1,3,5}, {2,3,4}, {2,3,5}}
 - branching factor is expected to be around the max sub array in length
 
 #### Problem Analysis
+- Depth
+  - The total depth is expected to be equal to the total number of arrays.
+  - thus if the total number of arrays is N the max depth / height of the recursive function is N.
+- Branching Factor
+  - There are M total number of elements per a given array / recursive level.  Therefore is assumming are equal to the max length of one subarray then M will be expected.
+- Copying per level occurs only on the last level and is at most only N elements in length.  
+  - since the copying occurs at the end of a permutation then need to just know the total number of possible permutations. 
+  - total number based on the values above would be equal to M^N
+- Expected worse case
+  - O(M^N + M^N) where the first is the branching factor to the depth, and second is the copy operations at the end of each permutation.
+  - O(2(M^N)) = O(M^N)
+
+- Memory
+  - O(M^N + N) should be the worse due to the copy contents and recursion depth.
 
 #### Problem Issues
+- none
