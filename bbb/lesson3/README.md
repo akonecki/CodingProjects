@@ -146,3 +146,68 @@ longestIncreasingSubsequence({9,6,1,5,3,7,55,12}) = {1,3,5,12} or {1,5,7,12} or 
 
 #### Problem Issues
 - none
+
+### Problem 4 - Edit Distance
+#### Problem Statement
+>
+Given 2 strings, s1 and s2, determine the minimum number of steps needed to transform s1 into s2. You may insert, delete, or change characters in the string, each of which is 1 step.
+>
+For ease of representation, you can implement a Step class that saves the before and after string.
+>
+Use the following function signature: 
+```
+List<Step> editDistance(String s1, String s2)
+```
+>
+Example
+```
+editDistance(“abc”, “cab”) = {“abc” -> “cabc”, “cabc” -> “cab”}
+```
+
+#### Problem Discussion
+- there can be acutally multiple steps that lead to the same minimum for the transformation of one string to another.
+- will operate on any character set, thus `A` != `a`.
+
+#### Problem Design
+- will actually return a `List<List<Step>>` since multiple differing paths can lead to the same minimum.
+- expect to have three branching factors
+  - one for insert
+  - one for delete
+  - one for change
+
+#### Problem Analysis
+- Depth
+  - Should not see a depth more than `max(s1.length(), s2.length()) + 1`.  
+  - this depth is to account for under or overshoot possibilities within each string.
+- Branching Factor
+  - Expected branching factor is 4
+  - equal
+  - insertion
+  - deletion
+  - modification
+- Memory 
+  - copying occurs only on the case that of which the total size of the list is less than or equal to the minimum
+  - ignoring the growth of the size array due to it being set prior to the recursion and single operations occurs for addition and removal from the back.
+  - if was dealing with just the minimum single instance that could be `max(s1.length(), s2.length()) + 1`.
+  - however since can get there from multiple ways and recording each maybe something along the line for `O(4^max(s1.length(), s2.length()) + 1))`
+
+#### Problem Issues
+- Just had to think a momement for allowing arbitary deletion and insertions at any index and how to prevent going very large / very small with the resulting string.
+- this was done by ensuring that the total size of steps is at least the minimum and not greater.
+
+### Problem 5 - Reflection
+#### What did you like about this assignment?
+>
+Some really good practice of some classic recursion problems.  
+Was able to practice not doing full copies at each level as well.
+
+#### What didn’t you like about this assignment?
+>
+Maybe a bit easy since they followed the same pattern and I have seen them all before, but I think the difficulty was quite good.
+
+#### How could I make this assignment more valuable?
+>
+This one was pretty good.
+I think I am likely off in the time and space complexity analysis.  Maybe I should use the FAST method to get a more concrete anwser on both the memory and time even though these are full permutation sets for the most part.
+>
+I think I would like to see some more on the analysis for copying full state data vs waiting until the end.
