@@ -176,7 +176,21 @@ editDistance(“abc”, “cab”) = {“abc” -> “cabc”, “cabc” -> “
   - one for change
 
 #### Problem Analysis
-- 
+- Depth
+  - Should not see a depth more than `max(s1.length(), s2.length()) + 1`.  
+  - this depth is to account for under or overshoot possibilities within each string.
+- Branching Factor
+  - Expected branching factor is 4
+  - equal
+  - insertion
+  - deletion
+  - modification
+- Memory 
+  - copying occurs only on the case that of which the total size of the list is less than or equal to the minimum
+  - ignoring the growth of the size array due to it being set prior to the recursion and single operations occurs for addition and removal from the back.
+  - if was dealing with just the minimum single instance that could be `max(s1.length(), s2.length()) + 1`.
+  - however since can get there from multiple ways and recording each maybe something along the line for `O(4^max(s1.length(), s2.length()) + 1))`
 
 #### Problem Issues
-- 
+- Just had to think a momement for allowing arbitary deletion and insertions at any index and how to prevent going very large / very small with the resulting string.
+- this was done by ensuring that the total size of steps is at least the minimum and not greater.
