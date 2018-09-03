@@ -43,6 +43,13 @@ public class Problem3 {
             list.add(startingValue);
             length = longestIncreasingSubsequence(nums, index + 1, maxLength, list, result);
             list.remove(list.size() - 1);
+
+            // this is the case in which the array of nums is already sorted, thus 
+            // there is no chance that another array will equal or be greater than 
+            // the current list.
+            if (length >= nums.size() - index) {
+                return length;
+            }
         }
 
         // exclusion
@@ -52,15 +59,23 @@ public class Problem3 {
     public static void main(String [] args) {
         List<Integer> list = new ArrayList<Integer>();
         // {9,6,1,5,3,7,55,12}
-        list.add(9);
-        list.add(6);
-        list.add(1);
-        list.add(5);
+        list.add(4);
         list.add(3);
+        list.add(2);
+        list.add(1);
+        list.add(8);
         list.add(7);
-        list.add(55);
+        list.add(6);
+        list.add(5);
         list.add(12);
-
+        list.add(11);
+        list.add(10);
+        list.add(9);
+        list.add(16);
+        list.add(15);
+        list.add(14);
+        list.add(13);
+        System.out.println(longestIncreasingSubsequence(list).size());
         for (List<Integer> nums : longestIncreasingSubsequence(list)) {
             for (int num : nums) {
                 System.out.print(num + " ");

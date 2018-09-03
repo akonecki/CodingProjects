@@ -127,7 +127,22 @@ longestIncreasingSubsequence({9,6,1,5,3,7,55,12}) = {1,3,5,12} or {1,5,7,12} or 
 - could iterate on the index until a larger value is found then branch
 
 #### Problem Analysis
-- 
+- Branching Factor
+  - worse case must go down the inclusion and exclusion logic paths, thus (2)
+- Depth Factor
+  - worse case depth would be equal to the total number of numbers contained within the array + 1 due to base case logic.
+- Copy Cost
+  - copying of data only occurs at a single point within the recursion logic, specifically at the base case in which a new maximum or equal length to maximum is found.  If have ever increasing maximum length of numbers per permutation of N numbers then will result in N^2 for copying.  
+  - this should be prevented in performing the inclusion stage first and then not performing higher level indices if the max found is greater or equal to `nums.size() - index`.
+- Total Expected Worse Case 
+  - O(2^(N + 1) + N^2)
+- Memory Impact
+  - could have a lot of small lists but all would have to have the same length.
+  - O(M^M) where M is the total number of peaks
+  - {3,2,1,6,5,4,9,8,7} \\ 3 peaks with sets 
+  - {3,6,9},{3,6,8},{3,6,7},{3,5,9},{3,5,8},{3,5,7},{3,4,9},{3,4,8},{3,4,7}
+  - {2,6,9},{2,6,8},{2,6,7},{2,5,9},{2,5,8},{2,5,7},{2,4,9},{2,4,8},{2,4,7}
+  - {1,6,9},{1,6,8},{1,6,7},{1,5,9},{1,5,8},{1,5,7},{1,4,9},{1,4,8},{1,4,7}
 
 #### Problem Issues
-- 
+- none
