@@ -47,9 +47,14 @@ public class Problem1 {
         // {a,aa,aaa,aaaa,....}
         // this will cause it to work on the smallest string set first so worse case
         // depth will be length of `s` / min{dict{element -> element.length}}
-        for (int pivotIndex = startIndex; pivotIndex < s.length(); pivotIndex++) {
+        // worse case depth is length.s / 1
+        // branching factor is s * maxLength
+        // O((s.length() * maxLength)^s.length()) -> current ignores the copy
+        // of the string buffer into the new stringbuffer in addition to the 
+        // substring processing.
+        for (int pivotIndex = startIndex; pivotIndex < s.length(); pivotIndex++) { // length.s
             int index = pivotIndex + 1;
-            for (; index <= s.length() && (index - pivotIndex <= maxLength); index++) {
+            for (; index <= s.length() && (index - pivotIndex <= maxLength); index++) { // maxlength
                 // check to see if the startIndex to endIndex is a valid word
                 if (dict.contains(s.substring(pivotIndex, index))) {
                     // System.out.println("Found " + s.substring(pivotIndex, index));
