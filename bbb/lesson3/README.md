@@ -194,3 +194,20 @@ editDistance(“abc”, “cab”) = {“abc” -> “cabc”, “cabc” -> “
 #### Problem Issues
 - Just had to think a momement for allowing arbitary deletion and insertions at any index and how to prevent going very large / very small with the resulting string.
 - this was done by ensuring that the total size of steps is at least the minimum and not greater.
+
+### Problem 5 - Reflection
+#### What did you like about this assignment?
+>
+Some really good practice of some classic recursion problems.  
+Was able to practice not doing full copies at each level as well.
+
+#### What didn’t you like about this assignment?
+>
+Maybe a bit easy since they followed the same pattern and I have seen them all before, but I think the difficulty was quite good.
+
+#### How could I make this assignment more valuable?
+>
+This one was pretty good.
+I think I am likely off in the time and space complexity analysis.  Maybe I should use the FAST method to get a more concrete anwser on both the memory and time even though these are full permutation sets for the most part.
+>
+I think I would like to see some more on the analysis for copying full state data vs waiting until the end.
