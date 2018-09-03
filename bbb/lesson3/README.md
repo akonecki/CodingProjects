@@ -146,3 +146,37 @@ longestIncreasingSubsequence({9,6,1,5,3,7,55,12}) = {1,3,5,12} or {1,5,7,12} or 
 
 #### Problem Issues
 - none
+
+### Problem 4 - Edit Distance
+#### Problem Statement
+>
+Given 2 strings, s1 and s2, determine the minimum number of steps needed to transform s1 into s2. You may insert, delete, or change characters in the string, each of which is 1 step.
+>
+For ease of representation, you can implement a Step class that saves the before and after string.
+>
+Use the following function signature: 
+```
+List<Step> editDistance(String s1, String s2)
+```
+>
+Example
+```
+editDistance(“abc”, “cab”) = {“abc” -> “cabc”, “cabc” -> “cab”}
+```
+
+#### Problem Discussion
+- there can be acutally multiple steps that lead to the same minimum for the transformation of one string to another.
+- will operate on any character set, thus `A` != `a`.
+
+#### Problem Design
+- will actually return a `List<List<Step>>` since multiple differing paths can lead to the same minimum.
+- expect to have three branching factors
+  - one for insert
+  - one for delete
+  - one for change
+
+#### Problem Analysis
+- 
+
+#### Problem Issues
+- 
