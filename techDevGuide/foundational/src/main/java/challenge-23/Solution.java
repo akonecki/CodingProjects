@@ -3,13 +3,13 @@ public class Solution {
         StringBuilder result = new StringBuilder();
         int index = 0;
 
-        while (index < compressed.length()) {
-            StringBuilder sb = new StringBuilder();
-            // System.out.println(index);
-            index = decompress(compressed, index, sb);
-            result.append(sb.toString());
-            // System.out.println("");
-        }
+        //while (index < compressed.length()) {
+        //    StringBuilder sb = new StringBuilder();
+        //    System.out.println(index);
+            index = decompress("1["+compressed+"]", index, result);
+        //    result.append(sb.toString());
+        System.out.println("");
+        //}
         // System.out.println(result.toString());
         return result.toString();
     }
@@ -20,10 +20,11 @@ public class Solution {
         }
         
         char character = compressed.charAt(index);
-        // System.out.println(character);
+        System.out.println(index);
         if (character >= 'a' && character <= 'z') {
             int endIndex = index;
-            while (compressed.charAt(endIndex) >= 'a' && 
+            while (endIndex < compressed.length() && 
+                compressed.charAt(endIndex) >= 'a' && 
                 compressed.charAt(endIndex) <= 'z') 
             {
                 endIndex++;
@@ -71,5 +72,7 @@ public class Solution {
         assert (decompress("1[a]").equals("a"));
         assert (decompress("1[a1[b]]").equals("ab"));
         assert (decompress("1[a]1[b]").equals("ab"));
+        assert (decompress("a[]b").equals("ab"));
+        assert (decompress("0[abc]").equals(""));
     }
 }
