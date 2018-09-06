@@ -22,6 +22,7 @@ Consider the following
 
 ### Problem Labels
 - Recursion
+- Stack
 
 ### Problem Design
 #### Design 1
