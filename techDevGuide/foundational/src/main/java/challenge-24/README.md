@@ -20,6 +20,7 @@ Output : 15
 #### Design 1
 - brute force implementation in which can find the next largest max left within the array.  If the indicies are greater than one then can iterate through all indices that occur between performing the difference of the min of pivot location and the next found max.
 - this would be expected to be O(N^2) for the time performance with O(1) space complexity.
+- this version does not work.
 
 #### Design 2
 - use a stack to keep track of the heights

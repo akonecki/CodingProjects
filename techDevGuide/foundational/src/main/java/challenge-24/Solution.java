@@ -7,12 +7,6 @@ public class Solution {
         return volumeLinear(heights);
     }
 
-    private static int volumeQuad(int [] heights) {
-        int volume = 0;
-
-        return volume;
-    }
-
     private static int volumeLinear(int [] heights) {
         int volume = 0;
         Stack<Integer> lowerHeights = new Stack<Integer>();
