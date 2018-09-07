@@ -3,8 +3,35 @@ import java.util.*;
 public class Solution {
 
     public static int volume(int [] heights) {
-        // assert (volumeQuad(heights) == volumeLinear(heights));
+        assert (volumeScanning(heights) == volumeLinear(heights));
         return volumeLinear(heights);
+    }
+
+    private static int volumeScanning(int [] heights) {
+        int [] leftMax = new int [heights.length];
+        int [] rightMax = new int [heights.length];
+        int volume = 0;
+
+        int max = heights[0];
+        for (int index = 0; index < heights.length; index++) {
+            if (heights[index] > max) {
+                max = heights[index];
+            }
+            rightMax[index] = max;
+        }
+        max = heights[heights.length - 1];
+        for (int index = heights.length - 1; index >= 0; index--) {
+            if (heights[index] > max) {
+                max = heights[index];
+            }
+            leftMax[index] = max;
+        }
+
+        for (int index = 0; index < heights.length; index++) {
+            volume += Math.min(leftMax[index], rightMax[index]) - heights[index];
+        }
+
+        return volume;
     }
 
     private static int volumeLinear(int [] heights) {
