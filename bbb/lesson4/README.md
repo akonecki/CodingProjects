@@ -103,7 +103,17 @@ Given a set of items with a set of weights, values, and quantity determine a the
 - if the final value is equal to the current maximum then want the one with the least amount of weight then
 
 #### Problem Analysis
--
+- The analysis is a bit difficult with this due to the data being tightly controlling branching factor.
+- Branching Factor
+  - the total number of branches will be 1 + max(all items with highest quantity) in the worse case.
+  - the plus 1 is due to the fact that an item can be not selected to be added.
+- Depth
+  - the total number of different items in the list of items provided to the function + 1 for handling the base case.
+  - so (N)
+- Memory Copies
+  - Due to the saving of list a full copy occurs only at the base case.  Although there can be instance of the buffer shrinking or enlarging due to number of elements as the recursion tree is walked up and down.
+  - There can be M number of elements in a list that get copied.  There are X number of permutation / paths thus worse case can be X*M, where X is a complex term larger than a linear constant.
 
 #### Problem Issues
--
+- None
+- Dont remember if the original problem delt with quantities in addition to value.
