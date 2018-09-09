@@ -84,3 +84,26 @@ Given a tree, and two nodes, write a function to find the lowest common ancestor
 
 #### Problem Issues
 - None
+
+### Problem 3 - Knapsack
+#### Problem Statement
+>
+Given a set of items with a set of weights, values, and quantity determine a the set(s) of items that you can carry in a knapsack up to a specified weight.
+
+#### Problem Discussion
+- Will allow for items to have multiples of, then will cause a use of iterative design for the recursion.
+- ordering of population of the knapsack is not important only max values w.r.t overall weight
+- want to maintain the list of items for a given maximum weight.
+- will need to define the `Item` class.
+
+#### Problem Design
+##### Design Consideration #1
+- will follow the approach that is similar in style to the greatest product path, but will include iterative to handle the quantity of an item.
+- will maintain a current item list, if it the final value ends up being greater than max then remove previous and save to current list.
+- if the final value is equal to the current maximum then want the one with the least amount of weight then
+
+#### Problem Analysis
+-
+
+#### Problem Issues
+-
