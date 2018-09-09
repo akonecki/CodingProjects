@@ -151,3 +151,16 @@ Find all permutations of a list using depth first search.
 
 #### Problem Issues
 - None, handling of duplicates came a bit later.
+
+### Problem 5 - Feedback
+- What did you like about this assignment?
+>
+Enjoyed the realative ease for the logic and handling.  Area of strength for recursion problems.
+
+- What did you not like about the assignment?
+>
+Little bit afraid if the questions are too simple.
+
+- How could you make this assignment more valuable?
+>
+Maybe highlight which questions you have seen in interviews in terms of this pattern design.
