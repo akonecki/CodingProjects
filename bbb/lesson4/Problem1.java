@@ -13,6 +13,9 @@ public class Problem1 {
             System.out.println("");
         }
 
+        Integer [][] dp = new Integer [values.length][values[0].length];
+        assert (result == maxProduct(values, dp, 0, 0));
+
         return result;
     }
 
@@ -32,7 +35,7 @@ public class Problem1 {
                 path.add(values[row][col]);
                 pathsToMax.clear();
                 pathsToMax.add(new ArrayList<Integer>(path));
-                path.remove(path.remove(path.size() - 1));
+                path.remove(path.size() - 1);
                 return product;
             }
             else if (product == max) {
@@ -87,11 +90,40 @@ public class Problem1 {
     // Each path is equal to the max
     // ((M + N - 2)! / ((M-1)!)) / ((N - 1)!) * (M*N) + (M+N)
 
+    // [S]ubproblem Identification & Momeization
+    // Ignore the population of the path for this only concerned about the max
+    // product computation.
+    private static int maxProduct(int [][] values, Integer [][] dp, int row, int col) {
+        if (row == values.length - 1 && col == values[row].length - 1) {
+            dp[row][col] = values[row][col];
+            return values[row][col];
+        }
+        else if (dp[row][col] != null) {
+            return dp[row][col].intValue();
+        }
+        else {
+            int max = values[row][col];
+
+            if (row + 1 < values.length && col + 1 < values[row].length) {
+                max *= Math.max(maxProduct(values, dp, row + 1, col), maxProduct(values, dp, row, col + 1));
+            }
+            else if (row + 1 < values.length) {
+                max *= maxProduct(values, dp, row + 1, col);
+            }
+            else if (col + 1 < values[row].length) {
+                max *= maxProduct(values, dp, row, col + 1);
+            }
+
+            dp[row][col] = max;
+            return max;
+        }
+    }
+
     public static void main (String [] args) {
         int [][] matrix = new int [][] {
             {1,2,3,4},
             {4,5,6,7},
-            {-7,8,0,0}
+            {-7,8,0,1}
         };
         System.out.println(maxProduct(matrix));
         //assert (maxProduct(matrix) == 1440);
