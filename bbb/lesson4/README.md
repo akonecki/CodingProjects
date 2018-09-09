@@ -117,3 +117,37 @@ Given a set of items with a set of weights, values, and quantity determine a the
 #### Problem Issues
 - None
 - Dont remember if the original problem delt with quantities in addition to value.
+
+### Problem 4 - Permutations
+#### Problem Statement
+>
+Find all permutations of a list using depth first search.
+
+#### Problem Discussion
+- there is no indication of duplicates or how to handle.
+- will assume the desired implementation is to find all unique permutations.
+- could sort to aid in handling duplicates
+- could develop a unique keying based on the order for duplicate detection.
+- each number will need to have occurred at each location within the newly formed array.
+
+#### Problem Design
+##### Design Consideration #1
+- implementation with the assumption that the array will contain all unique integers.
+
+##### Design Consideration #1
+- implementation with the assumption that the array will not be all unique integers.
+
+#### Problem Analysis
+- Recursion depth
+  - N where N is the total number of elements
+- Branching Factor
+  - at each level the branching factor reduces by 1 so 
+  - N + (N-1) + (N-2) + ... + 2 + 1
+  - N(N - 1) / 2
+- Ignoring time for memory copy and hash table expansion expecting worse case to be primarily controlled by 
+  - O((N(N - 1)/ 2)^N)
+- Memory Impact is controlled directly by the total number of permutations times the total number of elements.
+  - O(N * N! / (duplicate factors!))
+
+#### Problem Issues
+- None, handling of duplicates came a bit later.
