@@ -21,29 +21,35 @@ public class Problem4 {
             return;
         }
 
+        HashSet<Integer> setSeenAtLevel = new HashSet<Integer>();
+
         for (int index = 0; index < nums.length - numIndex; index++) {
-            numList.add(nums[index]);
-            // swap with the end.
-            int temp = nums[nums.length - numIndex - 1];
-            nums[nums.length - numIndex - 1] = nums[index];
-            nums[index] = temp;
+            if (!setSeenAtLevel.contains(nums[index])) {
+                setSeenAtLevel.add(nums[index]);
+                numList.add(nums[index]);
+                // swap with the end.
+                int temp = nums[nums.length - numIndex - 1];
+                nums[nums.length - numIndex - 1] = nums[index];
+                nums[index] = temp;
 
-            unique(nums, numIndex + 1, numList, result);
+                unique(nums, numIndex + 1, numList, result);
 
-            // un-wind
-            nums[index] = nums[nums.length - numIndex - 1];
-            nums[nums.length - numIndex - 1] =  temp;
-            numList.remove(numList.size() - 1);
+                // un-wind
+                nums[index] = nums[nums.length - numIndex - 1];
+                nums[nums.length - numIndex - 1] =  temp;
+                numList.remove(numList.size() - 1);
+            }
         } 
     }
 
     public static void main (String [] args) {
         assert (permutations(new int [] {1,2,3}).size() == 6);
-        for (List<Integer> list : permutations(new int [] {1,2,3,4,5,6})) {
+        for (List<Integer> list : permutations(new int [] {1,1,1,2,3,4,5})) {
             for (int num : list) {
                 System.out.print(num + ", ");
             }
             System.out.println("");
         }
+        System.out.println(permutations(new int [] {1,1,1,2,2,2,5}).size());
     }
 }

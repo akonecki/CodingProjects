@@ -138,7 +138,16 @@ Find all permutations of a list using depth first search.
 - implementation with the assumption that the array will not be all unique integers.
 
 #### Problem Analysis
-- 
+- Recursion depth
+  - N where N is the total number of elements
+- Branching Factor
+  - at each level the branching factor reduces by 1 so 
+  - N + (N-1) + (N-2) + ... + 2 + 1
+  - N(N - 1) / 2
+- Ignoring time for memory copy and hash table expansion expecting worse case to be primarily controlled by 
+  - O((N(N - 1)/ 2)^N)
+- Memory Impact is controlled directly by the total number of permutations times the total number of elements.
+  - O(N * N! / (duplicate factors!))
 
 #### Problem Issues
-- 
+- None, handling of duplicates came a bit later.
