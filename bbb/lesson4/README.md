@@ -76,7 +76,11 @@ Given a tree, and two nodes, write a function to find the lowest common ancestor
 - return enumeration value of the four cases above.
 
 #### Problem Analysis
-- 
+- Worse case have to search through all the nodes in the worse case.
+  - O(N)
+- Memory impact is also O(N) due to the tree not guaranteed to be balanced.
+  - O(N)
+- Did not make use of improving the average case for this.
 
 #### Problem Issues
-- 
+- None

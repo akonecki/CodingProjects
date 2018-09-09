@@ -48,6 +48,11 @@ public class Problem2 {
             return LCA_STATUS.NONE_FOUND;
         }
         else {
+            if (root == nodeA && root == nodeB) {
+                found.add(root);
+                return LCA_STATUS.BOTH_FOUND;
+            }
+
             LCA_STATUS left = lowestCommonAncestor(root.left, nodeA, nodeB, found);
             LCA_STATUS right = lowestCommonAncestor(root.right, nodeA, nodeB, found);
 
