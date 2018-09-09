@@ -48,3 +48,39 @@ Provide a function to find the max product and a function to provide the path(s)
 #### Problem Issues
 - Nothing with respect to the recursion other than the base case had a slight bug in it.
 
+### Problem 2 - Lowest Common Ancestor
+#### Problem Statement
+>
+Given a tree, and two nodes, write a function to find the lowest common ancestor between the two nodes.
+
+#### Problem Discussion
+- Guess is that will provide the actual nodes not the value of the nodes.
+- the tree is not guaranteed to have any orientation w.r.t the data contained within the nodes.
+- tree will also be given to the function
+- will need to add supporting code to actually develop the tree.
+- can search the two nodes first in a classic DFS / BFS fashion if need be.
+  - if the other node is found then the starting node is the least common ancestor of the two
+  - if neither are found then will need to search from the root, but if the nodes are found, wont need to go down
+- might want to just start from the root and traverse.
+
+#### Problem Design
+##### Design Consideration #1
+- four possible states when searching
+  - 1. Neither node found
+  - 2. Node A found
+  - 3. Node B found
+  - 4. Node A & B found
+- the first occurrence in which case (4) occurs is the least common ancestor node within the graph.
+- to get around the issue of return two types can take advantage of an array of node of size (1) which will contain the LCA of the two nodes within the tree.
+- if the array is emtpy then no LCA was found.
+- return enumeration value of the four cases above.
+
+#### Problem Analysis
+- Worse case have to search through all the nodes in the worse case.
+  - O(N)
+- Memory impact is also O(N) due to the tree not guaranteed to be balanced.
+  - O(N)
+- Did not make use of improving the average case for this.
+
+#### Problem Issues
+- None
