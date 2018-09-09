@@ -76,7 +76,7 @@ Given a tree, and two nodes, write a function to find the lowest common ancestor
 - return enumeration value of the four cases above.
 
 #### Problem Analysis
--
+- 
 
 #### Problem Issues
 - 
