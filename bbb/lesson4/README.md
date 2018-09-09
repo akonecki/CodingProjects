@@ -117,3 +117,28 @@ Given a set of items with a set of weights, values, and quantity determine a the
 #### Problem Issues
 - None
 - Dont remember if the original problem delt with quantities in addition to value.
+
+### Problem 4 - Permutations
+#### Problem Statement
+>
+Find all permutations of a list using depth first search.
+
+#### Problem Discussion
+- there is no indication of duplicates or how to handle.
+- will assume the desired implementation is to find all unique permutations.
+- could sort to aid in handling duplicates
+- could develop a unique keying based on the order for duplicate detection.
+- each number will need to have occurred at each location within the newly formed array.
+
+#### Problem Design
+##### Design Consideration #1
+- implementation with the assumption that the array will contain all unique integers.
+
+##### Design Consideration #1
+- implementation with the assumption that the array will not be all unique integers.
+
+#### Problem Analysis
+- 
+
+#### Problem Issues
+- 
