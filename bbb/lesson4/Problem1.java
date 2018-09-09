@@ -119,20 +119,32 @@ public class Problem1 {
         }
     }
 
+    // [T]urn the Problem Around
+    // Instead of going to the bottom and floating the max product up populate the previous
+    // and take the max of the left and top location instead.
     private static int maxProductSerial(int [][] values) {
         int [][] dp = new int [values.length + 1][values[0].length + 1];
-        
+        int [] reduced = new int [values[0].length + 1];
+
         for (int row = 0; row < dp.length; row++) {
             for (int col = 0; col < dp[row].length; col++) {
                 if (row != 0 && col != 0) {
                     dp[row][col] = Math.max(dp[row - 1][col], dp[row][col - 1]) * values[row - 1][col - 1];
+                    reduced[col] = Math.max(reduced[col], reduced[col - 1]) * values[row - 1][col - 1];
                 }
                 else {
                     dp[row][col] = 1;
+
+                    if (row == 0) {
+                        reduced[col] = 1;
+                    }
+                    else {
+                        // col == 0 row != 0
+                    }
                 }
             }
         }
-
+        assert (dp[values.length][values[values.length - 1].length] == reduced[values[values.length - 1].length]);
         return dp[values.length][values[values.length - 1].length];
     }
 
