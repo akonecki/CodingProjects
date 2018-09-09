@@ -31,7 +31,20 @@ Provide a function to find the max product and a function to provide the path(s)
 - will implement the pieces to support dynamic programming technique for practice.
 
 #### Problem Analysis
-- 
+- Depending on implementation pieces there is an array of different performances.
+  - Worse case for generic recursion for just max product 
+    - Time - O(2^(M+N))
+    - Memory - O(M+N)
+  - Worse case for paths with max product
+    - Time - O(2^(M+N) + ((M+N-2)!/(M-1)!*(N-1)!*(M+N)))
+    - Memory - O(((M+N-2)!/(M-1)!*(N-1)!*(M+N)))
+- DP
+  - Time O(M*N)
+  - Memory O(M*N)
+- Serial
+  - Time O(M*N)
+  - Memory (M*N)
 
 #### Problem Issues
+- Nothing with respect to the recursion other than the base case had a slight bug in it.
 
