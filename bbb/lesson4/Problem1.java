@@ -15,7 +15,7 @@ public class Problem1 {
 
         Integer [][] dp = new Integer [values.length][values[0].length];
         assert (result == maxProduct(values, dp, 0, 0));
-
+        assert (result == maxProductSerial(values));
         return result;
     }
 
@@ -117,6 +117,23 @@ public class Problem1 {
             dp[row][col] = max;
             return max;
         }
+    }
+
+    private static int maxProductSerial(int [][] values) {
+        int [][] dp = new int [values.length + 1][values[0].length + 1];
+        
+        for (int row = 0; row < dp.length; row++) {
+            for (int col = 0; col < dp[row].length; col++) {
+                if (row != 0 && col != 0) {
+                    dp[row][col] = Math.max(dp[row - 1][col], dp[row][col - 1]) * values[row - 1][col - 1];
+                }
+                else {
+                    dp[row][col] = 1;
+                }
+            }
+        }
+
+        return dp[values.length][values[values.length - 1].length];
     }
 
     public static void main (String [] args) {
