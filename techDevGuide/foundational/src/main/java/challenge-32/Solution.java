@@ -12,6 +12,24 @@ public class Solution {
             this.value = value;
         }
 
+        public Node insert(int value) {
+            return insert(this, value);
+        }
+
+        private static Node insert(Node root, int value) {
+            if (root == null) {
+                return new Node(value);
+            }
+            else if (root.value >= value) {
+                root.left = insert(root.left, value);
+            }
+            else {
+                root.right = insert(root.right, value);
+            }
+
+            return root;
+        }
+
         public Iterator<Node> iterator() {
             return new InorderTraversal(this);
         }
@@ -60,6 +78,7 @@ public class Solution {
 
     public static void main(String [] args) {
         Node root = new Node(1);
+        root = root.insert(1).insert(2).insert(3).insert(5).insert(2).insert(4);
 
         for (Node node : root) {
             System.out.println(node.value);
