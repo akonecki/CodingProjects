@@ -13,6 +13,7 @@ namespace student {
             // Student();
             Student(int id, char * name, int nameLength);
             void study();
+            int totalNumberOfStudents();
     };
 
 };

@@ -11,4 +11,8 @@ namespace student {
     void Student::study() {
         printf("The student %d is studying.\n", this->id);
     }
+
+    int Student::totalNumberOfStudents() {
+        
+    }
 }
