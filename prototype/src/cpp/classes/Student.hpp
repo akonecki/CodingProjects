@@ -12,6 +12,7 @@ namespace student {
         public:
             // Student();
             Student(int id, char * name, int nameLength);
+            void study();
     };
 
 };
