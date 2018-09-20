@@ -10,7 +10,7 @@ namespace person {
             char name [25];
         
         public:
-            Person(int id, char name [], int nameLength);
+            Person(int id, char * name, int nameLength);
             void print();
     };
 }
