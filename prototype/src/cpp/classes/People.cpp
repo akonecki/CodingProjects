@@ -27,6 +27,14 @@ int main (int argc, char * argv []) {
     fakeStudent->print();
     fakeStudent->study();
 
+    student::Student * newStudent = std::move(aStudent);
+
+    newStudent->print();
+    newStudent->study();
+
+    // at this point in time aStudnet is actually not guaranteed to be a value
+    // since the newStudent now has ownership of the object.
+
     delete aStudent;
     delete aPerson;
 
