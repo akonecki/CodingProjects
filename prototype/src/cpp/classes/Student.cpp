@@ -16,6 +16,10 @@ namespace student {
         this->isClone = true;
     }
 
+    Student::~Student() {
+        cout << "Student Deconstructor Called\n";
+    }
+
     void Student::study() {
         printf("The student %d is studying.\n", this->id);
     }

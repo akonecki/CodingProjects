@@ -1,7 +1,8 @@
 #include <iostream>
 
-#include "Student.hpp"
 #include "Person.hpp"
+#include "Professor.hpp"
+#include "Student.hpp"
 
 using namespace std;
 
@@ -37,6 +38,9 @@ int main (int argc, char * argv []) {
 
     delete aStudent;
     delete aPerson;
+
+    student::Student * student = (student::Student *) person::Person::create(1);
+    student->study();
 
     return 0;
 }

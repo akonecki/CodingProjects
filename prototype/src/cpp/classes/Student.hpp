@@ -11,6 +11,7 @@ namespace student {
             bool isClone = false;
 
         public:
+            ~Student();
             Student();
             Student(int id, char * name, int nameLength);
             Student(const Student &student);

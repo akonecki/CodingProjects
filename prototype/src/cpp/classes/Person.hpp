@@ -15,10 +15,13 @@ namespace person {
             char name [25];
         
         public:
+            static Person * create(int selector);
+
             Person();
             Person(const Person &);
             Person(int id, char * name, int nameLength);
             void print();
+            virtual ~Person();
     };
 }
 
