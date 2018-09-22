@@ -18,6 +18,15 @@ int main (int argc, char * argv []) {
     // Introduction of a child class method only.
     aStudent->study();
 
+    //student::Student * copy = new student::Student(aStudent);
+
+    person::Person * fakePerson = new person::Person(*aPerson);
+    fakePerson->print();
+
+    student::Student * fakeStudent = new student::Student(*aStudent);
+    fakeStudent->print();
+    fakeStudent->study();
+
     delete aStudent;
     delete aPerson;
 

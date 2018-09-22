@@ -8,10 +8,12 @@ namespace student {
     class Student : public person::Person {
         private:
             bool isStudent = true;
+            bool isClone = false;
 
         public:
-            // Student();
+            Student();
             Student(int id, char * name, int nameLength);
+            Student(const Student &student);
             void study();
             int totalNumberOfStudents();
     };

@@ -15,6 +15,8 @@ namespace person {
             char name [25];
         
         public:
+            Person();
+            Person(const Person &);
             Person(int id, char * name, int nameLength);
             void print();
     };
