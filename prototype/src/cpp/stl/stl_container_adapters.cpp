@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <queue>
 #include <vector>
+#include <stack>
 
 using namespace std;
 
@@ -41,15 +42,18 @@ int main(int argc, char * argv[]) {
     queue<int> queue;
     priority_queue<int> pqueue;
     int values [] = {15, 38, 1, 14, 76, 32};
+    stack<int> stack;
 
     for (int i = 0; i < 10; i++) {
         queue.push(i);
         pqueue.push(i);
+        stack.push(i);
     }
 
     print(queue);
     cout << queue.size() << endl;
     print(queue);
+    printTop(stack);
     printTop(pqueue);
 
     priority_queue<int, vector<int>, MyComparison> comparePQueue (values, values+4);
