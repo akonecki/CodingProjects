@@ -1,11 +1,13 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <forward_list>
 
 using namespace std;
 
 template <typename T> void printVector(T data) {
-    cout << data.size() << endl;
+    // Forward list does not have a size attribute
+    // cout << data.size() << endl;
     for (auto i = data.begin(); i != data.end(); i++) {
         cout << *i << " ";
     }
@@ -43,6 +45,7 @@ int main(int argc, char * argv []) {
     
     vector<int> data;
     list<int> myList;
+    forward_list<int> singlyLinkedList;
 
     for (int i = 0; i < 10; i++) {
         data.push_back(i);
@@ -67,5 +70,13 @@ int main(int argc, char * argv []) {
     it++;
     myList.insert(it, 3);
     printVector(myList);
+
+    singlyLinkedList.push_front(1);
+    singlyLinkedList.push_front(5);
+    singlyLinkedList.push_front(4);
+    singlyLinkedList.push_front(3);
+    singlyLinkedList.sort();
+    printVector(singlyLinkedList);
+
     return 0;
 }
