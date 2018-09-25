@@ -2,6 +2,7 @@
 #include <vector>
 #include <list>
 #include <forward_list>
+#include <array>
 
 using namespace std;
 
@@ -42,7 +43,7 @@ void swapVector(vector<int>  *data) {
 }
 
 int main(int argc, char * argv []) {
-    
+    array<int,6> myArray;
     vector<int> data;
     list<int> myList;
     forward_list<int> singlyLinkedList;
@@ -77,6 +78,10 @@ int main(int argc, char * argv []) {
     singlyLinkedList.push_front(3);
     singlyLinkedList.sort();
     printVector(singlyLinkedList);
+
+    myArray.fill(-1);
+    myArray.at(3) = 0;
+    printVector(myArray);
 
     return 0;
 }
