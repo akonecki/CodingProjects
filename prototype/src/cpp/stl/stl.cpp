@@ -3,6 +3,8 @@
 #include <list>
 #include <forward_list>
 #include <array>
+#include <deque>
+#include <algorithm>
 
 using namespace std;
 
@@ -43,6 +45,7 @@ void swapVector(vector<int>  *data) {
 }
 
 int main(int argc, char * argv []) {
+    deque<int> myDeque;
     array<int,6> myArray;
     vector<int> data;
     list<int> myList;
@@ -82,6 +85,13 @@ int main(int argc, char * argv []) {
     myArray.fill(-1);
     myArray.at(3) = 0;
     printVector(myArray);
+
+    myDeque.push_front(5);
+    myDeque.push_back(1);
+    printVector(myDeque);
+    std::sort(myDeque.begin(), myDeque.end());
+    printVector(myDeque);
+
 
     return 0;
 }
