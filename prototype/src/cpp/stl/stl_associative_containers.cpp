@@ -29,7 +29,8 @@ void print(T data) {
 }
 
 int main(int argc, char * argv[]) {
-    set<int> myset;
+    int values [] = {1, 15, 29, 13, 11, 7, 9, 11, -1};
+    multiset<int> myset (values, values+8);
     set<int, MyComparable> compSet;
 
     for (int i = 0; i < 10; i++) {
