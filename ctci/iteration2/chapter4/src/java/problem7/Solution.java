@@ -36,7 +36,8 @@ public class Solution {
         return result;
     }
 
-    // Worse case recursion will be O(N).
+    // Worse case recursion will be O(N).  This is a DFS implementation that
+    // peels off one layer at a time.
     private static boolean build(
         String project, HashMap<String, List<String>> buildDependsOn,
         List<String> result, HashSet<String> added,
