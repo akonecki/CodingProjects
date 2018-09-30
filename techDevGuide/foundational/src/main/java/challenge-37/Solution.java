@@ -1,4 +1,4 @@
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Random;
 
 public class Solution {
@@ -37,13 +37,14 @@ public class Solution {
 
     private static int numberOfIslandsSerial(int [][] map) {
         int [] dp = new int [map[0].length];
-        HashSet<Integer> uniqueIslandIds = new HashSet<Integer>();
+        HashMap<Integer, Integer> mappingIds = new HashMap<>();
         int idCount = 0;
+        int uniqueCount = 0;
 
         for (int row = 0; row < map.length; row++) {
             for (int col = 0; col < map[row].length; col++) {
                 if (map[row][col] != 0) {
-                    int left = 0, up = 0, min = 0;
+                    int left = 0, up = 0;
 
                     if (row - 1 >= 0 && dp[col] != 0) {
                         up = dp[col];
@@ -54,11 +55,7 @@ public class Solution {
                     }
 
                     if (left != 0 && up != 0) {
-                        if (left != up) {
-                            uniqueIslandIds.remove(Math.max(left, up));
-                        }
-                        // merge to min value of the two
-                        dp[col] = Math.min(left, up);
+                        // would have to setup a set & getRoot function to use this.
                     }
                     else if (left != 0) {
                         dp[col] = left;
@@ -67,10 +64,11 @@ public class Solution {
                         dp[col] = up;
                     }
                     else {
-                        // new
+                        // new root within the set
                         idCount++;
                         dp[col] = idCount;
-                        uniqueIslandIds.add(idCount);
+                        mappingIds.add(idCount, idCount);
+                        uniqueCount++;
                     }
                 }
                 else {
