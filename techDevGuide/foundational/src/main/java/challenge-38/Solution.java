@@ -8,7 +8,28 @@ public class Solution {
     }
 
     private static int waterVolumeScan(int [] heights) {
+        int [] leftToRight = new int [heights.length];
+        int [] rightToLeft = new int [heights.length];
+        int volume = 0;
 
+        // build up max from left to right.
+        leftToRight[0] = heights[0];
+        for (int index = 1; index < heights.length; index++) {
+            leftToRight[index] = Math.max(leftToRight[index - 1], heights[index]);
+        }
+
+        // build up max from right to left
+        rightToLeft[heights.length - 1] = heights[heights.length - 1];
+        for (int index = heights.length - 2; index >= 0; index--) {
+            rightToLeft[index] = Math.max(rightToLeft[index + 1], heights[index]);
+        }
+
+        // compute the total volume.
+        for (int index = 0; index < heights.length; index++) {
+            volume += Math.abs(Math.min(rightToLeft[index], leftToRight[index]) - heights[index]);
+        }
+
+        return volume;
     }
 
     private static int waterVolumeStack(int [] heights) {
