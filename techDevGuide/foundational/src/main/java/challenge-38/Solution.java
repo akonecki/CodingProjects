@@ -3,8 +3,9 @@ import java.util.Random;
 
 public class Solution {
     
-    public static int waterVolume(int [] heights) {
-
+    public static boolean waterVolume(int [] heights) {
+        assert (waterVolumeScan(heights) == waterVolumeStack(heights));
+        return true;
     }
 
     private static int waterVolumeScan(int [] heights) {
@@ -69,26 +70,20 @@ public class Solution {
     }
 
     public static void main(String [] args) {
-        /*
         Random random = new Random();
         final int count = 1000;
+        final int maxHeight = 10000;
 
         for (int i = 0; i < 1000; i++) {
-            int rows = random.nextInt(24) + 1;
-            int cols = random.nextInt(24) + 1;
-
-            int [][] map = new int [rows][cols];
-            System.out.println("New Map:");
-            for (int row = 0; row < rows; row++) {
-                for (int col = 0; col < cols; col++) {
-                    map[row][col] = random.nextBoolean() ? 1 : 0;
-                    System.out.print(map[row][col] + " ");
-                }
+            int [] heights = new int [random.nextInt(999) + 1];
+            System.out.println("New Heights:");
+            for (int index = 0; index < heights.length; index++) {
+                heights[index] = random.nextInt(maxHeight);
+                System.out.print(heights[index] + " ");
                 System.out.println("");
             }
             System.out.println("");
-            numberOfIslands(map);
+            waterVolume(heights);
         }
-        */
     }
 }
