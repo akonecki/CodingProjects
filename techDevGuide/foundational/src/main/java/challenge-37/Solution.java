@@ -1,5 +1,7 @@
 import java.util.HashMap;
 import java.util.Random;
+import java.util.List;
+import java.util.LinkedList;
 
 public class Solution {
     public static boolean numberOfIslands(int [][] map) {
@@ -35,8 +37,17 @@ public class Solution {
         numberOfIslands(map, row + 1, col);
     }
 
+    private static int getParent(HashMap<Integer, Integer> mappingIds, int key) {
+        while (mappingIds.get(key).intValue() != key) {
+            key = mappingIds.get(key).intValue();
+        }
+
+        return key;
+    }
+
     private static int numberOfIslandsSerial(int [][] map) {
         int [] dp = new int [map[0].length];
+        // Key - now represents a precursor in the graph
         HashMap<Integer, Integer> mappingIds = new HashMap<>();
         int idCount = 0;
         int uniqueCount = 0;
@@ -56,6 +67,23 @@ public class Solution {
 
                     if (left != 0 && up != 0) {
                         // would have to setup a set & getRoot function to use this.
+                        int leftParent = getParent(mappingIds, left);
+                        int upParent = getParent(mappingIds, up);
+
+                        if (leftParent == upParent) {
+                            dp[col] = leftParent;
+                        }
+                        else {
+                            if ((new Random()).nextBoolean()) {
+                                dp[col] = leftParent;
+                                mappingIds.put(upParent, leftParent);
+                            }
+                            else {
+                                dp[col] = upParent;
+                                mappingIds.put(leftParent, upParent);
+                            }
+                            uniqueCount--;
+                        }
                     }
                     else if (left != 0) {
                         dp[col] = left;
@@ -67,7 +95,7 @@ public class Solution {
                         // new root within the set
                         idCount++;
                         dp[col] = idCount;
-                        mappingIds.add(idCount, idCount);
+                        mappingIds.put(idCount, idCount);
                         uniqueCount++;
                     }
                 }
@@ -78,8 +106,8 @@ public class Solution {
             }
             System.out.println("");
         }
-        System.out.println("Serial Size " + uniqueIslandIds.size());
-        return uniqueIslandIds.size();
+        System.out.println("Serial Size " + uniqueCount);
+        return uniqueCount;
     }
 
     public static void main(String [] args) {
@@ -87,8 +115,8 @@ public class Solution {
         final int count = 1000;
 
         for (int i = 0; i < 1000; i++) {
-            int rows = random.nextInt(9) + 1;
-            int cols = random.nextInt(9) + 1;
+            int rows = random.nextInt(24) + 1;
+            int cols = random.nextInt(24) + 1;
 
             int [][] map = new int [rows][cols];
             System.out.println("New Map:");
