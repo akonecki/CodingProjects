@@ -1,3 +1,6 @@
+import java.util.Queue;
+import java.util.LinkedList;
+
 public class Solution {
     // [F]unctional - Recurisve implementation to support the general 
     // implementation.
@@ -60,6 +63,10 @@ public class Solution {
 
     // [T]urn Around the Problem
     // Use the dp to remove the reliance on the recursion of the problem.
+
+    // [Er]adicate Memory
+    // Now reduce the memory footprint even further since don't need to hold an
+    // entire array of length N for the problem.
     public static int waysToGo(int N) {
         if (N < 1) {
             return 0;
@@ -81,12 +88,25 @@ public class Solution {
         dp[2] = 2;
         dp[3] = 4;
 
+        Queue<Integer> values = new LinkedList<Integer>();
+        int total = 1 + 2 + 4;
+
+        values.add(1);
+        values.add(2);
+        values.add(4);
+
         for (int index = 4; index < dp.length; index++) {
             dp[index] = dp[index - 1] + dp[index - 2] + dp[index - 3];
+            
+            values.add(total);
+            total += total - values.remove().intValue();
         }
         
-        assert (dp[N] == waysToGo(N, 0, new int [N]));
+        while (!values.isEmpty()) {
+            total = values.remove().intValue();
+        }
 
+        assert (total == dp[N]);
         return dp[N];
     }
 
