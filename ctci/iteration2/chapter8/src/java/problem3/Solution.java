@@ -1,8 +1,27 @@
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Arrays;
+
 public class Solution {
     // [F]unctional
 
     public static int magicIndex(int [] A) {
-        return magicIndex(A, 0, A.length - 1);
+        HashSet<Integer> results = new HashSet<>();
+        int result = magicIndex(A, 0, A.length - 1);
+
+        for (int index = 0; index < A.length; index++) {
+            if (A[index] == index) {
+                results.add(index);
+            }
+        }
+
+        if (results.isEmpty()) {
+            results.add(-1);
+        }
+
+        assert (results.contains(result));
+
+        return result;
     }
 
     // Data assumption is numbers are sorted.
@@ -57,13 +76,42 @@ public class Solution {
         return -1;        
     }    
 
+    // [A]nalysis
+    // 1. Does the problem contain optimal sub-structure?
+    // Yes each level of the recursive function is self contained.
+    // 2. Does the problem have re-occurring sub-problems?
+    // No because each index is called only once.
+
+    // Memory Impact
+    // Stack Height of the recursive method can approach O(lgN) where N is the
+    // number of elements within the array.
+
+    // Performance Impact
+    // O(N) - in the case you must access each element within the matrix.  This
+    // only happens once on the implementation so is O(N). 
+
     public static void main(String [] args) {
-        assert (magicIndex(new int [] {1,2,3,4,5,6}) == -1);
-        assert (magicIndex(new int [] {-1, -1, 1,2,3,4,5,6}) == -1);
-        assert (magicIndex(new int [] {-1,1,2,3,4,5,6}) != -1);
-        assert (magicIndex(new int [] {-1,1,1,1,1,1,1}) == 1);
-        assert (magicIndex(new int [] {-1,1,1,1,4,5,6}) != -1);
-        assert (magicIndex(new int [] {0,2,3,9,14,15,16}) == 0);
-        assert (magicIndex(new int [] {-1,2,3,6,6,6,6}) == 6);
+        final int cases = 100;
+        Random random = new Random();
+
+        for (int caseIndex = 0; caseIndex < cases; caseIndex++) {
+            int [] data = new int [random.nextInt(100) + 1];
+
+            for (int index = 0; index < data.length; index++) {
+                data[index] = random.nextInt(26) * (random.nextBoolean() ? -1 : 1);
+            }
+
+            Arrays.sort(data);
+            int result = magicIndex(data); 
+            if (result != -1) {
+                System.out.println("Case " + caseIndex + " " + data.length);
+                for (int num : data) {
+                    System.out.print(num + " ");
+                }    
+                System.out.println("");
+            }
+            
+        }
+
     }
 }
