@@ -53,6 +53,59 @@ public class Solution {
         path.remove(path.size() - 1);
     }
 
+    private static boolean validPath(int [][] matrix, int row, int col, List<List<Integer>> path) {
+        if (row > matrix.length || (row != matrix.length && col > matrix[col].length)) {
+            return false;
+        }
+        else if (row == matrix.length && col == matrix[row - 1].length) {
+            // at the bottom right cell of the matrix.
+            return true;
+        }
+        else if (row == matrix.length || col == matrix[row - 1].length || matrix[row][col] == 1) {
+            return false;
+        }   
+
+        List<Integer> newPoint = new LinkedList<Integer>();
+        newPoint.add(row);
+        newPoint.add(col);
+        path.add(newPoint);
+
+        if (validPath(matrix, row, col + 1, path)) {
+            return true;
+        }
+
+        if (validPath(matrix, row + 1, col, path)) {
+            return true;
+        }
+
+        path.remove(path.size() - 1);
+        return false;
+    }
+
+    // [A]nalysis
+    // Memory
+    // Total # of Valid Paths
+    // Subjected to the maximum height of the call tree.  Worse case would be 
+    // all right then all down resulting in a O(M + N).
+
+    // Valid Path
+    // O(M + N) + O(M + N) so O(M + N).
+
+    // Valid Paths
+    // O(M + N) due to logic above, but not including the path saving.
+    // So assume a grid with no obstructions, then need to account for total 
+    // branching factor as well. O(2^(M+N)).
+
+    // Performance
+    // Total # of Paths
+    // O(2^(M+N))
+
+    // Valid Path
+    // O(2^(M+N))
+
+    // Valid Paths
+    // O(2^(M+N)).
+
     public static void main(String [] args) {
 
     }
