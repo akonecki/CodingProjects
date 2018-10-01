@@ -1,6 +1,11 @@
 public class Solution {
     public static int waysToGo(int N) {
+        int recursive = waysToGo(N, 0);
+        int dp = waysToGo(N, 0, new int [N]);
 
+        assert (recursive == dp);
+
+        return dp;
     }
 
     // [F]unctional - Recurisve implementation to support the general 
@@ -10,8 +15,11 @@ public class Solution {
     // expected branches would be branch step + 1, + 2, + 3
     // Count the number of ways in which it reaches Nth step or greater.
     private static int waysToGo(int N, int step) {
-        if (step > N) {
+        if (step == N) {
             return 1;
+        }
+        else if (step > N) {
+            return 0;
         }
         return waysToGo(N, step + 1) + waysToGo(N, step + 2) + waysToGo(N, step + 3);
     }
@@ -37,11 +45,35 @@ public class Solution {
     
     // O(3^N)
 
-    private static int waysToGoSerial(int N) {
+    //[S]ubproblem Identification & Momeization
+    // N is the total number of unique paths from 0 to step N.
+    private static int waysToGo(int N, int step, int [] dp) {
+        int count = 0;
 
+        if (step == N) {
+            return 1;
+        }
+        else if (step > N) {
+            return 0;
+        }
+
+        if (dp[step] != 0) {
+            return dp[step];
+        }
+
+        count = waysToGo(N, step + 1) + waysToGo(N, step + 2) + waysToGo(N, step + 3);
+        dp[step] = count;
+
+        return dp[step];
+    }
+
+    private static int waysToGoSerial(int N) {
+        return 0;
     }
 
     public static void main(String [] args) {
-
+        for (int i = 0; i < 100; i++) {
+            System.out.println("Case " + i + " result is " + waysToGo(i));
+        }
     }
 }
