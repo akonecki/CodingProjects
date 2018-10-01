@@ -23,17 +23,20 @@ public class Solution {
     }
 
     private static void validPaths(int [][] matrix, int row, int col, List<List<Integer>> path, List<List<List<Integer>>> paths) {
+        List<Integer> newPoint = new LinkedList<Integer>();
+        newPoint.add(row);
+        newPoint.add(col);
+
         if (row == matrix.length - 1 && col == matrix[row].length - 1 && matrix[row][col] != 1) {
+            path.add(newPoint);
             paths.add(new LinkedList<List<Integer>>(path));
+            path.remove(path.size() - 1);
             return;
         }
         else if (row >= matrix.length || col >= matrix[row].length || matrix[row][col] == 1) {
             return;
         }
         
-        List<Integer> newPoint = new LinkedList<Integer>();
-        newPoint.add(row);
-        newPoint.add(col);
         path.add(newPoint);
 
         // go right
@@ -47,16 +50,18 @@ public class Solution {
     }
 
     private static boolean validPath(int [][] matrix, int row, int col, List<List<Integer>> path) {
+        List<Integer> newPoint = new LinkedList<Integer>();
+        newPoint.add(row);
+        newPoint.add(col);
+        
         if (row == matrix.length - 1 && col == matrix[row].length - 1 && matrix[row][col] != 1) {
+            path.add(newPoint);
             return true;
         }
         else if (row >= matrix.length || col >= matrix[row].length || matrix[row][col] == 1) {
             return false;
         } 
 
-        List<Integer> newPoint = new LinkedList<Integer>();
-        newPoint.add(row);
-        newPoint.add(col);
         path.add(newPoint);
 
         if (validPath(matrix, row, col + 1, path)) {
@@ -118,28 +123,42 @@ public class Solution {
     }
 
     // [T]urn the Problem Around
+    // [E]valuate 
+    // Dont need the full 2D matrix since evaulating the data one row at a time.
+    // Just need a single row of data.
     public static int totalPaths(int [][] matrix) {
         int [][] dp = new int [matrix.length + 1][matrix[0].length + 1];
+        // [R]educe
+        // using only a single row at a time.  This does require some additional
+        // logic in the loop to make sure that zero is account for.
+        int [] data = new int [matrix[0].length + 1];
 
         for (int row = 0; row < dp.length; row++) {
             for (int col = 0; col < dp[row].length; col++) {
                 if (row != 0 && col != 0) {
                     if (row == 1 && col == 1) {
                         dp[row][col] = 1;
+                        data[col] = 1;
                     }
-                    else if (matrix[row - 1][col - 1] == 0) {
-                        dp[row][col] = dp[row - 1][col] + dp[row][col - 1];
+                    else {
+                        if (matrix[row - 1][col - 1] == 0) {
+                            dp[row][col] = dp[row - 1][col] + dp[row][col - 1];
+                            data[col] = data[col - 1] + data[col];
+                        }
+                        else {
+                            data[col] = 0;
+                        }
                     }
                 }
             }
         }
 
         int result = totalPaths(matrix, 0, 0, new int [matrix.length][matrix[matrix.length - 1].length]);
-        assert (totalPaths(matrix, 0, 0) == result);
         
         System.out.println(result + " " + dp[matrix.length][matrix[matrix.length - 1].length]);
         
         assert (result == dp[matrix.length][matrix[matrix.length - 1].length]);
+        assert (dp[matrix.length][matrix[matrix.length - 1].length] == data[matrix[matrix.length - 1].length]);
 
         return result;
     }
@@ -149,7 +168,7 @@ public class Solution {
         Random random = new Random();
 
         for (int caseIndex = 0; caseIndex < caseCount; caseIndex++) {
-            int [][] matrix = new int [random.nextInt(24) + 1][random.nextInt(24) + 1];
+            int [][] matrix = new int [random.nextInt(9) + 1][random.nextInt(9) + 1];
             System.out.println("Case Number " + caseIndex);
 
             for (int row = 0; row < matrix.length; row++) {
@@ -172,6 +191,24 @@ public class Solution {
 
             System.out.println("");
             totalPaths(matrix);
+            List<List<Integer>> path = new LinkedList<>();
+            validPath(matrix, 0, 0, path);
+
+            for (List<Integer> point : path) {
+                System.out.print("(" + point.get(0) + ", " + point.get(1) + "), ");
+            }
+            System.out.println("");
+
+            List<List<List<Integer>>> paths = new LinkedList<>();
+            validPaths(matrix, 0, 0, new LinkedList<List<Integer>>(), paths);
+
+            for (List<List<Integer>> list : paths) {
+                for (List<Integer> point : list) {
+                    System.out.print("(" + point.get(0) + ", " + point.get(1) + "), ");
+                }
+                System.out.println("");
+            }
+            System.out.println("");
         }
     }
 }
