@@ -1,13 +1,4 @@
 public class Solution {
-    public static int waysToGo(int N) {
-        int recursive = waysToGo(N, 0);
-        int dp = waysToGo(N, 0, new int [N]);
-
-        assert (recursive == dp);
-
-        return dp;
-    }
-
     // [F]unctional - Recurisve implementation to support the general 
     // implementation.
 
@@ -67,8 +58,36 @@ public class Solution {
         return dp[step];
     }
 
-    private static int waysToGoSerial(int N) {
-        return 0;
+    // [T]urn Around the Problem
+    // Use the dp to remove the reliance on the recursion of the problem.
+    public static int waysToGo(int N) {
+        if (N < 1) {
+            return 0;
+        }
+        else if (N == 1) {
+            return 1;
+        }
+        else if (N == 2) {
+            return 2;
+        }
+        else if (N == 3) {
+            return 4;
+        }
+
+        int dp [] = new int [N + 1];
+
+        // Populate the first three ways
+        dp[1] = 1;
+        dp[2] = 2;
+        dp[3] = 4;
+
+        for (int index = 4; index < dp.length; index++) {
+            dp[index] = dp[index - 1] + dp[index - 2] + dp[index - 3];
+        }
+        
+        assert (dp[N] == waysToGo(N, 0, new int [N]));
+
+        return dp[N];
     }
 
     public static void main(String [] args) {
