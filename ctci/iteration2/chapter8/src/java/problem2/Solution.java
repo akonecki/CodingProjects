@@ -83,6 +83,11 @@ public class Solution {
     }
 
     // [A]nalysis
+    // 1. Does the problem contain optimal sub-structure?
+    // All contains optimal sub-structure
+    // 2. Does the problem have re-occurring calls?
+    // Only the total number of paths contains re-occurring calls.
+
     // Memory
     // Total # of Valid Paths
     // Subjected to the maximum height of the call tree.  Worse case would be 
@@ -105,6 +110,27 @@ public class Solution {
 
     // Valid Paths
     // O(2^(M+N)).
+
+    // [S]ubproblem Identification & Momeization
+    private static int totalPaths(int [][] matrix, int row, int col, int [][] dp) {
+        if (row > matrix.length || (row != matrix.length && col > matrix[col].length)) {
+            return 0;
+        }
+        else if (row == matrix.length && col == matrix[row - 1].length) {
+            // at the bottom right cell of the matrix.
+            return 1;
+        }
+        else if (row == matrix.length || col == matrix[row - 1].length || matrix[row][col] == 1) {
+            return 0;
+        }
+
+        if (dp[row][col] != 0) {
+            return dp[row][col];
+        }
+
+        dp[row][col] = totalPaths(matrix, row + 1, col) + totalPaths(matrix, row, col + 1);
+        return dp[row][col];
+    }
 
     public static void main(String [] args) {
 
