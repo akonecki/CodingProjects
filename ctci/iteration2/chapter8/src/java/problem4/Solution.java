@@ -47,6 +47,18 @@ public class Solution {
         //}
     }
 
+    // [A]nalysis
+    // 1. Does the problem have optimal sub structure?
+    // Yes each stage is independent.
+    // 2. Does the problem have re-occurring subproblems.
+    // With the current implementation no due to the subset parameter.
+
+    // Memory Impact
+    // O(2^N) for the possibilities and O(N) for the stack depth
+
+    // Performance Impact
+    // O(2^N)
+
     public static void main(String [] args) {
         for (List<Integer> list : subsets(new int [] {1,2,3})) {
             System.out.print("{");
