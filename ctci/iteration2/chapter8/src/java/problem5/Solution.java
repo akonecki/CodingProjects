@@ -34,7 +34,7 @@ public class Solution {
 
     // should be able to perform shift of a & b as long as b is still represented.
     public static int multiplication(int a, int b) {
-        System.out.println(a + " " + b);
+        //System.out.println(a + " " + b);
 
         if (b == 1) {
             return a;
@@ -53,8 +53,9 @@ public class Solution {
         }
     }
 
-    // always want a >= b
     public static int multiplication(int a, int b, HashMap<Integer, Integer> dp) {
+        System.out.println(a + " " + b);
+        
         if (b == 0) {
             return 0;
         }
@@ -85,6 +86,36 @@ public class Solution {
         return result;
     }
 
+    public static int multiplicationReducedCalls(int a, int b, HashMap<Integer, Integer> dp) {
+        System.out.println(a + " " + b);
+        
+        if (b == 0) {
+            return 0;
+        }
+        else if (b == 1) {
+            return a;
+        }
+
+        if (dp.containsKey(b)) {
+            return dp.get(b).intValue();
+        }
+
+        int result = 0;
+
+        // see if the value is even.
+        if (((b >>> 1) << 1) != b) {
+            // b is even
+            result = a;
+            b--;
+        }
+
+        result += (multiplication(a, b >> 1, dp) << 1);
+        
+        dp.put(b, result);
+
+        return result;
+    }
+
     public static void main(String [] args) {
         assert (multiplicationIterative(1,1) == 1);
         assert (multiplicationIterative(5,10) == 50);
@@ -96,6 +127,7 @@ public class Solution {
                 System.out.println("New i " + i + " New j " + j);
                 assert (multiplication(i, j) == i*j);
                 assert (multiplication(i, j, new HashMap<Integer, Integer>()) == i*j);
+                assert (multiplicationReducedCalls(i, j, new HashMap<Integer, Integer>()) == i*j);
             }
         }
     }
