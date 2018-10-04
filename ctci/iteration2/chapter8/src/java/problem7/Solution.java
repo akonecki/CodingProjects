@@ -40,6 +40,20 @@ public class Solution {
         }
     }
     
+    // [A]nalysis 
+    // 1. Does the problem have optimal substructure?
+    // Yes - each level is independent of each other.
+    // 2. Does the problem have re-occurring problems.
+    // No due to the sb being populated with different string values in different
+    // orders.
+
+    // Memory Impact
+    // Bounded more by the number of permtuations that the stack.
+    // O(L!)
+
+    // Performance Impact
+    // O(L^L) L - length of the string
+
     public static void main(String [] args) {
         for (String string : permutationsWithoutDuplicates("abcde")) {
             System.out.println(string);
