@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 public class Solution {
     // [F]unctional
 
@@ -51,6 +53,38 @@ public class Solution {
         }
     }
 
+    // always want a >= b
+    public static int multiplication(int a, int b, HashMap<Integer, Integer> dp) {
+        if (b == 0) {
+            return 0;
+        }
+        else if (b == 1) {
+            return a;
+        }
+
+        if (dp.containsKey(b)) {
+            return dp.get(b).intValue();
+        }
+
+        int result = 0;
+
+        // see if the value is even.
+        if (((b >>> 1) << 1) == b) {
+            // b is even
+            result = multiplication(a, b >> 1, dp);
+        }
+        else {
+            // b is odd
+            result = multiplication(a, (b - 1) >> 1, dp) + a;
+        }
+
+        result += multiplication(a, b >> 1, dp);
+        
+        dp.put(b, result);
+
+        return result;
+    }
+
     public static void main(String [] args) {
         assert (multiplicationIterative(1,1) == 1);
         assert (multiplicationIterative(5,10) == 50);
@@ -61,6 +95,7 @@ public class Solution {
             for (int j = 1; j < 100; j++) {
                 System.out.println("New i " + i + " New j " + j);
                 assert (multiplication(i, j) == i*j);
+                assert (multiplication(i, j, new HashMap<Integer, Integer>()) == i*j);
             }
         }
     }
