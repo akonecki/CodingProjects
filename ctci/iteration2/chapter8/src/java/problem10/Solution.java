@@ -1,3 +1,6 @@
+import java.util.Queue;
+import java.util.LinkedList;
+
 public class Solution {
     // [F]uncational
 
@@ -9,7 +12,56 @@ public class Solution {
             return;
         }
 
-        fill(matrix, pointX, pointY, matrix[pointX][pointY], newValue);
+        int [][] copy = new int [matrix.length][matrix[0].length];
+        int oldColor = matrix[pointX][pointY];
+
+        for (int row = 0; row < matrix.length; row++) {
+            for (int col = 0; col < matrix[row].length; col++) {
+                copy[row][col] = matrix[row][col];
+            }
+        }
+
+        fill(copy, pointX, pointY, oldColor, newValue);
+
+        Queue<Integer> xQueue = new LinkedList<Integer>();
+        Queue<Integer> yQueue = new LinkedList<Integer>();
+        xQueue.add(pointX);
+        yQueue.add(pointY);
+
+        while (!xQueue.isEmpty() && !yQueue.isEmpty()) {
+            pointX = xQueue.remove();
+            pointY = yQueue.remove();
+
+            if (matrix[pointX][pointY] == oldColor) {
+                matrix[pointX][pointY] = newValue;
+
+                if (pointX + 1 < matrix.length && matrix[pointX + 1][pointY] == oldColor) {
+                    xQueue.add(pointX + 1);
+                    yQueue.add(pointY);
+                }
+
+                if (pointX - 1 >= 0 && matrix[pointX - 1][pointY] == oldColor) {
+                    xQueue.add(pointX - 1);
+                    yQueue.add(pointY);    
+                }
+
+                if (pointY + 1 < matrix[pointX].length && matrix[pointX][pointY + 1] == oldColor) {
+                    xQueue.add(pointX);
+                    yQueue.add(pointY + 1);
+                }
+
+                if (pointY - 1 >= 0 && matrix[pointX][pointY - 1] == oldColor) {
+                    xQueue.add(pointX);
+                    yQueue.add(pointY - 1);
+                }
+            }
+        }
+
+        for (int row = 0; row < matrix.length; row++) {
+            for (int col = 0; col < matrix[row].length; col++) {
+                assert (matrix[row][col] == copy[row][col]);
+            }
+        }
     }
 
     private static void fill(int [][] matrix, int pointX, int pointY, int oldValue, int newValue) {
