@@ -36,6 +36,20 @@ public class Solution {
         return result;
     }
 
+    // [A]nalysis
+    // 1. Does the problem contain optimal substructure?
+    // yes, each stage is independent of each other.
+    // 2. Does the problem have reoccurring problems?
+    // yes it is possible for the value remaining and the given index to 
+    // reoccur.
+
+    // Performance
+    // Memory
+    // O(N) where N is the number of denominations due to the iterative recursion
+    
+    // Time
+    // O((D)^N) where D = value / smallest denomination.
+
     public static void main(String [] args) {
         System.out.println(numberOfWaysToMakeChange(25, new int [] {25, 10, 5, 1}));
     }
