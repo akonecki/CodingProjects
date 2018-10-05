@@ -27,6 +27,21 @@ public class Solution {
         fill(matrix, pointX, pointY - 1, oldValue, newValue);
     }
 
+    // Analysis 
+    // 1. Does the problem have optimal substructure
+    // Yes each level of the recursive call is self contained.
+    // 2. Does the problem have reoccurring problems?
+    // No A single point in the matrix does not reoccur with the same matrix
+    // state.
+
+    // Performance
+    // Memory 
+    // O(M*N) 
+    // due to case of the whole picture being filled, worse case stack space.
+
+    // Time 
+    // O(M*N) - have to visit each location once.
+
     public static void main(String [] args) {
         int [][] matrix = new int [][] {
             {1,1,1,1},
