@@ -86,6 +86,10 @@ public class Solution {
     }
 
     // [T]urn Problem Around
+    // [E]valuate
+    // Currently the previous problem only needs to work on one row at a time, 
+    // can take advantage of this and reduce the memory footprint significantly.
+    // Want to use just a single row at a time. 
     public static int numberOfWaysToMakeChange(int changeAmount, 
         int [] denominations) 
     {
@@ -97,6 +101,8 @@ public class Solution {
         assert (ways == numberOfWaysToMakeChange(changeAmount, denominations, 0));
 
         int [][] dp = new int [denominations.length + 1][changeAmount + 1];
+        // [R]educe
+        int [] rowData = new int [changeAmount + 1];
 
         for (int row = 0; row < dp.length; row++) {
             for (int col = 0; col < dp[row].length; col++) {
@@ -107,6 +113,7 @@ public class Solution {
                     
                     // exclude 
                     int value = dp[row - 1][col];
+                    int rowValue = rowData[col];
 
                     // include 
                     if (col >= denominations[row - 1] && col % denominations[row - 1] == 0) {
@@ -114,17 +121,23 @@ public class Solution {
 
                         if (denominations[row - 1] == col) {
                             value += 1;
+                            rowValue += 1;
                         } 
                         else {
                             value += dp[row][col - denominations[row - 1]]; 
+                            rowValue += rowData[col - denominations[row - 1]];
                         }
                     }
                     else if (col > denominations[row - 1]) {
                         // Performing dp[row - 1][col] earlier means dont need to perform dp[row - 1][col - denominations[row - 1]]
                         value += dp[row][col - denominations[row - 1]];
+                        rowValue += rowData[col - denominations[row -1]];
                     }
 
                     dp[row][col] = value;
+                    rowData[col] = rowValue;
+
+                    assert (value == rowValue);
                 }
                 System.out.print(dp[row][col] + " ");
             }
@@ -133,14 +146,9 @@ public class Solution {
 
         System.out.println(dp[denominations.length][changeAmount]);
         return ways;
-    }
-
-    // [E]valuate
-    // Currently the previous problem only needs to work on one row at a time, 
-    // can take advantage of this and reduce the memory footprint significantly.
-    // Want to use just a single row at a time.  
+    } 
 
     public static void main(String [] args) {
-        System.out.println(numberOfWaysToMakeChange(65, new int [] {25, 10, 5, 1}));
+        System.out.println(numberOfWaysToMakeChange(100, new int [] {25, 10, 5, 1}));
     }
 }
