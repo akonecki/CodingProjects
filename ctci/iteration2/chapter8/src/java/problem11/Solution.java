@@ -135,6 +135,11 @@ public class Solution {
         return ways;
     }
 
+    // [E]valuate
+    // Currently the previous problem only needs to work on one row at a time, 
+    // can take advantage of this and reduce the memory footprint significantly.
+    // Want to use just a single row at a time.  
+
     public static void main(String [] args) {
         System.out.println(numberOfWaysToMakeChange(65, new int [] {25, 10, 5, 1}));
     }
