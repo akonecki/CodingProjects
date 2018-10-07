@@ -37,6 +37,16 @@ public class Solution {
         return count;
     }
     
+    // [A]nalysis
+    // Does meet DP requirements
+
+    // Performance
+    // Memory
+    // O(N) for the stack
+
+    // Time
+    // O((N/2)^N)
+
     public static int numberOfWays(String expression, boolean answerDesired) {
         System.out.println(evalWays(expression, answerDesired));
         return evalWays(expression, answerDesired);
