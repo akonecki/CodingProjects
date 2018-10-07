@@ -59,6 +59,21 @@ public class Solution {
         return true;
     }
 
+    // [A]nalysis
+    // 1. does the problem have optimal substructure?
+    // Yes - each level is fairly independent of global interfernce.
+    // 2. does the problem have reoccurring problems?
+    // No - due to the building of unique permutation of values, this is 
+    // prevented in the checking.
+
+    // Performance
+    // Memory
+    // O(N^2N) primarily on the board population.
+
+    // Time
+    // O(N^2N) - performing a check of N at each level, and occurs for a height
+    // of N. 
+
     private static String buildBoard(int [] colLocations) {
         StringBuilder board = new StringBuilder(colLocations.length * (colLocations.length + 1));
 
