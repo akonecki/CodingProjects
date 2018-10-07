@@ -58,6 +58,19 @@ public class Solution {
         }
     }
 
+    // [A]nalysis
+    // 1. Does the problem have optimal substructure?
+    // Yes
+    // 2. Does the problem have reoccurring problems?
+    // Yes it is possible.
+
+    // Performance
+    // Memory
+    // Stack height based O(N)
+
+    // Time
+    // O(2^N)
+
     public static int maxHeight(int [][] boxes) {
         Box [] sortedBoxes = new Box [boxes.length];
 
