@@ -80,6 +80,7 @@ public class Solution {
         return Math.max(notIncludedHeight, includedHieght);
     }
 
+    // [T]urn the problem around.
     public static int maxHeight(int [][] boxes) {
         Box [] sortedBoxes = new Box [boxes.length];
 
@@ -90,35 +91,61 @@ public class Solution {
         }
 
         //Arrays.sort(sortedBoxes, new BoxOrder());
-        System.out.println(maxHeight(sortedBoxes, 0, null));
-        System.out.println(maxHeight(sortedBoxes, 0, null, new int [sortedBoxes.length]));
-        //assert (maxHeight(sortedBoxes, 0, null) == maxHeight(sortedBoxes, 0, null, new int [sortedBoxes.length]));
+        assert (maxHeight(sortedBoxes, 0, null) == maxHeight(sortedBoxes, 0, null, new int [sortedBoxes.length]));
 
+        /*
+        int [][] dp = new int [sortedBoxes.length + 1][sortedBoxes.length + 1];
+
+        for (int row = 0; row < dp.length; row++) {
+            // row is the base box
+            for (int col = 0; col < dp[row].length; col++) {
+                if (row == 0 || col == 0) {
+                    // do nothing
+                }
+                else if (row == col) {
+                    Box baseBox = sortedBoxes[row - 1];
+                    dp[row][col] = dp[row][col - 1] + baseBox.height;    
+                }
+                else {
+                    Box baseBox = sortedBoxes[row - 1];
+                    Box box = sortedBoxes[col - 1];
+
+                    int notIncludedHeight = dp[row - 1][col];
+                    int includedHeight = 0;
+
+                    if (baseBox.compareTo(box) > 0) {
+                        includedHeight = baseBox.height + dp[row][col];
+                    }
+
+                    dp[row][col] = Math.max(notIncludedHeight, includedHeight);
+                }
+
+                System.out.print(dp[row][col] + " ");
+            }
+            System.out.println("");
+        }
+
+        System.out.println(maxHeight(sortedBoxes, 0, null, new int [sortedBoxes.length]));
+        System.out.println(dp[sortedBoxes.length][sortedBoxes.length]);
+        */
         return 0;
     }
 
     public static void main(String [] args) {
-        final int numberOfCases = 100;
+        final int numberOfCases = 10;
         Random random = new Random();
 
         for (int caseNumber = 0; caseNumber < numberOfCases; caseNumber++) {
-            int boxCount = random.nextInt(100) + 1;
+            int boxCount = random.nextInt(4) + 1;
             int [][] boxes = new int [boxCount][3];
 
             for (int [] box : boxes) {
-                box[0] = random.nextInt(20) + 1;
-                box[1] = random.nextInt(20) + 1;
-                box[2] = random.nextInt(20) + 1;
+                box[0] = random.nextInt(5) + 1;
+                box[1] = random.nextInt(5) + 1;
+                box[2] = random.nextInt(5) + 1;
             }
 
             maxHeight(boxes);
-        }
-        
-        System.out.println(maxHeight(new int [][] {
-            {1,2,3},
-            {2,3,4},
-            {4,5,1},
-            {5,1,2}
-        }));   
+        }   
     }
 }
