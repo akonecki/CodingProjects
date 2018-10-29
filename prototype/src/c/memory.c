@@ -65,6 +65,25 @@ void traversal(const treenode_t * root_ptr) {
     }
 }
 
+void deleteTree(treenode_t ** root_ptr) {
+    if (*root_ptr == NULL) {
+        return;
+    }
+    else {
+        // go left first
+        deleteTree(&(*root_ptr)->left);
+
+        // go right second
+        deleteTree(&(*root_ptr)->right);
+
+        // delete root
+        (*root_ptr)->left = NULL;
+        (*root_ptr)->right = NULL;
+        free (*root_ptr);
+        (*root_ptr) = NULL;
+    }
+}
+
 int main(int argc, char * argv[]) {
     int * intPtr = NULL;
     volatile int number = 0;
@@ -102,6 +121,8 @@ int main(int argc, char * argv[]) {
     insert(&root, 0);
     traversal(root);
 
+    printf("\n");
+    deleteTree(&root);
 
     return 0;
 }
